@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--   Homepage   -->
+    <dimen name="home_city_text_size">32sp</dimen>
+    <dimen name="home_today_text_size">24sp</dimen>
+    <dimen name="home_parameters_text_size">20sp</dimen>
+    <dimen name="home_sub_parameters_text_size">16sp</dimen>
+    <dimen name="home_margin_top_next_days_textview">48dp</dimen>
+    <dimen name="home_margin_cards_next_days">10dp</dimen>
+    <dimen name="home_card_width">344dp</dimen>
+    <dimen name="home_card_height">160dp</dimen>
+
+    <!--   Detailed page (today, tomorrow)   -->
+    <dimen name="detailed_forecast_min_text_size">16sp</dimen>
+    <dimen name="detailed_forecast_max_text_size">20sp</dimen>
+    <dimen name="detailed_forecast_city_margin_top">62dp</dimen>
+    <dimen name="detailed_forecast_date_margin_top">80dp</dimen>
+    <dimen name="detailed_forecast_hour_margin_top">40dp</dimen>
+    <dimen name="detailed_forecast_card_parameters_margin">16dp</dimen>
+    <dimen name="detailed_forecast_card_width">344dp</dimen>
+    <dimen name="detailed_forecast_card_height">216dp</dimen>
+
+    <!--   Error page   -->
+    <dimen name="error_text_size">16sp</dimen>
+    <dimen name="error_button_retry_margins">40dp</dimen>
+
+    <!--   Search page   -->
+    <dimen name="search_city_text_size">20sp</dimen>
+    <dimen name="search_edit_text_size">16sp</dimen>
+    <dimen name="search_recent_margin_top">24dp</dimen>
+    <dimen name="search_weather_text_size">10sp</dimen>
+
+    <!--   others   -->
+    <dimen name="min_margin_from_start_end">24dp</dimen>
+    <dimen name="bottom_bar_text_size">8sp</dimen>
+
+
+
+</resources>
