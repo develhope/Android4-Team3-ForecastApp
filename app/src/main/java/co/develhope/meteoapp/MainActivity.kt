@@ -2,12 +2,16 @@ package co.develhope.meteoapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import co.develhope.meteoapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.hide()  //function to hide the support action bar
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -18,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.today_navigation_button->{
-                    //TODO("add navigation path to today fragment")
+                    loadFragment(Today_screen())
                     true
                 }
                 R.id.tomorrow_navigation_button->{
@@ -36,4 +40,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private  fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.commit()
+    }
+
 }
