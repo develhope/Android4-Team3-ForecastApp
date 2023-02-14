@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/min_margin_from_start_end"
+    android:paddingEnd="@dimen/min_margin_from_start_end"
+    android:orientation="horizontal"
+    android:id="@+id/hourly_forecast_list_item_view">
+
+    <TextView
+        android:id="@+id/hour_list_item_view"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="@dimen/detailed_forecast_min_text_size"
+        tools:text="11:00"/>
+
+    <ImageView
+        android:id="@+id/icon_list_item_view"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/sunny_icon"/>
+
+    <TextView
+        android:id="@+id/celsius_list_item_view"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="@dimen/detailed_forecast_max_text_size"
+        tools:text="31°"/>
+
+    <TextView
+        android:id="@+id/wetness_list_item_view"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="@dimen/detailed_forecast_max_text_size"
+
+        tools:text="0%"
+        app:drawableLeftCompat="@drawable/humidity_icon" />
+
+</LinearLayout>

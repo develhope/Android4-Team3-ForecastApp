@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/detailed_forecast_card_width"
+    android:layout_height="@dimen/detailed_forecast_card_height"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp">
+
+    <TextView
+        android:id="@+id/perceived_temperature_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/detailed_forecast_min_text_size"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_gravity="start|top"
+        tools:text="Percepita \n 45°"/>
+
+    <TextView
+        android:id="@+id/wetness_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/detailed_forecast_min_text_size"
+        android:layout_marginStart="18dp"
+        android:layout_gravity="start|center_vertical"
+        tools:text="Umidità \n 60%"/>
+
+    <TextView
+        android:id="@+id/coverage_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/detailed_forecast_min_text_size"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="18dp"
+        android:layout_gravity="start|bottom"
+        tools:text="Copertura \n 24%"/>
+
+    <TextView
+        android:id="@+id/uv_index_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/detailed_forecast_min_text_size"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="18dp"
+        tools:text="Indice UV \n 5/10"/>
+
+    <TextView
+        android:id="@+id/wind_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/detailed_forecast_min_text_size"
+        android:layout_marginStart="200dp"
+        android:layout_gravity="center_vertical"
+        tools:text="Vento \n SSE 7km/h"/>
+
+    <TextView
+        android:id="@+id/rain_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/detailed_forecast_min_text_size"
+        android:layout_marginStart="200dp"
+        android:layout_marginBottom="18dp"
+        android:layout_gravity="bottom"
+        tools:text="Pioggia \n 0cm"/>
+
+</androidx.cardview.widget.CardView>
