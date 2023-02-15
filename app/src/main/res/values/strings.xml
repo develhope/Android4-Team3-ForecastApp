@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">meteoapp</string>
+    <string name="today">Oggi</string>
 </resources>
