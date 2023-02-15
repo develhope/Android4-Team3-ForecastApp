@@ -6,37 +6,9 @@ import org.threeten.bp.OffsetDateTime
 
 object DataSource {
 
-    private val specificDayWeatherList: List<SpecificDayWeather> = listOf(
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
-                            Weather.SUNNY),
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
-                            Weather.SUNNY),
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
-                            Weather.SUNNY),
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
-                            Weather.SUNNY),
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
-                            Weather.SUNNY),
+    private val specificDayWeatherList: List<HomePageItems> = listOf(
+        Title("Palermo", "Sicily"),
+
         SpecificDayWeather(OffsetDateTime.now(),
                             minDegree = 22,
                             maxDegree = 31,
@@ -44,6 +16,42 @@ object DataSource {
                             rainPerc = 0,
                             Weather.SUNNY),
 
+        NextDays("NEXT 5 DAYS"),
+
+        SpecificDayWeather(OffsetDateTime.now(),
+                            minDegree = 22,
+                            maxDegree = 31,
+                            windKmh = 12,
+                            rainPerc = 0,
+                            Weather.SUNNY),
+
+        SpecificDayWeather(OffsetDateTime.now(),
+                            minDegree = 22,
+                            maxDegree = 31,
+                            windKmh = 12,
+                            rainPerc = 0,
+                            Weather.SUNNY),
+
+        SpecificDayWeather(OffsetDateTime.now(),
+                            minDegree = 22,
+                            maxDegree = 31,
+                            windKmh = 12,
+                            rainPerc = 0,
+                            Weather.SUNNY),
+
+        SpecificDayWeather(OffsetDateTime.now(),
+                            minDegree = 22,
+                            maxDegree = 31,
+                            windKmh = 12,
+                            rainPerc = 0,
+                            Weather.SUNNY),
+
+        SpecificDayWeather(OffsetDateTime.now(),
+                            minDegree = 22,
+                            maxDegree = 31,
+                            windKmh = 12,
+                            rainPerc = 0,
+                            Weather.SUNNY),
     )
     fun getspecificDayWeather()= specificDayWeatherList
 
@@ -56,14 +64,16 @@ object DataSource {
 
 }
 
+sealed class HomePageItems()
+
 data class NextDays(
     val nextFiveDays: String
-)
+):HomePageItems()
 
 data class Title (
     val city: String,
     val region: String
-)
+):HomePageItems()
 
 data class SpecificDayWeather(
     val date: OffsetDateTime,
@@ -72,7 +82,7 @@ data class SpecificDayWeather(
     val windKmh: Int,
     val rainPerc: Int,
     val weather: Weather
-)
+):HomePageItems()
 
 enum class Weather{
     SUNNY,
