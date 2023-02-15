@@ -2,47 +2,131 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/min_margin_from_start_end"
-    android:paddingEnd="@dimen/min_margin_from_start_end"
-    android:orientation="horizontal"
     android:id="@+id/hourly_forecast_list_item_view">
 
-    <TextView
-        android:id="@+id/hour_list_item_view"
-        android:layout_width="0dp"
-        android:layout_weight="0.5"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="@dimen/detailed_forecast_min_text_size"
-        tools:text="11:00"/>
+        android:paddingStart="@dimen/min_margin_from_start_end"
+        android:paddingEnd="@dimen/min_margin_from_start_end"
+        android:orientation="horizontal"
+        android:id="@+id/visible_hourly_forecast_list_item_view">
 
-    <ImageView
-        android:id="@+id/icon_list_item_view"
-        android:layout_width="0dp"
-        android:layout_weight="1.5"
-        android:layout_height="match_parent"
-        tools:src="@drawable/sunny_icon"/>
+        <TextView
+            android:id="@+id/hour_list_item_view"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/detailed_forecast_min_text_size"
+            tools:text="11:00"/>
 
-    <TextView
-        android:id="@+id/celsius_list_item_view"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="@dimen/detailed_forecast_max_text_size"
-        tools:text="31°"/>
+        <ImageView
+            android:id="@+id/icon_list_item_view"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="match_parent"
+            tools:src="@drawable/sunny_icon"/>
 
-    <TextView
-        android:id="@+id/wetness_list_item_view"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="@dimen/detailed_forecast_max_text_size"
+        <TextView
+            android:id="@+id/celsius_list_item_view"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/detailed_forecast_max_text_size"
+            tools:text="31°"/>
 
-        tools:text="0%"
-        app:drawableLeftCompat="@drawable/humidity_icon" />
+        <TextView
+            android:id="@+id/wetness_list_item_view"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/detailed_forecast_max_text_size"
+
+            tools:text="0%"
+            app:drawableLeftCompat="@drawable/humidity_icon" />
+
+        <ImageView
+            android:id="@+id/expandable_button_image_view"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_keyboard_arrow_down_24"/>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/detailed_forecast_card_width"
+        android:layout_height="@dimen/detailed_forecast_card_height"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="@dimen/min_margin_from_start_end"
+        android:visibility="gone"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="16dp"
+        android:id="@+id/hidden_hourly_forecast_list_item_view">
+
+        <TextView
+            android:id="@+id/perceived_temperature_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/detailed_forecast_min_text_size"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="18dp"
+            android:layout_gravity="start|top"
+            tools:text="Percepita \n 45°"/>
+
+        <TextView
+            android:id="@+id/wetness_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/detailed_forecast_min_text_size"
+            android:layout_marginStart="18dp"
+            android:layout_gravity="start|center_vertical"
+            tools:text="Umidità \n 60%"/>
+
+        <TextView
+            android:id="@+id/coverage_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/detailed_forecast_min_text_size"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="18dp"
+            android:layout_gravity="start|bottom"
+            tools:text="Copertura \n 24%"/>
+
+        <TextView
+            android:id="@+id/uv_index_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/detailed_forecast_min_text_size"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="18dp"
+            tools:text="Indice UV \n 5/10"/>
+
+        <TextView
+            android:id="@+id/wind_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/detailed_forecast_min_text_size"
+            android:layout_marginStart="200dp"
+            android:layout_gravity="center_vertical"
+            tools:text="Vento \n SSE 7km/h"/>
+
+        <TextView
+            android:id="@+id/rain_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/detailed_forecast_min_text_size"
+            android:layout_marginStart="200dp"
+            android:layout_marginBottom="18dp"
+            android:layout_gravity="bottom"
+            tools:text="Pioggia \n 0cm"/>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

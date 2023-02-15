@@ -1,10 +1,15 @@
 package co.develhope.meteoapp
 
+import android.os.Build
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import org.threeten.bp.OffsetDateTime
 
@@ -35,6 +40,7 @@ class TitleViewHolder(view: View):RecyclerView.ViewHolder(view){
 }
 
 class CardViewHolder(view: View):RecyclerView.ViewHolder(view){
+    //TODO remove this view holder and integrate it in HourlyViewHolder
     val perceivedTemperatureView: TextView
     val wetnessTextView: TextView
     val coverageTextView: TextView
@@ -53,9 +59,6 @@ class CardViewHolder(view: View):RecyclerView.ViewHolder(view){
 }
 
 class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private lateinit var cardViewHolder: CardViewHolder
-    private lateinit var hourlyViewHolder: HourlyViewHolder
 
     enum class ViewType(val value: Int){
         TITLE_FORECAST(1),
@@ -82,6 +85,25 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
             ViewType.HOURLY_FORECAST.value -> {
                 val ListItemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.hourly_forecast_list_item, parent, false)
+
+                //this implementation enable the expandable card view for each list item
+                val wholeView = ListItemView.findViewById<LinearLayout>(R.id.hourly_forecast_list_item_view)
+                val arrowButton = ListItemView.findViewById<ImageView>(R.id.expandable_button_image_view)
+                val hiddenCard = ListItemView.findViewById<CardView>(R.id.hidden_hourly_forecast_list_item_view)
+
+                arrowButton.setOnClickListener{
+                    if (hiddenCard.visibility == View.VISIBLE){
+                        TransitionManager.beginDelayedTransition(wholeView, AutoTransition())
+                        hiddenCard.visibility = View.GONE
+                        arrowButton.setImageResource(R.drawable.baseline_keyboard_arrow_down_24)
+                    }else{
+                        TransitionManager.beginDelayedTransition(wholeView, AutoTransition())
+                        hiddenCard.visibility = View.VISIBLE
+                        arrowButton.setImageResource(R.drawable.baseline_keyboard_arrow_up_24)
+                    }
+                }
+                //TODO remove baseline_keyboard_arrow_down_24 baseline_keyboard_arrow_up_24
+
                 return HourlyViewHolder(ListItemView)
             }
             ViewType.CARD_FORECAST.value ->{
@@ -93,15 +115,6 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
                 TODO()
             }
         }
-    }
-    /*
-    val ListItemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.hourly_forecast_list_item, parent, false)
-            return HourlyViewHolder(hourlyListItemView)
-            */
-
-    override fun getItemCount(): Int {
-        return list.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -143,5 +156,8 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
                             "${(list[position] as TitleForecast).date.month}").lowercase()
             }
         }
+    }
+    override fun getItemCount(): Int {
+        return list.size
     }
 }
