@@ -22,7 +22,7 @@
         android:id="@+id/icon_list_item_view"
         android:layout_width="0dp"
         android:layout_weight="1.5"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:src="@drawable/sunny_icon"/>
 
     <TextView
