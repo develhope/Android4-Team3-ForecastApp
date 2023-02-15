@@ -33,6 +33,7 @@
     <!--   others   -->
     <dimen name="min_margin_from_start_end">24dp</dimen>
     <dimen name="bottom_bar_text_size">8sp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
 
 
 

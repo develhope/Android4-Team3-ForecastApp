@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">meteoapp</string>
     <string name="today">Oggi</string>
+    <string name="next_5_days">NEXT 5 DAYS</string>
 </resources>
