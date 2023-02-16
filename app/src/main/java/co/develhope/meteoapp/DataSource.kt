@@ -6,60 +6,60 @@ import org.threeten.bp.OffsetDateTime
 
 object DataSource {
 
-    private val specificDayWeatherList: List<HomePageItems> = listOf(
-        Title("Palermo", "Sicily"),
+    private val homeItems: List<HomePageItems> = listOf(
+        HomeTitle("Palermo", "Sicily"),
 
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
+        SpecificDayWeather( cardDayOfWeek = OffsetDateTime.now(),
+                            date = OffsetDateTime.now(),
+                            22,
+                            31,
+                            12,
+                            0,
                             Weather.SUNNY),
 
         NextDays("NEXT 5 DAYS"),
 
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
+        SpecificDayWeather( cardDayOfWeek = OffsetDateTime.now().plusDays(1),
+                            date = OffsetDateTime.now().plusDays(1),
+                            22,
+                            31,
+                            12,
+                            0,
                             Weather.SUNNY),
 
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
+        SpecificDayWeather( cardDayOfWeek = OffsetDateTime.now().plusDays(2),
+                            date = OffsetDateTime.now().plusDays(2),
+                            22,
+                            31,
+                            12,
+                            0,
                             Weather.SUNNY),
 
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
+        SpecificDayWeather( cardDayOfWeek = OffsetDateTime.now().plusDays(3),
+                            date = OffsetDateTime.now().plusDays(3),
+                            22,
+                            31,
+                            12,
+                            0,
                             Weather.SUNNY),
 
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
+        SpecificDayWeather( cardDayOfWeek = OffsetDateTime.now().plusDays(4),
+                            date = OffsetDateTime.now().plusDays(4),
+                            22,
+                            31,
+                            12,
+                            0,
                             Weather.SUNNY),
 
-        SpecificDayWeather(OffsetDateTime.now(),
-                            minDegree = 22,
-                            maxDegree = 31,
-                            windKmh = 12,
-                            rainPerc = 0,
+        SpecificDayWeather( cardDayOfWeek = OffsetDateTime.now().plusDays(5),
+                            date = OffsetDateTime.now().plusDays(5),
+                            22,
+                            31,
+                            12,
+                            0,
                             Weather.SUNNY),
     )
-    fun getspecificDayWeather()= specificDayWeatherList
-
-    private val title = Title("Palermo","Sicily")
-    fun getTitle() = title
-
-    private val nextFiveDays = NextDays("Next 5 Days")
-
+    fun getHomeItems()= homeItems
 
 
 }
@@ -70,12 +70,13 @@ data class NextDays(
     val nextFiveDays: String
 ):HomePageItems()
 
-data class Title (
+data class HomeTitle (
     val city: String,
     val region: String
 ):HomePageItems()
 
 data class SpecificDayWeather(
+    val cardDayOfWeek : OffsetDateTime,
     val date: OffsetDateTime,
     val minDegree: Int,
     val maxDegree: Int,

@@ -6,6 +6,7 @@
     android:layout_marginLeft="@dimen/min_margin_from_start_end">
 
     <TextView
+        android:id="@+id/home_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next_5_days"
