@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home_navigation_button"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:id="@+id/homeScreen"
+        android:icon="@drawable/home_icon_1"
         android:title="home"/>
     <item
-        android:id="@+id/today_navigation_button"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:id="@+id/todayScreen"
+        android:icon="@drawable/today_icon"
         android:title="today"/>
     <item
-        android:id="@+id/tomorrow_navigation_button"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="tomorrow"/>
+        android:id="@+id/specificDayScreen"
+        android:icon="@drawable/today_icon_1"
+        android:title="tomorrow" />
     <item
-        android:id="@+id/search_navigation_button"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="search"/>
+        android:id="@+id/searchScreen"
+        android:icon="@drawable/search_icon_1"
+        android:title="search" />
 
-    <!-- TODO extract string resources from menu's items -->
-    <!-- TODO replace demo drawables with figma drawables-->
     <!-- TODO add text style for title's strings-->
 </menu>
