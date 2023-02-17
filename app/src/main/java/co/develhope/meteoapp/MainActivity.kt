@@ -2,38 +2,30 @@ package co.develhope.meteoapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import co.develhope.meteoapp.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.hide()  //function to hide the support action bar
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.bottomNavigationToolbar.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home_navigation_button->{
-                    //TODO("add navigation path to home fragment")
-                    true
-                }
-                R.id.today_navigation_button->{
-                    //TODO("add navigation path to today fragment")
-                    true
-                }
-                R.id.tomorrow_navigation_button->{
-                    //TODO("add navigation path to tomorrow fragment")
-                    true
-                }
-                R.id.search_navigation_button->{
-                    //TODO("add navigation path to search fragment")
-                    true
-                }
-                else->{
-                    //TODO("i don't know why but the ide ask me for the else case")
-                    true
-                }
-            }
-        }
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        //used findFragmentById instead of binding for this issue with fragmentManager
+        //https://issuetracker.google.com/issues/142847973?pli=1
+
+        navController = navHostFragment.navController
+        val bottomNavigationView = binding.bottomNavigationToolbar
+        setupWithNavController(bottomNavigationView, navController)
     }
 }
