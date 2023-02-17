@@ -6,9 +6,14 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+<<<<<<< HEAD
     <color name="white">#FFFFFFFF</color>
     <color name="unselected_button">#847CB1</color>
     <color name="selected_button">#230EA5</color>
     <color name="home_screen_card">#948CEF</color>
     <color name="home_screen_background">#4434F9</color>
+=======
+    <color name="white">#FFFFFF</color>
+    <color name="home_screen_card">#948CEF</color>
+>>>>>>> 1cca0c47987fb5654afb1ab19328c7775927ec4b
 </resources>
