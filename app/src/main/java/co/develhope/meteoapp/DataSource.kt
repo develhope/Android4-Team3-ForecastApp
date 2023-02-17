@@ -7,7 +7,7 @@ import org.threeten.bp.OffsetDateTime
 object DataSource {
 
     private val homeItems: List<HomePageItems> = listOf(
-        HomeTitle("Palermo", "Sicily"),
+        HomeTitle("Palermo", "Sicilia"),
 
         SpecificDayWeather( cardDayOfWeek = OffsetDateTime.now(),
                             date = OffsetDateTime.now(),
@@ -17,7 +17,7 @@ object DataSource {
                             0,
                             Weather.SUNNY),
 
-        NextDays("NEXT 5 DAYS"),
+        NextDays("PROSSIMI 5 GIORNI"),
 
         SpecificDayWeather( cardDayOfWeek = OffsetDateTime.now().plusDays(1),
                             date = OffsetDateTime.now().plusDays(1),

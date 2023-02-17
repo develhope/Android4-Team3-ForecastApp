@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.TextStyle
 import org.w3c.dom.Text
 import java.util.*
 
@@ -90,6 +91,8 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
         }
     }
 
+
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(list[position]){
             is HomeTitle -> {
@@ -105,18 +108,19 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
             is SpecificDayWeather -> {
                 when ((list[position] as SpecificDayWeather).cardDayOfWeek){
 
-                    OffsetDateTime.now() ->
-                        (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.today)
+                   OffsetDateTime.now() -> (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.today)
 
-                    OffsetDateTime.now().plusDays(1) ->
-                        (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.tomorrow)
+                   OffsetDateTime.now().plusDays(1) -> (holder as HomeCardViewHolder).
+                   dayOfWeek.setText(R.string.tomorrow)
 
-                    else -> (holder as HomeCardViewHolder).dayOfWeek.text =
-                        "${(list[position] as SpecificDayWeather).cardDayOfWeek.dayOfWeek}"
+                   else -> (holder as HomeCardViewHolder).dayOfWeek.text =
+                        (list[position] as SpecificDayWeather).cardDayOfWeek.dayOfWeek.
+                        getDisplayName(TextStyle.FULL, Locale.ITALIAN)
                 }
 
                 (holder as HomeCardViewHolder).date.text =
-                    (list[position] as SpecificDayWeather).date.format(DateTimeFormatter.ofPattern("dd/MM", Locale.ITALIAN))
+                    (list[position] as SpecificDayWeather).date.format(DateTimeFormatter.
+                    ofPattern("dd/MM", Locale.ITALIAN))
 
                 when((list[position] as SpecificDayWeather).weather){
                     Weather.SUNNY -> (holder as HomeCardViewHolder).weather.setImageResource(R.drawable.sunny_icon)
@@ -139,8 +143,7 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
             }
 
             is NextDays ->
-                (holder as HomeSubtitleViewHolder).nextFiveDays.text =
-                    (list[position] as NextDays).nextFiveDays
+                (holder as HomeSubtitleViewHolder).nextFiveDays.setText(R.string.next_5_days)
         }
     }
 
