@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import co.develhope.meteoapp.DataSource.getHomeItems
 import co.develhope.meteoapp.databinding.FragmentHomeScreenBinding
 
 
@@ -17,6 +19,11 @@ class HomeScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
+
+        binding.homeScreenRecyclerView.adapter = HomeScreenAdapter(getHomeItems())
+        binding.homeScreenRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+
         return binding.root
     }
 

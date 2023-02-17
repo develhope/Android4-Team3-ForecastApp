@@ -90,8 +90,6 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
         }
     }
 
-
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(list[position]){
             is HomeTitle -> {
@@ -106,10 +104,15 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
 
             is SpecificDayWeather -> {
                 when ((list[position] as SpecificDayWeather).cardDayOfWeek){
-                    OffsetDateTime.now() -> (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.today)
-                    OffsetDateTime.now().plusDays(1) -> (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.tomorrow)
-                    else -> (holder as HomeCardViewHolder).dayOfWeek.
-                     setText("${(list[position] as SpecificDayWeather).cardDayOfWeek.dayOfWeek}")
+
+                    OffsetDateTime.now() ->
+                        (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.today)
+
+                    OffsetDateTime.now().plusDays(1) ->
+                        (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.tomorrow)
+
+                    else -> (holder as HomeCardViewHolder).dayOfWeek.text =
+                        "${(list[position] as SpecificDayWeather).cardDayOfWeek.dayOfWeek}"
                 }
 
                 (holder as HomeCardViewHolder).date.text =
