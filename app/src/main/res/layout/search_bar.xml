@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0EFFF"
+    tools:context=".SearchScreen">
+
+    <!--
+    ADJUST SEARCH ICON AND SEARCH TEXT !!!
+-->
+
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/bottom_bar_text_size"
+        android:layout_marginTop="@dimen/bottom_bar_text_size"
+        android:layout_marginRight="@dimen/bottom_bar_text_size"
+        android:background="@drawable/search_view_background"
+        android:inputType="textAutoComplete"
+        app:iconifiedByDefault="false"
+        app:queryHint="@string/search_city"
+        app:searchIcon="@drawable/search_icon_black" />
+
+</FrameLayout>

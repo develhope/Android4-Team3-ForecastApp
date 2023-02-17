@@ -1,21 +1,32 @@
 package co.develhope.meteoapp
 
 object SearchSource{
-    private val searchList : List<Cities> = listOf()
-    private val hourlyForecastList : List<HourlyForecast> = listOf()
+    private val searchList : List<GetHourlyForecastList> = listOf(
+        SearchBar(""),
+        RecentSearches("Ricerche Recenti"),
+        HourlyForecast(16, Weather.SUNNY, "Palermo"),
+        HourlyForecast(12, Weather.SUNNY, "Palermo"),
+        HourlyForecast(12, Weather.SUNNY, "Palermo")
+    )
+    fun getSearchCitiesList() : List<GetHourlyForecastList>{
+        return searchList
+    }
 
-    fun getSearchCitiesList() : List<Cities> = searchList
-    fun getHourlyForecastList() : List<HourlyForecast> = hourlyForecastList
 }
 
 data class HourlyForecast(
-    override val degrees : Int,
-    override val weather : Weather
-) : GetHourlyForecastList(degrees,weather)
+    val degrees : Int,
+    val weather : Weather,
+    val cities: String
+) : GetHourlyForecastList()
 
-data class Cities(
-    override val cities: List<Cities>
-) : GetSearchCityList(cities)
+data class RecentSearches(
+    val recentSearches : String
+) : GetHourlyForecastList()
+
+data class SearchBar(
+    val searchBar : String
+) : GetHourlyForecastList()
 
 enum class Weather{
     SUNNY,
@@ -23,8 +34,9 @@ enum class Weather{
     RAIN
 }
 
-sealed class GetSearchCityList(open val cities: List<Cities>)
-sealed class GetHourlyForecastList(open val degrees: Int, open val weather: Weather)
+sealed class GetHourlyForecastList()
+
+
 
 
 
