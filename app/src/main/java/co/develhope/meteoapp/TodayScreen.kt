@@ -5,20 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import co.develhope.meteoapp.DataSourceTodayScreen.getHourlyForecast
+import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
 
 
 class TodayScreen : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
+    lateinit var binding: FragmentTodayScreenBinding
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_today_screen, container, false)
+        binding = FragmentTodayScreenBinding.inflate(inflater, container, false)
+        binding.todayRecycleView.adapter = Adapter(getHourlyForecast())
+        binding.todayRecycleView.layoutManager = LinearLayoutManager(requireContext())
+        return binding.root
     }
 
 }
