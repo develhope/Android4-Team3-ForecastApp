@@ -1,6 +1,5 @@
 package co.develhope.meteoapp
 
-import android.os.Build
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -12,20 +11,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import org.threeten.bp.OffsetDateTime
-
-class HourlyViewHolder(view: View):RecyclerView.ViewHolder(view){
-    val hourTextView: TextView
-    val iconView: ImageView
-    val celsiusTextView: TextView
-    val wetnessTextView: TextView
-
-    init {
-        hourTextView = view.findViewById(R.id.hour_list_item_view)
-        iconView = view.findViewById(R.id.icon_list_item_view)
-        celsiusTextView = view.findViewById(R.id.celsius_list_item_view)
-        wetnessTextView = view.findViewById(R.id.wetness_list_item_view)
-    }
-}
 
 class TitleViewHolder(view: View):RecyclerView.ViewHolder(view){
     val cityAndRegionTextView: TextView
@@ -39,40 +24,48 @@ class TitleViewHolder(view: View):RecyclerView.ViewHolder(view){
     }
 }
 
-class CardViewHolder(view: View):RecyclerView.ViewHolder(view){
-    //TODO remove this view holder and integrate it in HourlyViewHolder
-    val perceivedTemperatureView: TextView
+class HourlyViewHolder(view: View):RecyclerView.ViewHolder(view){
+    val hourTextView: TextView
+    val iconView: ImageView
+    val celsiusTextView: TextView
     val wetnessTextView: TextView
-    val coverageTextView: TextView
-    val uvIndexTextView: TextView
-    val windTextView: TextView
-    val rainTextView: TextView
+
+    val cardPerceivedTemperatureView: TextView
+    val cardWetnessTextView: TextView
+    val cardCoverageTextView: TextView
+    val cardUvIndexTextView: TextView
+    val cardWindTextView: TextView
+    val cardRainTextView: TextView
 
     init {
-        perceivedTemperatureView = view.findViewById(R.id.perceived_temperature_text_view)
-        wetnessTextView = view.findViewById(R.id.wetness_text_view)
-        coverageTextView = view.findViewById(R.id.coverage_text_view)
-        uvIndexTextView = view.findViewById(R.id.uv_index_text_view)
-        windTextView = view.findViewById(R.id.wind_text_view)
-        rainTextView = view.findViewById(R.id.rain_text_view)
+        hourTextView = view.findViewById(R.id.hour_list_item_view)
+        iconView = view.findViewById(R.id.icon_list_item_view)
+        celsiusTextView = view.findViewById(R.id.celsius_list_item_view)
+        wetnessTextView = view.findViewById(R.id.wetness_list_item_view)
+
+
+        cardPerceivedTemperatureView = view.findViewById(R.id.perceived_temperature_text_view)
+        cardWetnessTextView = view.findViewById(R.id.wetness_text_view)
+        cardCoverageTextView = view.findViewById(R.id.coverage_text_view)
+        cardUvIndexTextView = view.findViewById(R.id.uv_index_text_view)
+        cardWindTextView = view.findViewById(R.id.wind_text_view)
+        cardRainTextView = view.findViewById(R.id.rain_text_view)
     }
 }
+
 
 class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class ViewType(val value: Int){
         TITLE_FORECAST(1),
-        HOURLY_FORECAST(2),
-        CARD_FORECAST(3),
+        HOURLY_FORECAST(2)
     }
     override fun getItemViewType(position: Int): Int =
         when(list[position]){
-            is DetailedCardForecast -> ViewType.CARD_FORECAST.value
             is HourlyForecast -> ViewType.HOURLY_FORECAST.value
             is TitleForecast -> ViewType.TITLE_FORECAST.value
             //TODO REMOVE THIS IMPLEMENTATION FOR A BETTER ONE
         }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -106,11 +99,6 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
 
                 return HourlyViewHolder(ListItemView)
             }
-            ViewType.CARD_FORECAST.value ->{
-                val ListItemView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.hourly_forecast_card_view, parent, false)
-                return CardViewHolder(ListItemView)
-            }
             else ->{
                 TODO()
             }
@@ -119,6 +107,23 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(list[position]){
+            is TitleForecast ->{
+                (holder as TitleViewHolder).cityAndRegionTextView.text =
+                    "${(list[position] as TitleForecast).city}, " +
+                            "${(list[position] as TitleForecast).region}"
+
+                if(OffsetDateTime.now().dayOfMonth ==
+                    (list[position] as TitleForecast).date.dayOfMonth){
+                    (holder as TitleViewHolder).currentDayTextView.text = "Today"
+                }
+                else{
+                    (holder as TitleViewHolder).currentDayTextView.text = "NotToday"
+                }
+                (holder as TitleViewHolder).dateTextView.text =
+                    ("${(list[position] as TitleForecast).date.dayOfWeek}" + " " +
+                            "${(list[position] as TitleForecast).date.dayOfMonth}" + " " +
+                            "${(list[position] as TitleForecast).date.month}").lowercase()
+            }
             is HourlyForecast ->{
                 (holder as HourlyViewHolder).hourTextView.text =
                     (list[position] as HourlyForecast).date.hour.toString()
@@ -132,31 +137,24 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
                     (list[position] as HourlyForecast).celsius.toString()
                 (holder as HourlyViewHolder).wetnessTextView.text =
                     (list[position] as HourlyForecast).wetness.toString()
-            }
-            is DetailedCardForecast ->{
 
-            }
-            is TitleForecast ->{
-
-                (holder as TitleViewHolder).cityAndRegionTextView.text =
-                    "${(list[position] as TitleForecast).city}, " +
-                            "${(list[position] as TitleForecast).region}"
-
-                if(OffsetDateTime.now().dayOfMonth ==
-                    (list[position] as TitleForecast).date.dayOfMonth){
-                    (holder as TitleViewHolder).currentDayTextView.text = "Today"
-                }
-                else{
-                    (holder as TitleViewHolder).currentDayTextView.text = "NotToday"
-                }
-
-                (holder as TitleViewHolder).dateTextView.text =
-                    ("${(list[position] as TitleForecast).date.dayOfWeek} " +
-                            "${(list[position] as TitleForecast).date.dayOfMonth}" +
-                            "${(list[position] as TitleForecast).date.month}").lowercase()
+                //Card Values From here
+                (holder as HourlyViewHolder).cardPerceivedTemperatureView.text =
+                    (list[position] as HourlyForecast).cardValues.perceivedTemperature.toString()
+                (holder as HourlyViewHolder).cardCoverageTextView.text =
+                    (list[position] as HourlyForecast).cardValues.coverage.toString()
+                (holder as HourlyViewHolder).cardRainTextView.text =
+                    (list[position] as HourlyForecast).cardValues.rain.toString()
+                (holder as HourlyViewHolder).cardWetnessTextView.text =
+                    (list[position] as HourlyForecast).wetness.toString()
+                (holder as HourlyViewHolder).cardUvIndexTextView.text =
+                    (list[position] as HourlyForecast).cardValues.uvIndex.toString()
+                (holder as HourlyViewHolder).cardWindTextView.text =
+                    (list[position] as HourlyForecast).cardValues.wind.toString()
             }
         }
     }
+
     override fun getItemCount(): Int {
         return list.size
     }

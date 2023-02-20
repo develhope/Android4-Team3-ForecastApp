@@ -62,12 +62,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/detailed_forecast_card_width"
         android:layout_height="@dimen/detailed_forecast_card_height"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="@dimen/min_margin_from_start_end"
         android:visibility="gone"
         app:cardCornerRadius="8dp"
-        app:cardElevation="16dp"
+        app:cardElevation="8dp"
         android:id="@+id/hidden_hourly_forecast_list_item_view">
 
         <TextView

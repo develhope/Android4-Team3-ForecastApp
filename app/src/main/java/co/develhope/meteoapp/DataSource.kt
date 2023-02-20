@@ -5,10 +5,14 @@ import org.threeten.bp.OffsetDateTime
 object DataSource{
     private val ForecastList: List<Forecast> = listOf(
         TitleForecast(OffsetDateTime.now(), "Napoli", "Campania"),
-        HourlyForecast(OffsetDateTime.now(), Weather.SUNNY, 20, 15),
-        HourlyForecast(OffsetDateTime.now().plusHours(1), Weather.CLOUD, 20, 15),
-        HourlyForecast(OffsetDateTime.now().plusHours(2), Weather.RAIN, 20, 15),
-        HourlyForecast(OffsetDateTime.now().plusHours(3), Weather.NIGHT, 20, 15),
+        HourlyForecast(OffsetDateTime.now(), Weather.SUNNY, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 6, 1)),
+        HourlyForecast(OffsetDateTime.now().plusHours(1), Weather.CLOUD, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 6)),
+        HourlyForecast(OffsetDateTime.now().plusHours(2), Weather.RAIN, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 4, 3)),
+        HourlyForecast(OffsetDateTime.now().plusHours(3), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
     )
 
     fun getHourlyForecast() = ForecastList
@@ -21,17 +25,16 @@ data class HourlyForecast(
     val weather: Weather,
     val celsius: Int,
     val wetness: Int,
+    val cardValues: DetailedCardForecast,
 ): Forecast()
 
 data class DetailedCardForecast(
-    val date: OffsetDateTime,
-    val weather: Weather,
-    val celsius: Int,
-    val wetness: Int,  //umidità
     val perceivedTemperature: Int,
     val coverage: Int,
-    val rain: Int
-): Forecast()
+    val rain: Int,
+    val uvIndex: Int,
+    val wind: Int
+)
 
 data class TitleForecast(
     val date: OffsetDateTime,
