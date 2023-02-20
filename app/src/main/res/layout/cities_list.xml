@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#6779FF">
+
+    <!-- IMPLEMENTS SPACE BETWEEN CITIES -->
+
+    <TextView
+        android:id="@+id/cities_name"
+        android:name="search_city_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bottom_bar_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Palermo"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/bottom_bar_text_size"
+        android:layout_marginBottom="@dimen/bottom_bar_text_size"/>
+
+    <TextView
+        android:id="@+id/degrees"
+        android:name="search_city_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/bottom_bar_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toTopOf="@id/weather"
+        tools:text="12°"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/bottom_bar_text_size"/>
+
+    <TextView
+        android:id="@+id/weather"
+        android:name="search_weather_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/bottom_bar_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/degrees"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="soleggiato"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_marginBottom="@dimen/bottom_bar_text_size"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
