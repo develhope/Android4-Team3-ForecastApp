@@ -80,7 +80,7 @@ class SearchAdapter(
             is HourlyForecast -> {
                 (holder as HourlyForecastViewHolder).weather.text =
                     (search[position] as HourlyForecast).weather.toString()
-                (holder as HourlyForecastViewHolder).degrees.text =
+                (holder as HourlyForecastViewHolder).degrees.text=
                     (search[position] as HourlyForecast).degrees.toString()
                 (holder as HourlyForecastViewHolder).cities.text =
                     (search[position] as HourlyForecast).cities.toString()
@@ -93,6 +93,7 @@ class SearchAdapter(
 
             }
         }
+
     }
 
     override fun getItemCount(): Int {

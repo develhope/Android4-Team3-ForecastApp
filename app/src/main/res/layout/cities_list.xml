@@ -6,8 +6,6 @@
     android:layout_height="wrap_content"
     android:background="#6779FF">
 
-    <!-- IMPLEMENTS SPACE BETWEEN CITIES -->
-
     <TextView
         android:id="@+id/cities_name"
         android:name="search_city_text_size"
