@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.DataSource.getHourlyForecast
+import co.develhope.meteoapp.DataSourceTodayScreen.getHourlyForecast
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
 
 

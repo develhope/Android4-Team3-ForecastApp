@@ -2,7 +2,7 @@ package co.develhope.meteoapp
 
 import org.threeten.bp.OffsetDateTime
 
-object DataSource{
+object DataSourceTodayScreen{
     private val ForecastList: List<Forecast> = listOf(
         TitleForecast(OffsetDateTime.now(), "Napoli", "Campania"),
         HourlyForecast(OffsetDateTime.now(), Weather.SUNNY, 20, 15,
