@@ -32,6 +32,21 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    buildscript {
+        repositories {
+            google()
+        }
+
+    }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src\\main\\res', 'src\\main\\res\\drawable\\icons'
+            }
+        }
+    }
+
 }
 
 dependencies {
