@@ -15,17 +15,17 @@ import org.w3c.dom.Text
 import java.util.*
 
 
-class HomeCardViewHolder(view:View): RecyclerView.ViewHolder(view) {
+class HomeCardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    val dayOfWeek : TextView
-    val date : TextView
+    val dayOfWeek: TextView
+    val date: TextView
     val minDegree: TextView
     val maxDegree: TextView
     val windKmh: TextView
     val rainPerc: TextView
     val weather: ImageView
 
-    init{
+    init {
         dayOfWeek = view.findViewById(R.id.day_card)
         date = view.findViewById(R.id.date_card)
         minDegree = view.findViewById(R.id.min_degrees)
@@ -36,9 +36,9 @@ class HomeCardViewHolder(view:View): RecyclerView.ViewHolder(view) {
     }
 }
 
-class HomeTitleViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    val city : TextView
-    val region : TextView
+class HomeTitleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val city: TextView
+    val region: TextView
 
     init {
         city = view.findViewById(R.id.home_title_city)
@@ -46,24 +46,25 @@ class HomeTitleViewHolder(view: View): RecyclerView.ViewHolder(view) {
     }
 }
 
-class HomeSubtitleViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    val nextFiveDays : TextView
+class HomeSubtitleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val nextFiveDays: TextView
 
     init {
         nextFiveDays = view.findViewById(R.id.home_subtitle)
     }
 }
 
-class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeScreenAdapter(val list: List<HomePageItems>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    enum class ViewType(val value: Int){
+    enum class ViewType(val value: Int) {
         HOME_TITLE(1),
         HOME_CARD(2),
         HOME_NEXTDAYS(3)
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(list[position]){
+        return when (list[position]) {
             is HomeTitle -> ViewType.HOME_TITLE.value
             is SpecificDayWeather -> ViewType.HOME_CARD.value
             is NextDays -> ViewType.HOME_NEXTDAYS.value
@@ -71,20 +72,20 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        when(viewType){
+        when (viewType) {
             ViewType.HOME_TITLE.value -> {
-                val homeListItemView = LayoutInflater.from(parent.context).
-                inflate(R.layout.home_screen_title, parent, false)
+                val homeListItemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.home_screen_title, parent, false)
                 return HomeTitleViewHolder(homeListItemView)
             }
             ViewType.HOME_CARD.value -> {
-                val homeListItemView = LayoutInflater.from(parent.context).
-                inflate(R.layout.home_screen_cardview, parent, false)
+                val homeListItemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.home_screen_cardview, parent, false)
                 return HomeCardViewHolder(homeListItemView)
             }
             ViewType.HOME_NEXTDAYS.value -> {
-                val homeListItemView = LayoutInflater.from(parent.context).
-                inflate(R.layout.home_screen_subtitle, parent, false)
+                val homeListItemView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.home_screen_subtitle, parent, false)
                 return HomeSubtitleViewHolder(homeListItemView)
             }
             else -> throw java.lang.IllegalArgumentException("error")
@@ -94,7 +95,7 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(list[position]){
+        when (list[position]) {
             is HomeTitle -> {
 
                 (holder as HomeTitleViewHolder).city.text =
@@ -106,23 +107,29 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
             }
 
             is SpecificDayWeather -> {
-                when ((list[position] as SpecificDayWeather).cardDayOfWeek){
+                when ((list[position] as SpecificDayWeather).cardDayOfWeek.dayOfWeek) {
 
-                   OffsetDateTime.now() -> (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.today)
+                    OffsetDateTime.now().dayOfWeek -> (holder as HomeCardViewHolder).dayOfWeek.setText(
+                        R.string.today
+                    )
 
-                   OffsetDateTime.now().plusDays(1) -> (holder as HomeCardViewHolder).
-                   dayOfWeek.setText(R.string.tomorrow)
+                    OffsetDateTime.now()
+                        .plusDays(1).dayOfWeek -> (holder as HomeCardViewHolder).dayOfWeek.setText(R.string.tomorrow)
 
-                   else -> (holder as HomeCardViewHolder).dayOfWeek.text =
-                        (list[position] as SpecificDayWeather).cardDayOfWeek.dayOfWeek.
-                        getDisplayName(TextStyle.FULL, Locale.ITALIAN)
+                    else -> (holder as HomeCardViewHolder).dayOfWeek.text =
+                        (list[position] as SpecificDayWeather).cardDayOfWeek.dayOfWeek.getDisplayName(
+                            TextStyle.FULL,
+                            Locale.ITALIAN
+                        ).
+                        replaceFirstChar {it.titlecase(Locale.getDefault())}
                 }
 
                 (holder as HomeCardViewHolder).date.text =
-                    (list[position] as SpecificDayWeather).date.format(DateTimeFormatter.
-                    ofPattern("dd/MM", Locale.ITALIAN))
+                    (list[position] as SpecificDayWeather).date.format(
+                        DateTimeFormatter.ofPattern("dd/MM", Locale.ITALIAN)
+                    )
 
-                when((list[position] as SpecificDayWeather).weather){
+                when ((list[position] as SpecificDayWeather).weather) {
                     Weather.SUNNY -> (holder as HomeCardViewHolder).weather.setImageResource(R.drawable.sunny_icon)
                     Weather.CLOUDY -> (holder as HomeCardViewHolder).weather.setImageResource(R.drawable.sun_cloud_icon)
                     Weather.RAINY -> (holder as HomeCardViewHolder).weather.setImageResource(R.drawable.sun_behind_rain_cloud_icon)
@@ -146,7 +153,6 @@ class HomeScreenAdapter(val list: List<HomePageItems>): RecyclerView.Adapter<Rec
                 (holder as HomeSubtitleViewHolder).nextFiveDays.setText(R.string.next_5_days)
         }
     }
-
 
 
     override fun getItemCount(): Int {

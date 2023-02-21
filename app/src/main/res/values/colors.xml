@@ -10,5 +10,6 @@
     <color name="unselected_button">#847CB1</color>
     <color name="selected_button">#230EA5</color>
     <color name="home_screen_card">#948CEF</color>
-    <color name="home_screen_background">#4434F9</color>
+    <color name="first_home_screen_background">#4434F9</color>
+    <color name="second_home_screen_background">#6A64AD</color>
 </resources>
