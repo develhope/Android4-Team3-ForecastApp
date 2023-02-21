@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 
 class SearchBarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -75,15 +76,16 @@ class SearchAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-
         when (search[position]){
             is HourlyForecast -> {
                 (holder as HourlyForecastViewHolder).weather.text =
-                    (search[position] as HourlyForecast).weather.toString()
+                    (search[position] as HourlyForecast).weather.toString().lowercase()
                 (holder as HourlyForecastViewHolder).degrees.text=
                     (search[position] as HourlyForecast).degrees.toString()
                 (holder as HourlyForecastViewHolder).cities.text =
                     (search[position] as HourlyForecast).cities.toString()
+                (holder as HourlyForecastViewHolder).degrees.text=
+                    "${(search[position] as HourlyForecastViewHolder).degrees}°"
             }
             is RecentSearches -> {
                 (holder as RecentSearchViewHolder).recentSearches.text =
