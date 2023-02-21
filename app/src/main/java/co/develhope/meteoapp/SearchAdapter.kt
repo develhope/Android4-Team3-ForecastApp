@@ -40,22 +40,24 @@ class SearchAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        when (viewType){
+        when (viewType) {
             ViewType.HOURLYFORECAST.num -> {
-                    val listItem =
-                        LayoutInflater.from(parent.context).inflate(R.layout.cities_list, parent, false)
-                    return HourlyForecastViewHolder(listItem)
-                }
+                val listItem =
+                    LayoutInflater.from(parent.context).inflate(R.layout.cities_list, parent, false)
+                return HourlyForecastViewHolder(listItem)
+            }
             ViewType.RESENTSEARCH.num -> {
-                val listItem2 = LayoutInflater.from(parent.context).inflate(R.layout.recent_search, parent, false)
+                val listItem2 = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.recent_search, parent, false)
                 return RecentSearchViewHolder(listItem2)
             }
             ViewType.SEARCHBAR.num -> {
-                val listItem3 = LayoutInflater.from(parent.context).inflate(R.layout.search_bar, parent, false)
+                val listItem3 =
+                    LayoutInflater.from(parent.context).inflate(R.layout.search_bar, parent, false)
                 return SearchBarViewHolder(listItem3)
             }
             else -> TODO()
-            }
+        }
     }
 
 
@@ -76,15 +78,19 @@ class SearchAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        when (search[position]){
+        when (search[position]) {
             is HourlyForecast -> {
                 (holder as HourlyForecastViewHolder).weather.text =
                     (search[position] as HourlyForecast).weather.toString().lowercase()
-                (holder as HourlyForecastViewHolder).degrees.text=
+                (holder as HourlyForecastViewHolder).itemView.isClickable
+                (holder as HourlyForecastViewHolder).itemView.setOnClickListener {
+
+                }
+                (holder as HourlyForecastViewHolder).degrees.text =
                     (search[position] as HourlyForecast).degrees.toString()
                 (holder as HourlyForecastViewHolder).cities.text =
                     (search[position] as HourlyForecast).cities.toString()
-                (holder as HourlyForecastViewHolder).degrees.text=
+                (holder as HourlyForecastViewHolder).degrees.text =
                     "${(search[position] as HourlyForecastViewHolder).degrees}°"
             }
             is RecentSearches -> {
