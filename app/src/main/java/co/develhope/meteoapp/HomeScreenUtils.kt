@@ -23,8 +23,3 @@ data class SpecificDayWeather(
     val weather: Weather
 ):HomePageItems()
 
-enum class Weather{
-    SUNNY,
-    CLOUDY,
-    RAINY
-}

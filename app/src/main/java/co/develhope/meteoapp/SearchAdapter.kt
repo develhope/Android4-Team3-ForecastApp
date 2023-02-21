@@ -54,7 +54,7 @@ class SearchAdapter(
                 return SearchBarViewHolder(listItem3)
             }
             else -> TODO()
-            }
+        }
     }
 
 
@@ -76,7 +76,7 @@ class SearchAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
-        when (search[position]){
+        when (search[position]) {
             is HourlyForecast -> {
                 (holder as HourlyForecastViewHolder).weather.text =
                     (search[position] as HourlyForecast).weather.toString()

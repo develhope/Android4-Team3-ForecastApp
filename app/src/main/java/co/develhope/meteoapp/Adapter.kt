@@ -58,11 +58,11 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
 
     enum class ViewType(val value: Int){
         TITLE_FORECAST(1),
-        HOURLY_FORECAST(2)
+        HOURLY_FORECAST_LIST_ITEM(2)
     }
     override fun getItemViewType(position: Int): Int =
         when(list[position]){
-            is HourlyForecast -> ViewType.HOURLY_FORECAST.value
+            is HourlyForecastListItem -> ViewType.HOURLY_FORECAST_LIST_ITEM.value
             is TitleForecast -> ViewType.TITLE_FORECAST.value
             //TODO REMOVE THIS IMPLEMENTATION FOR A BETTER ONE
         }
@@ -75,7 +75,7 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
                     .inflate(R.layout.hourly_forecast_title_item, parent, false)
                 return TitleViewHolder(ListItemView)
             }
-            ViewType.HOURLY_FORECAST.value -> {
+            ViewType.HOURLY_FORECAST_LIST_ITEM.value -> {
                 val ListItemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.hourly_forecast_list_item, parent, false)
 
@@ -124,33 +124,33 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
                             "${(list[position] as TitleForecast).date.dayOfMonth}" + " " +
                             "${(list[position] as TitleForecast).date.month}").lowercase()
             }
-            is HourlyForecast ->{
+            is HourlyForecastListItem ->{
                 (holder as HourlyViewHolder).hourTextView.text =
-                    (list[position] as HourlyForecast).date.hour.toString()
-                when((list[position] as HourlyForecast).weather){
+                    (list[position] as HourlyForecastListItem).date.hour.toString()
+                when((list[position] as HourlyForecastListItem).weather){
                     Weather.SUNNY -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sunny_icon)
-                    Weather.CLOUD -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sun_cloud_icon)
-                    Weather.RAIN -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sun_behind_rain_cloud_icon)
+                    Weather.CLOUDY -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sun_cloud_icon)
+                    Weather.RAINY -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sun_behind_rain_cloud_icon)
                     Weather.NIGHT -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.moon_icon)
                 }
                 (holder as HourlyViewHolder).celsiusTextView.text =
-                    (list[position] as HourlyForecast).celsius.toString()
+                    (list[position] as HourlyForecastListItem).celsius.toString()
                 (holder as HourlyViewHolder).wetnessTextView.text =
-                    (list[position] as HourlyForecast).wetness.toString()
+                    (list[position] as HourlyForecastListItem).wetness.toString()
 
                 //Card Values From here
                 (holder as HourlyViewHolder).cardPerceivedTemperatureView.text =
-                    (list[position] as HourlyForecast).cardValues.perceivedTemperature.toString()
+                    (list[position] as HourlyForecastListItem).cardValues.perceivedTemperature.toString()
                 (holder as HourlyViewHolder).cardCoverageTextView.text =
-                    (list[position] as HourlyForecast).cardValues.coverage.toString()
+                    (list[position] as HourlyForecastListItem).cardValues.coverage.toString()
                 (holder as HourlyViewHolder).cardRainTextView.text =
-                    (list[position] as HourlyForecast).cardValues.rain.toString()
+                    (list[position] as HourlyForecastListItem).cardValues.rain.toString()
                 (holder as HourlyViewHolder).cardWetnessTextView.text =
-                    (list[position] as HourlyForecast).wetness.toString()
+                    (list[position] as HourlyForecastListItem).wetness.toString()
                 (holder as HourlyViewHolder).cardUvIndexTextView.text =
-                    (list[position] as HourlyForecast).cardValues.uvIndex.toString()
+                    (list[position] as HourlyForecastListItem).cardValues.uvIndex.toString()
                 (holder as HourlyViewHolder).cardWindTextView.text =
-                    (list[position] as HourlyForecast).cardValues.wind.toString()
+                    (list[position] as HourlyForecastListItem).cardValues.wind.toString()
             }
         }
     }
