@@ -6,6 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:listitem="@layout/hourly_forecast_list_item"
-    tools:context=".TodayScreen">
+    tools:context=".todayscreen.TodayScreen">
 
 </androidx.recyclerview.widget.RecyclerView>

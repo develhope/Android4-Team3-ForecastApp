@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import co.develhope.meteoapp.databinding.FragmentHomeScreenBinding
 
+//TODO this fragment is a copy of HomeScreen, to be deleted, ps this is not called by the nav graph
+
 
 class HomeScreenFragment : Fragment() {
     private lateinit var binding: FragmentHomeScreenBinding

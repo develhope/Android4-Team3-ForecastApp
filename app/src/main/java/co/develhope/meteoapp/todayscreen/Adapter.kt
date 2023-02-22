@@ -1,5 +1,6 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.todayscreen
 
+import android.annotation.SuppressLint
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import co.develhope.meteoapp.R
+import co.develhope.meteoapp.Weather
 import org.threeten.bp.OffsetDateTime
 
 class TitleViewHolder(view: View):RecyclerView.ViewHolder(view){
@@ -43,7 +46,6 @@ class HourlyViewHolder(view: View):RecyclerView.ViewHolder(view){
         celsiusTextView = view.findViewById(R.id.celsius_list_item_view)
         wetnessTextView = view.findViewById(R.id.wetness_list_item_view)
 
-
         cardPerceivedTemperatureView = view.findViewById(R.id.perceived_temperature_text_view)
         cardWetnessTextView = view.findViewById(R.id.wetness_text_view)
         cardCoverageTextView = view.findViewById(R.id.coverage_text_view)
@@ -54,50 +56,30 @@ class HourlyViewHolder(view: View):RecyclerView.ViewHolder(view){
 }
 
 
-class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class Adapter(private val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    enum class ViewType(val value: Int){
+    private enum class ViewType(val value: Int){
         TITLE_FORECAST(1),
         HOURLY_FORECAST_LIST_ITEM(2)
     }
+
     override fun getItemViewType(position: Int): Int =
         when(list[position]){
             is HourlyForecastListItem -> ViewType.HOURLY_FORECAST_LIST_ITEM.value
             is TitleForecast -> ViewType.TITLE_FORECAST.value
-            //TODO REMOVE THIS IMPLEMENTATION FOR A BETTER ONE
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        when(viewType){
+        return when(viewType){
             ViewType.TITLE_FORECAST.value -> {
-                val ListItemView = LayoutInflater.from(parent.context)
+                val listItemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.hourly_forecast_title_item, parent, false)
-                return TitleViewHolder(ListItemView)
+                TitleViewHolder(listItemView)
             }
             ViewType.HOURLY_FORECAST_LIST_ITEM.value -> {
-                val ListItemView = LayoutInflater.from(parent.context)
+                val listItemView = LayoutInflater.from(parent.context)
                     .inflate(R.layout.hourly_forecast_list_item, parent, false)
-
-                //this implementation enable the expandable card view for each list item
-                val wholeView = ListItemView.findViewById<LinearLayout>(R.id.hourly_forecast_list_item_view)
-                val arrowButton = ListItemView.findViewById<ImageView>(R.id.expandable_button_image_view)
-                val hiddenCard = ListItemView.findViewById<CardView>(R.id.hidden_hourly_forecast_list_item_view)
-
-                arrowButton.setOnClickListener{
-                    if (hiddenCard.visibility == View.VISIBLE){
-                        TransitionManager.beginDelayedTransition(wholeView, AutoTransition())
-                        hiddenCard.visibility = View.GONE
-                        arrowButton.setImageResource(R.drawable.baseline_keyboard_arrow_down_24)
-                    }else{
-                        TransitionManager.beginDelayedTransition(wholeView, AutoTransition())
-                        hiddenCard.visibility = View.VISIBLE
-                        arrowButton.setImageResource(R.drawable.baseline_keyboard_arrow_up_24)
-                    }
-                }
-                //TODO remove baseline_keyboard_arrow_down_24 baseline_keyboard_arrow_up_24
-
-                return HourlyViewHolder(ListItemView)
+                HourlyViewHolder(listItemView)
             }
             else ->{
                 TODO()
@@ -105,12 +87,14 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(list[position]){
+
             is TitleForecast ->{
                 (holder as TitleViewHolder).cityAndRegionTextView.text =
                     "${(list[position] as TitleForecast).city}, " +
-                            "${(list[position] as TitleForecast).region}"
+                            (list[position] as TitleForecast).region
 
                 if(OffsetDateTime.now().dayOfMonth ==
                     (list[position] as TitleForecast).date.dayOfMonth){
@@ -124,9 +108,10 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
                             "${(list[position] as TitleForecast).date.dayOfMonth}" + " " +
                             "${(list[position] as TitleForecast).date.month}").lowercase()
             }
+
             is HourlyForecastListItem ->{
                 (holder as HourlyViewHolder).hourTextView.text =
-                    (list[position] as HourlyForecastListItem).date.hour.toString()
+                    "${(list[position] as HourlyForecastListItem).date.hour.toString()}:00"
                 when((list[position] as HourlyForecastListItem).weather){
                     Weather.SUNNY -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sunny_icon)
                     Weather.CLOUDY -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sun_cloud_icon)
@@ -140,17 +125,44 @@ class Adapter(val list: List<Forecast>):RecyclerView.Adapter<RecyclerView.ViewHo
 
                 //Card Values From here
                 (holder as HourlyViewHolder).cardPerceivedTemperatureView.text =
-                    (list[position] as HourlyForecastListItem).cardValues.perceivedTemperature.toString()
+                    "${(list[position] as HourlyForecastListItem)
+                        .cardValues.perceivedTemperature.toString()}°"
                 (holder as HourlyViewHolder).cardCoverageTextView.text =
-                    (list[position] as HourlyForecastListItem).cardValues.coverage.toString()
+                    "${(list[position] as HourlyForecastListItem).cardValues.coverage.toString()}%"
                 (holder as HourlyViewHolder).cardRainTextView.text =
-                    (list[position] as HourlyForecastListItem).cardValues.rain.toString()
+                    "${(list[position] as HourlyForecastListItem).cardValues.rain.toString()}cm"
                 (holder as HourlyViewHolder).cardWetnessTextView.text =
-                    (list[position] as HourlyForecastListItem).wetness.toString()
+                    "${(list[position] as HourlyForecastListItem).wetness.toString()}%"
                 (holder as HourlyViewHolder).cardUvIndexTextView.text =
-                    (list[position] as HourlyForecastListItem).cardValues.uvIndex.toString()
+                    "${(list[position] as HourlyForecastListItem).cardValues.uvIndex.toString()}/10"
                 (holder as HourlyViewHolder).cardWindTextView.text =
-                    (list[position] as HourlyForecastListItem).cardValues.wind.toString()
+                    "SSE${(list[position] as HourlyForecastListItem).cardValues.wind.toString()}km/h"
+
+                //this implementation enable the expandable card view for each list item
+                val wholeView = (holder as HourlyViewHolder).itemView
+                    .findViewById<LinearLayout>(R.id.hourly_forecast_list_item_view)
+                val arrowButton = (holder as HourlyViewHolder).itemView
+                    .findViewById<ImageView>(R.id.expandable_button_image_view)
+                val lineView = (holder as HourlyViewHolder).itemView
+                    .findViewById<ImageView>(R.id.line_image_view)
+                val hiddenCard = (holder as HourlyViewHolder).itemView
+                    .findViewById<CardView>(R.id.hidden_hourly_forecast_list_item_view)
+
+                //expandable card view implementation
+                arrowButton.setOnClickListener {
+                    if (hiddenCard.visibility == View.VISIBLE) {
+                        TransitionManager.beginDelayedTransition(wholeView, AutoTransition())
+                        lineView.visibility = View.VISIBLE
+                        hiddenCard.visibility = View.GONE
+                        arrowButton.setImageResource(R.drawable.baseline_keyboard_arrow_down_24)
+                    } else {
+                        TransitionManager.beginDelayedTransition(wholeView, AutoTransition())
+                        lineView.visibility = View.GONE
+                        hiddenCard.visibility = View.VISIBLE
+                        arrowButton.setImageResource(R.drawable.baseline_keyboard_arrow_up_24)
+                    }
+                }
+                //TODO remove baseline_keyboard_arrow_down_24 baseline_keyboard_arrow_up_24
             }
         }
     }
