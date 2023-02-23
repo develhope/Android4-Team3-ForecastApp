@@ -22,6 +22,7 @@
         android:inputType="textAutoComplete"
         app:iconifiedByDefault="false"
         app:queryHint="@string/search_city"
-        app:searchIcon="@drawable/search_icon_black" />
+        app:searchIcon="@drawable/search_icon_black"
+        />
 
 </FrameLayout>

@@ -14,7 +14,7 @@
     tools:text="Ricerche recenti"
     android:name="search_recent_margin_top"
     android:layout_marginTop="@dimen/bottom_bar_text_size"
-    android:textColor="#230EA5"
+    android:textColor="@color/selected_button"
     android:textStyle="bold"
     android:layout_marginStart="@dimen/bottom_bar_text_size"
     />

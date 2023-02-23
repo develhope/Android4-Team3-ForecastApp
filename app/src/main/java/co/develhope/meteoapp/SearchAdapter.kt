@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 
@@ -84,14 +85,15 @@ class SearchAdapter(
                     (search[position] as HourlyForecast).weather.toString().lowercase()
                 (holder as HourlyForecastViewHolder).itemView.isClickable
                 (holder as HourlyForecastViewHolder).itemView.setOnClickListener {
-
+                    it.findNavController().navigate(R.id.click_on_city_card)
                 }
                 (holder as HourlyForecastViewHolder).degrees.text =
                     (search[position] as HourlyForecast).degrees.toString()
                 (holder as HourlyForecastViewHolder).cities.text =
                     (search[position] as HourlyForecast).cities.toString()
                 (holder as HourlyForecastViewHolder).degrees.text =
-                    "${(search[position] as HourlyForecastViewHolder).degrees}°"
+                    "${(search[position] as HourlyForecast).degrees}°"
+
             }
             is RecentSearches -> {
                 (holder as RecentSearchViewHolder).recentSearches.text =

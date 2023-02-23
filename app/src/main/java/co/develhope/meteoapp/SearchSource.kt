@@ -4,9 +4,9 @@ object SearchSource{
     private val searchList : List<GetHourlyForecastList> = listOf(
         SearchBar(""),
         RecentSearches("Ricerche Recenti"),
-        HourlyForecast("12°", Weather.SUNNY, "Palermo"),
-        HourlyForecast("16°", Weather.CLOUDY, "Catanzaro"),
-        HourlyForecast("16°", Weather.RAINY, "Roma")
+        HourlyForecast(12, Weather.SUNNY, "Palermo"),
+        HourlyForecast(12, Weather.CLOUDY, "Catanzaro"),
+        HourlyForecast(12, Weather.RAINY, "Roma")
     )
     fun getSearchCitiesList() : List<GetHourlyForecastList>{
         return searchList
