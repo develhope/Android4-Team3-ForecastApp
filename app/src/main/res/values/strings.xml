@@ -6,5 +6,11 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_city">Cerca città</string>
+    <string name="perceived">Percepita</string>
+    <string name="wetness">Umidità</string>
+    <string name="coverage">Copertura</string>
+    <string name="uv_index">Indice UV</string>
+    <string name="wind">Vento</string>
+    <string name="rain">Piogga</string>
 
 </resources>
