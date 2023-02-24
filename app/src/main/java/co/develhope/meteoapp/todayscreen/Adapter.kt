@@ -119,9 +119,9 @@ class Adapter(private val list: List<Forecast>):RecyclerView.Adapter<RecyclerVie
                     Weather.NIGHT -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.moon_icon)
                 }
                 (holder as HourlyViewHolder).celsiusTextView.text =
-                    (list[position] as HourlyForecastListItem).celsius.toString()
+                    "${(list[position] as HourlyForecastListItem).celsius}°"
                 (holder as HourlyViewHolder).wetnessTextView.text =
-                    (list[position] as HourlyForecastListItem).wetness.toString()
+                    "${(list[position] as HourlyForecastListItem).wetness}%"
 
                 //Card Values From here
                 (holder as HourlyViewHolder).cardPerceivedTemperatureView.text =

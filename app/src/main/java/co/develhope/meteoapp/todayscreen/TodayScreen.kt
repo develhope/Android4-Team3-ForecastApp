@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
-import co.develhope.meteoapp.todayscreen.DataSourceTodayScreen.getHourlyForecast
+import co.develhope.meteoapp.todayscreen.DataSourceTodayScreen.getTodayDetailedForecast
 
 
 class TodayScreen : Fragment() {
@@ -18,7 +18,7 @@ class TodayScreen : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTodayScreenBinding.inflate(inflater, container, false)
-        binding.todayRecycleView.adapter = Adapter(getHourlyForecast())
+        binding.todayRecycleView.adapter = Adapter(getTodayDetailedForecast())
         binding.todayRecycleView.layoutManager = LinearLayoutManager(requireContext())
         return binding.root
     }

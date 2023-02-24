@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
 import co.develhope.meteoapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -27,5 +29,20 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         val bottomNavigationView = binding.bottomNavigationToolbar
         setupWithNavController(bottomNavigationView, navController)
+        if (navController != null) {
+            bottomNavigationView.setupWithNavController(navController)
+            bottomNavigationView.setOnItemSelectedListener  {
+                when (it.itemId) {
+                    R.id.homeScreen -> {
+                        if (navController.popBackStack(R.id.homeScreen,false)){
+                            it.onNavDestinationSelected(navController)
+                        };
+                        true
+                    }
+                    else -> {it.onNavDestinationSelected(navController)
+                    }
+                }
+            }
+        }
     }
 }

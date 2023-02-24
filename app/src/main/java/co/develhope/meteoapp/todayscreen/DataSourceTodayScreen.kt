@@ -14,9 +14,25 @@ object DataSourceTodayScreen{
             DetailedCardForecast( 22, 15, 0, 4, 3)),
         HourlyForecastListItem(OffsetDateTime.now().plusHours(3), Weather.NIGHT, 20, 15,
             DetailedCardForecast( 22, 15, 0, 7, 2)),
+        HourlyForecastListItem(OffsetDateTime.now().plusHours(4), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
+        HourlyForecastListItem(OffsetDateTime.now().plusHours(5), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
+        HourlyForecastListItem(OffsetDateTime.now().plusHours(6), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
+        HourlyForecastListItem(OffsetDateTime.now().plusHours(7), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
+        HourlyForecastListItem(OffsetDateTime.now().plusHours(8), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
+        HourlyForecastListItem(OffsetDateTime.now().plusHours(9), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
+        HourlyForecastListItem(OffsetDateTime.now().plusHours(10), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
+        HourlyForecastListItem(OffsetDateTime.now().plusHours(10), Weather.NIGHT, 20, 15,
+            DetailedCardForecast( 22, 15, 0, 7, 2)),
     )
 
-    fun getHourlyForecast() = ForecastList
+    fun getTodayDetailedForecast() = ForecastList
 }
 
 

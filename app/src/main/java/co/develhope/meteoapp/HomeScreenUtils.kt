@@ -14,7 +14,6 @@ data class HomeTitle (
 ):HomePageItems()
 
 data class SpecificDayWeather(
-    val cardDayOfWeek : OffsetDateTime,
     val date: OffsetDateTime,
     val minDegree: Int,
     val maxDegree: Int,

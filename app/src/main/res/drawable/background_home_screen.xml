@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <gradient
+                android:type="linear"
+                android:angle="270"
+                android:startColor="@color/first_home_screen_background"
+                android:endColor="@color/second_home_screen_background"
+                />
+        </shape>
+    </item>
+
+</selector>
