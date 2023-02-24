@@ -27,5 +27,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         val bottomNavigationView = binding.bottomNavigationToolbar
         setupWithNavController(bottomNavigationView, navController)
+
     }
 }
