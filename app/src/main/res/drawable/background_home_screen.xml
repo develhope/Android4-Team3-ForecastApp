@@ -4,7 +4,7 @@
         <shape>
             <gradient
                 android:type="linear"
-                android:angle="@integer/material_motion_duration_medium_1"
+                android:angle="270"
                 android:startColor="@color/first_home_screen_background"
                 android:endColor="@color/second_home_screen_background"
                 />
