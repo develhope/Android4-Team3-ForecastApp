@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/todayScreen"
-        android:name="co.develhope.meteoapp.TodayScreen"
+        android:name="co.develhope.meteoapp.todayscreen.TodayScreen"
         tools:layout="@layout/fragment_today_screen" />
     <fragment
         android:id="@+id/specificDayScreen"
