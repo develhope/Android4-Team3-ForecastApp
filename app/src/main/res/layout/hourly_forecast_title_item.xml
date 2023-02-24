@@ -3,19 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginStart="@dimen/min_margin_from_start_end"
+    android:layout_marginTop="@dimen/detailed_forecast_city_margin_top"
+    android:layout_marginBottom="@dimen/detailed_forecast_city_margin_top">
 
     <TextView
         android:id="@+id/city_and_region_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/detailed_forecast_min_text_size"
+        android:textColor="@color/selected_button"
         tools:text="Palermo, Sicily"/>
 
     <TextView
         android:id="@+id/current_day_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/selected_button"
         android:textSize="@dimen/detailed_forecast_max_text_size"
         tools:text="Today,"/>
 
@@ -23,6 +28,7 @@
         android:id="@+id/date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/selected_button"
         android:textSize="@dimen/detailed_forecast_max_text_size"
         tools:text="Sunday 10 september"/>
 

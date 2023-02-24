@@ -5,9 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import co.develhope.meteoapp.databinding.FragmentSpecificDayScreenBinding
+import co.develhope.meteoapp.todayscreen.Adapter
+import co.develhope.meteoapp.todayscreen.DataSourceTodayScreen
 
 
 class SpecificDayScreen : Fragment() {
+    private lateinit var binding: FragmentSpecificDayScreenBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -18,7 +23,10 @@ class SpecificDayScreen : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_specific_day_screen, container, false)
+        binding = FragmentSpecificDayScreenBinding.inflate(inflater, container, false)
+        binding.specificDayRecycleView.adapter = Adapter(DataSourceTodayScreen.getTodayDetailedForecast())
+        binding.specificDayRecycleView.layoutManager = LinearLayoutManager(requireContext())
+        return binding.root
     }
 
 
