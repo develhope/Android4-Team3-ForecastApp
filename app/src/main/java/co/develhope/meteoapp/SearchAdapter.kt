@@ -84,11 +84,9 @@ class SearchAdapter(
                     it.findNavController().navigate(R.id.click_on_city_card)
                 }
                 holder.degrees.text =
-                    (search[position] as HourlyForecast).degrees.toString()
+                    "${(search[position] as HourlyForecast).degrees}°"
                 holder.cities.text =
                     (search[position] as HourlyForecast).cities
-                holder.degrees.text =
-                    "${(search[position] as HourlyForecast).degrees}°"
 
             }
             is RecentSearches -> {
