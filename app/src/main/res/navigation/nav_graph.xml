@@ -9,6 +9,14 @@
         android:id="@+id/homeScreen"
         android:name="co.develhope.meteoapp.HomeScreen"
         tools:layout="@layout/fragment_home_screen" >
+        <argument
+            android:name="city_name"
+            app:argType="string"
+            android:defaultValue="Palermo" />
+        <argument
+            android:name="region_name"
+            app:argType="string"
+            android:defaultValue="Sicily" />
         <action
             android:id="@+id/homeScreen_to_todayScreen"
             app:destination="@id/todayScreen" />
@@ -29,6 +37,6 @@
         android:name="co.develhope.meteoapp.SearchScreen"
         tools:layout="@layout/fragment_search_screen" />
     <action
-        android:id="@+id/click_on_city_card"
+        android:id="@+id/searchScreenToHomeScreen"
         app:destination="@+id/homeScreen"/>
 </navigation>

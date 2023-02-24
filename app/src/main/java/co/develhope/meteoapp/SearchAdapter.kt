@@ -81,7 +81,10 @@ class SearchAdapter(
                     (search[position] as HourlyForecast).weather.toString().lowercase()
                 holder.itemView.isClickable
                 holder.itemView.setOnClickListener {
-                    it.findNavController().navigate(R.id.click_on_city_card)
+                    val destination = SearchScreenDirections.searchScreenToHomeScreen()
+                    destination.cityName = (search[position] as HourlyForecast).cities
+                    destination.regionName = "Italia"
+                    it.findNavController().navigate(destination)
                 }
                 holder.degrees.text =
                     "${(search[position] as HourlyForecast).degrees}°"
