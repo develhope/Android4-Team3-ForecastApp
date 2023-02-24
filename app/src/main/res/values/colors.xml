@@ -12,4 +12,7 @@
     <color name="home_screen_card">#948CEF</color>
     <color name="first_home_screen_background">#4434F9</color>
     <color name="second_home_screen_background">#6A64AD</color>
+    <color name="start_color_search_screen_background">#1F2D98</color>
+    <color name="end_color_search_screen_background">#6779FF</color>
+    <color name="search_screen_background">#F0EFFF</color>
 </resources>
