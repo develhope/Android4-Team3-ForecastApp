@@ -62,9 +62,9 @@ ViewHolder(binding.root) {
 class HomeTitleViewHolder(private val binding : HomeScreenTitleBinding) : RecyclerView.
 ViewHolder(binding.root) {
 
-    fun bindHomeTitle(title : HomeTitle){
-        binding.homeTitleCity.text = title.city
-        binding.homeTitleRegion.text = title.region
+    fun bindHomeTitle(title : HomeTitle, args: HomeScreenArgs){
+        binding.homeTitleCity.text = args.cityName
+        binding.homeTitleRegion.text = args.regionName
     }
 }
 
@@ -76,7 +76,7 @@ ViewHolder(binding.root) {
     }
 }
 
-class HomeScreenAdapter(val list: List<HomePageItems>) :
+class HomeScreenAdapter(val list: List<HomePageItems>, val args: HomeScreenArgs) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class ViewType(val value: Int) {
@@ -110,7 +110,7 @@ class HomeScreenAdapter(val list: List<HomePageItems>) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is HomeTitleViewHolder -> holder.bindHomeTitle(list[position] as HomeTitle)
+            is HomeTitleViewHolder -> holder.bindHomeTitle(list[position] as HomeTitle, args)
 
             is HomeCardViewHolder -> holder.bindHomeCardView(list[position] as SpecificDayWeather)
 
