@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
-import co.develhope.meteoapp.todayscreen.DataSourceTodayScreen.getTodayDetailedForecast
+import co.develhope.meteoapp.data.DataSource.getTodayDetailedForecast
 
 
 class TodayScreen : Fragment() {

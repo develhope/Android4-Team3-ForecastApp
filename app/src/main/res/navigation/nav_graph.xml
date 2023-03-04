@@ -30,11 +30,11 @@
         tools:layout="@layout/fragment_today_screen" />
     <fragment
         android:id="@+id/specificDayScreen"
-        android:name="co.develhope.meteoapp.SpecificDayScreen"
+        android:name="co.develhope.meteoapp.specificdayscreen.SpecificDayScreen"
         tools:layout="@layout/fragment_specific_day_screen" />
     <fragment
         android:id="@+id/searchScreen"
-        android:name="co.develhope.meteoapp.SearchScreen"
+        android:name="co.develhope.meteoapp.searchscreen.SearchScreen"
         tools:layout="@layout/fragment_search_screen" />
     <action
         android:id="@+id/searchScreenToHomeScreen"

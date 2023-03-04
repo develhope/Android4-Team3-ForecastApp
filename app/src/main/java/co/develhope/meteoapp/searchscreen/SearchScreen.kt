@@ -1,13 +1,12 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.searchscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.SearchSource.getSearchCitiesList
+import co.develhope.meteoapp.data.DataSource.getSearchCitiesList
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
 
 class SearchScreen : Fragment() {

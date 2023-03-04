@@ -12,7 +12,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.R
-import co.develhope.meteoapp.Weather
+import co.develhope.meteoapp.data.Weather
+import co.develhope.meteoapp.data.Forecast
+import co.develhope.meteoapp.data.HourlyForecastListItem
+import co.develhope.meteoapp.data.TitleForecast
 import org.threeten.bp.OffsetDateTime
 
 class TitleViewHolder(view: View):RecyclerView.ViewHolder(view){

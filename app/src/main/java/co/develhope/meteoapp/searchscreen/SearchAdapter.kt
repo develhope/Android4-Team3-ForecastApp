@@ -1,4 +1,4 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.searchscreen
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import co.develhope.meteoapp.R
+import co.develhope.meteoapp.data.GetHourlyForecastList
+import co.develhope.meteoapp.data.HourlyForecast
+import co.develhope.meteoapp.data.RecentSearches
+import co.develhope.meteoapp.data.SearchBar
 
 class SearchBarViewHolder(view: View) : RecyclerView.ViewHolder(view)
 

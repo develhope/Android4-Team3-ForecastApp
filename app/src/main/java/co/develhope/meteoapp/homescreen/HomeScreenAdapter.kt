@@ -3,8 +3,9 @@ package co.develhope.meteoapp
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import co.develhope.meteoapp.data.HomePageItems
+import co.develhope.meteoapp.data.Weather
 import co.develhope.meteoapp.databinding.HomeScreenCardviewBinding
 import co.develhope.meteoapp.databinding.HomeScreenSubtitleBinding
 import co.develhope.meteoapp.databinding.HomeScreenTitleBinding

@@ -1,16 +1,16 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.data
 
 import org.threeten.bp.OffsetDateTime
 
 sealed class HomePageItems(){
     data class NextDays(
         val nextFiveDays: String
-    ):HomePageItems()
+    ): HomePageItems()
 
     data class HomeTitle (
         val city: String,
         val region: String
-    ):HomePageItems()
+    ): HomePageItems()
 
     data class SpecificDayWeather(
         val date: OffsetDateTime,
@@ -19,7 +19,7 @@ sealed class HomePageItems(){
         val windKmh: Int,
         val rainPerc: Int,
         val weather: Weather
-    ):HomePageItems()
+    ): HomePageItems()
 }
 
 
