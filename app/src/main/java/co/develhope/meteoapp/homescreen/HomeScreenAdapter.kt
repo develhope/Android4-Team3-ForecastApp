@@ -8,16 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.databinding.HomeScreenCardviewBinding
 import co.develhope.meteoapp.databinding.HomeScreenSubtitleBinding
 import co.develhope.meteoapp.databinding.HomeScreenTitleBinding
+import co.develhope.meteoapp.homescreen.HomeScreenArgs
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.TextStyle
 import java.util.*
 
+interface OnCardClick {
+    fun onCardClick(card: HomePageItems.SpecificDayWeather)
+}
 class HomeCardViewHolder(private val binding: HomeScreenCardviewBinding) : RecyclerView.
 ViewHolder(binding.root) {
 
  @SuppressLint("SetTextI18n")
- fun bindHomeCardView(cardView: SpecificDayWeather){
+ fun bindHomeCardView(cardView: HomePageItems.SpecificDayWeather, listener : OnCardClick){
      binding.dayCard.text =
          when (cardView.date.dayOfWeek) {
 
@@ -49,20 +53,18 @@ ViewHolder(binding.root) {
 
      binding.windKmh.text = "${cardView.windKmh}kmh"
 
-     binding.cardViewHomeScreen.setOnClickListener { when(cardView.date.dayOfWeek){
-         OffsetDateTime.now().dayOfWeek ->  it.findNavController().
-         navigate(R.id.homeScreen_to_todayScreen)
-         else ->  it.findNavController().navigate(R.id.homeScreen_to_specificDayScreen)
+     binding.cardViewHomeScreen.setOnClickListener {
+         listener.onCardClick(cardView)
          }
      }
 
- }
+
 }
 
 class HomeTitleViewHolder(private val binding : HomeScreenTitleBinding) : RecyclerView.
 ViewHolder(binding.root) {
 
-    fun bindHomeTitle(title : HomeTitle, args: HomeScreenArgs){
+    fun bindHomeTitle(title : HomePageItems.HomeTitle, args: HomeScreenArgs){
         binding.homeTitleCity.text = args.cityName
         binding.homeTitleRegion.text = args.regionName
     }
@@ -71,12 +73,12 @@ ViewHolder(binding.root) {
 class HomeSubtitleViewHolder(private val binding : HomeScreenSubtitleBinding) : RecyclerView.
 ViewHolder(binding.root) {
 
-    fun bindHomesubtitle(subtitle : NextDays){
+    fun bindHomesubtitle(subtitle : HomePageItems.NextDays){
         binding.homeSubtitle.text = itemView.context.getString(R.string.next_5_days)
     }
 }
 
-class HomeScreenAdapter(val list: List<HomePageItems>, val args: HomeScreenArgs) :
+class HomeScreenAdapter(val list: List<HomePageItems>, private val listener: OnCardClick, val args: HomeScreenArgs) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class ViewType(val value: Int) {
@@ -87,9 +89,10 @@ class HomeScreenAdapter(val list: List<HomePageItems>, val args: HomeScreenArgs)
 
     override fun getItemViewType(position: Int): Int {
         return when (list[position]) {
-            is HomeTitle -> ViewType.HOME_TITLE.value
-            is SpecificDayWeather -> ViewType.HOME_CARD.value
-            is NextDays -> ViewType.HOME_NEXTDAYS.value
+            is HomePageItems.HomeTitle -> ViewType.HOME_TITLE.value
+            is HomePageItems.SpecificDayWeather -> ViewType.HOME_CARD.value
+            is HomePageItems.NextDays -> ViewType.HOME_NEXTDAYS.value
+            else -> super.getItemViewType(position)
         }
     }
 
@@ -110,11 +113,11 @@ class HomeScreenAdapter(val list: List<HomePageItems>, val args: HomeScreenArgs)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is HomeTitleViewHolder -> holder.bindHomeTitle(list[position] as HomeTitle, args)
+            is HomeTitleViewHolder -> holder.bindHomeTitle(list[position] as HomePageItems.HomeTitle, args)
 
-            is HomeCardViewHolder -> holder.bindHomeCardView(list[position] as SpecificDayWeather)
+            is HomeCardViewHolder -> holder.bindHomeCardView(list[position] as HomePageItems.SpecificDayWeather, listener)
 
-            is HomeSubtitleViewHolder -> holder.bindHomesubtitle(list[position] as NextDays)
+            is HomeSubtitleViewHolder -> holder.bindHomesubtitle(list[position] as HomePageItems.NextDays)
         }
     }
 

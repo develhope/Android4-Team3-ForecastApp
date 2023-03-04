@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeScreen"
-        android:name="co.develhope.meteoapp.HomeScreen"
+        android:name="co.develhope.meteoapp.homescreen.HomeScreen"
         tools:layout="@layout/fragment_home_screen" >
         <argument
             android:name="city_name"
