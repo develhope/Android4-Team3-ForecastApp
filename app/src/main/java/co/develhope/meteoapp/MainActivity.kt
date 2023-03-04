@@ -29,18 +29,16 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         val bottomNavigationView = binding.bottomNavigationToolbar
         setupWithNavController(bottomNavigationView, navController)
-        if (navController != null) {
-            bottomNavigationView.setupWithNavController(navController)
-            bottomNavigationView.setOnItemSelectedListener  {
-                when (it.itemId) {
-                    R.id.homeScreen -> {
-                        if (navController.popBackStack(R.id.homeScreen,false)){
-                            it.onNavDestinationSelected(navController)
-                        };
-                        true
-                    }
-                    else -> {it.onNavDestinationSelected(navController)
-                    }
+        bottomNavigationView.setupWithNavController(navController)
+        bottomNavigationView.setOnItemSelectedListener  {
+            when (it.itemId) {
+                R.id.homeScreen -> {
+                    if (navController.popBackStack(R.id.homeScreen,false)){
+                        it.onNavDestinationSelected(navController)
+                    };
+                    true
+                }
+                else -> {it.onNavDestinationSelected(navController)
                 }
             }
         }
