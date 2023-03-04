@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".SearchScreen">
+    tools:context=".searchscreen.SearchScreen">
 
     <!--
     ADJUST SEARCH ICON AND SEARCH TEXT !!!
@@ -20,6 +20,7 @@
         android:layout_marginRight="@dimen/bottom_bar_text_size"
         android:background="@drawable/search_view_background"
         android:inputType="textAutoComplete"
+        android:autofillHints="name"
         app:iconifiedByDefault="false"
         app:queryHint="@string/search_city"
         app:searchIcon="@drawable/search_icon_black"

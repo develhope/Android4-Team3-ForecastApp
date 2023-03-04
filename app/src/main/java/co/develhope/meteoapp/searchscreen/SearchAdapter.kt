@@ -3,11 +3,19 @@ package co.develhope.meteoapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import co.develhope.meteoapp.searchscreen.*
 
-class SearchBarViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+class SearchBarViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    val searchBar : SearchView
+    init {
+        searchBar = view.findViewById(R.id.search_view)
+    }
+
+}
 
 class HourlyForecastViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -33,8 +41,9 @@ class RecentSearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 }
 
 class SearchAdapter(
-    val search: List<GetHourlyForecastList>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val search: List<GetHourlyForecastList>, val listener: Navigable, val filterable: Filterable
+
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         when (viewType) {
@@ -79,12 +88,13 @@ class SearchAdapter(
             is HourlyForecast -> {
                 (holder as HourlyForecastViewHolder).weather.text =
                     (search[position] as HourlyForecast).weather.toString().lowercase()
-                holder.itemView.isClickable
                 holder.itemView.setOnClickListener {
+
                     val destination = SearchScreenDirections.searchScreenToHomeScreen()
                     destination.cityName = (search[position] as HourlyForecast).cities
                     destination.regionName = "Italia"
-                    it.findNavController().navigate(destination)
+                    listener.navigate(destination)
+
                 }
                 holder.degrees.text =
                     "${(search[position] as HourlyForecast).degrees}°"
@@ -97,15 +107,25 @@ class SearchAdapter(
                     (search[position] as RecentSearches).recentSearches
             }
             is SearchBar -> {
+                (holder as SearchBarViewHolder).searchBar.setOnQueryTextFocusChangeListener(filterable)
 
+                // DA CONTROLLARE
+            }
             }
         }
-    }
 
     override fun getItemCount(): Int {
         return search.size
     }
+
+
+
+
 }
+
+
+
+
 
 
 

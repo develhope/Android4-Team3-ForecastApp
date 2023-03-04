@@ -1,4 +1,6 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.searchscreen
+
+import co.develhope.meteoapp.Weather
 
 object SearchSource{
     private val searchList : List<GetHourlyForecastList> = listOf(
@@ -26,8 +28,8 @@ data class RecentSearches(
 
 data class SearchBar(
     val searchBar : String
-) : GetHourlyForecastList()
-
+) : GetHourlyForecastList(){
+}
 
 
 sealed class GetHourlyForecastList
