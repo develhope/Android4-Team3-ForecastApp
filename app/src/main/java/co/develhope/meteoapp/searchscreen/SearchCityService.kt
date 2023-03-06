@@ -5,7 +5,7 @@ import co.develhope.meteoapp.NavGraphDirections
 import retrofit2.http.GET
 
 interface SearchCityService {
-    @GET("v1/search?name=palermo")  // CONTROLLARE ENDPOINT
+    @GET("v1/search")  // CONTROLLARE ENDPOINT
     suspend fun getDetails() : SearchCities
 }
 

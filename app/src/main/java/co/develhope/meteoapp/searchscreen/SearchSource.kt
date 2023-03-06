@@ -4,11 +4,10 @@ import co.develhope.meteoapp.Weather
 
 object SearchSource{
     private val searchList : List<GetHourlyForecastList> = listOf(
-        SearchBar(""),
         RecentSearches("Ricerche Recenti"),
-        HourlyForecast(12, Weather.SUNNY, "Palermo"),
-        HourlyForecast(12, Weather.CLOUDY, "Catanzaro"),
-        HourlyForecast(12, Weather.RAINY, "Roma")
+        HourlyForecast(12, Weather.SUNNY, Place("Palermo", 0.000, 0.000)),
+        HourlyForecast(12, Weather.CLOUDY, Place("Catanzaro", 0.000, 0.000)),
+        HourlyForecast(12, Weather.RAINY, Place("Roma", 0.000, 0.000))
     )
     fun getSearchCitiesList() : List<GetHourlyForecastList>{
         return searchList
@@ -19,7 +18,7 @@ object SearchSource{
 data class HourlyForecast(
     val degrees : Int,
     val weather : Weather,
-    val cities: String
+    val city: Place
 ) : GetHourlyForecastList()
 
 data class RecentSearches(
@@ -28,8 +27,13 @@ data class RecentSearches(
 
 data class SearchBar(
     val searchBar : String
-) : GetHourlyForecastList(){
-}
+)
+
+data class Place(
+    val name: String,
+    val latitude: Double,
+    val longitude: Double  // SPOSTARE CLASSE
+)
 
 
 sealed class GetHourlyForecastList

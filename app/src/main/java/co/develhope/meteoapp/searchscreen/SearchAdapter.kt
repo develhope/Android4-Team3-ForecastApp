@@ -41,7 +41,10 @@ class RecentSearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 }
 
 class SearchAdapter(
-    val search: List<GetHourlyForecastList>, val listener: Navigable, val filterable: Filterable
+    val search: List<GetHourlyForecastList>,
+    val listener: Navigable,
+    val filterable: Filterable,
+    private val onClick: (Place) -> Unit
 
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -78,7 +81,7 @@ class SearchAdapter(
 
             is HourlyForecast -> ViewType.HOURLYFORECAST.num
             is RecentSearches -> ViewType.RESENTSEARCH.num
-            is SearchBar -> ViewType.SEARCHBAR.num
+            //is SearchBar -> ViewType.SEARCHBAR.num
         }
     }
 
@@ -89,28 +92,24 @@ class SearchAdapter(
                 (holder as HourlyForecastViewHolder).weather.text =
                     (search[position] as HourlyForecast).weather.toString().lowercase()
                 holder.itemView.setOnClickListener {
-
-                    val destination = SearchScreenDirections.searchScreenToHomeScreen()
-                    destination.cityName = (search[position] as HourlyForecast).cities
-                    destination.regionName = "Italia"
-                    listener.navigate(destination)
+                    onClick((search[position] as HourlyForecast).city)
+//                    val destination = SearchScreenDirections.searchScreenToHomeScreen()
+//                    destination.cityName =
+//                    destination.regionName = "Italia"
+//                    listener.navigate(destination)
 
                 }
                 holder.degrees.text =
                     "${(search[position] as HourlyForecast).degrees}°"
                 holder.cities.text =
-                    (search[position] as HourlyForecast).cities
+                    (search[position] as HourlyForecast).city.name
 
             }
             is RecentSearches -> {
                 (holder as RecentSearchViewHolder).recentSearches.text =
                     (search[position] as RecentSearches).recentSearches
             }
-            is SearchBar -> {
-                (holder as SearchBarViewHolder).searchBar.setOnQueryTextFocusChangeListener(filterable)
 
-                // DA CONTROLLARE
-            }
             }
         }
 

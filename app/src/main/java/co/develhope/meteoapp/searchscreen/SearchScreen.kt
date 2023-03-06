@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.NavGraphDirections
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.SearchAdapter
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
+import co.develhope.meteoapp.homescreen.DataSource
 import co.develhope.meteoapp.searchscreen.SearchSource.getSearchCitiesList
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -26,7 +28,11 @@ class SearchScreen : Fragment() {
     }, object : Filterable {
     }
 
-    )
+    ){
+        DataSource.setSelectedCity(it)
+        findNavController().navigate(R.id.searchScreenToHomeScreen)
+    }
+
 
 
     override fun onCreateView(
