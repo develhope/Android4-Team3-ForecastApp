@@ -1,17 +1,18 @@
 package co.develhope.meteoapp
 
+import android.util.Log
+import co.develhope.meteoapp.dto.DayForecast
 import co.develhope.meteoapp.homescreen.HomeCardApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class RetrofitInstance {
 
-    val BASE_URL = "https://api.open-meteo.com/"
-    val logging = HttpLoggingInterceptor()
-    val client = OkHttpClient.Builder().addInterceptor(logging).build()
+    private val BASE_URL = "https://api.open-meteo.com/"
+    private val logging = HttpLoggingInterceptor()
+    private val client = OkHttpClient.Builder().addInterceptor(logging).build()
 
     val retrofit = Retrofit.Builder()
         .client(client)
@@ -20,4 +21,14 @@ class RetrofitInstance {
         .build()
 
     val apiService = retrofit.create(HomeCardApiService::class.java)
+
+
+    suspend fun retrieveDailyDetails():DayForecast{
+        return try {
+            apiService.getHomeCardApiService()
+        }catch (e:Exception){
+            Log.e("retrieveDailyDetails", "Error: ${e.message}")
+            throw  e
+        }
+    }
 }

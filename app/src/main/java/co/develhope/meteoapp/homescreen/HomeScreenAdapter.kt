@@ -22,9 +22,9 @@ class HomeCardViewHolder(private val binding: HomeScreenCardviewBinding) : Recyc
 ViewHolder(binding.root) {
 
  @SuppressLint("SetTextI18n")
- fun bindHomeCardView(cardView: HomePageItems.SpecificDayWeather, listener : OnCardClick){
+ fun bindHomeCardView(cardView: HomePageItems.SpecificDayWeather, listener: OnCardClick){
      binding.dayCard.text =
-         when (cardView.date.dayOfWeek) {
+         when (cardView.homeCardWeather.date.dayOfWeek) {
 
          OffsetDateTime.now().dayOfWeek -> itemView.context.
          getString(R.string.today)
@@ -32,27 +32,27 @@ ViewHolder(binding.root) {
          OffsetDateTime.now().plusDays(1).dayOfWeek -> itemView.context.
          getString(R.string.tomorrow)
 
-         else -> cardView.date.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()).
+         else -> cardView.homeCardWeather.date.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()).
          replaceFirstChar { it.titlecase(Locale.getDefault()) }
      }
 
-     binding.dateCard.text = cardView.date.format(DateTimeFormatter.
+     binding.dateCard.text = cardView.homeCardWeather.date.format(DateTimeFormatter.
      ofPattern("dd/MM", Locale.getDefault()))
 
-     binding.iconWeather.setImageResource(when(cardView.weather){
+     binding.iconWeather.setImageResource(when(cardView.homeCardWeather.weather){
          Weather.SUNNY -> R.drawable.sunny_icon
          Weather.CLOUDY -> R.drawable.sun_cloud_icon
          Weather.RAINY -> R.drawable.sun_behind_rain_cloud_icon
          else -> throw java.lang.IllegalArgumentException("error")
      })
 
-     binding.minDegrees.text = "${cardView.minDegree}°"
+     binding.minDegrees.text = "${cardView.homeCardWeather.minDegree}°"
 
-     binding.maxDegrees.text = "${cardView.maxDegree}°"
+     binding.maxDegrees.text = "${cardView.homeCardWeather.maxDegree}°"
 
-     binding.rainPerc.text = "${cardView.rainPerc}%"
+     binding.rainPerc.text = "${cardView.homeCardWeather.rainPerc}%"
 
-     binding.windKmh.text = "${cardView.windKmh}kmh"
+     binding.windKmh.text = "${cardView.homeCardWeather.windKmh}kmh"
 
      binding.cardViewHomeScreen.setOnClickListener {
          listener.onCardClick(cardView)
@@ -79,7 +79,10 @@ ViewHolder(binding.root) {
     }
 }
 
-class HomeScreenAdapter(val list: List<HomePageItems>, private val listener: OnCardClick, val args: HomeScreenArgs) :
+class HomeScreenAdapter(
+    private val list: List<HomePageItems>,
+    private val listener: OnCardClick,
+    private val args: HomeScreenArgs) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class ViewType(val value: Int) {
@@ -116,7 +119,7 @@ class HomeScreenAdapter(val list: List<HomePageItems>, private val listener: OnC
         when (holder) {
             is HomeTitleViewHolder -> holder.bindHomeTitle(list[position] as HomePageItems.HomeTitle, args)
 
-            is HomeCardViewHolder -> holder.bindHomeCardView(list[position] as HomePageItems.SpecificDayWeather, listener)
+            is HomeCardViewHolder -> holder.bindHomeCardView(list[position] as HomePageItems.SpecificDayWeather, listener )
 
             is HomeSubtitleViewHolder -> holder.bindHomesubtitle(list[position] as HomePageItems.NextDays)
         }

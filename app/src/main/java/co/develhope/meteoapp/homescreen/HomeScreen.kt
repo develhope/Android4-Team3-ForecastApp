@@ -26,9 +26,6 @@ class HomeScreen : Fragment() {
     ): View? {
         binding = FragmentHomeScreenBinding.inflate(inflater, container, false)
 
-
-
-
         return binding.root
     }
 
@@ -37,7 +34,7 @@ class HomeScreen : Fragment() {
 
         val adapter = HomeScreenAdapter(DataSource.getHomeItems(), object: OnCardClick{
             override fun onCardClick(card: HomePageItems.SpecificDayWeather) {
-                when(card.date.dayOfWeek){
+                when(card.homeCardWeather.date.dayOfWeek){
                     OffsetDateTime.now().dayOfWeek ->  findNavController().
                     navigate(R.id.homeScreen_to_todayScreen)
                     else ->  findNavController().navigate(R.id.homeScreen_to_specificDayScreen)
