@@ -16,7 +16,6 @@ interface HomeCardApiService {
             "sunset",
             "temperature_2m_max",
             "temperature_2m_min",
-            "time",
             "weathercode",
             "windspeed_10m_max"),
         @Query("current_weather") current_weather:Boolean = true,

@@ -5,7 +5,7 @@ import org.threeten.bp.OffsetDateTime
 object DataSource{
 
     private val homeItems: List<HomePageItems> = listOf(
-        HomePageItems.HomeTitle(Title("Palermo", "Sicilia", 0.0, 0.0)),
+        HomePageItems.HomeTitle(Title("Palermo", "Sicilia")),
 
         HomePageItems.SpecificDayWeather(HomeCardWeather(
             date = OffsetDateTime.now(),
@@ -71,6 +71,14 @@ object DataSource{
         )
         ),
     )
+
+    val cardView = HomeCardWeather(
+        date = OffsetDateTime.now(),
+        22,
+        31,
+        12,
+        0,
+        Weather.SUNNY)
     fun getHomeItems()= homeItems
 
 
@@ -127,6 +135,21 @@ object DataSource{
     )
     fun getSearchCitiesList() : List<GetHourlyForecastList>{
         return searchList
+    }
+
+    fun Int.toWeather() : Weather{
+        return when(this){
+            0 -> Weather.SUNNY
+            1,2,3 -> Weather.CLOUDY
+            45,48 -> Weather.CLOUDY
+            51,53,55 -> Weather.RAINY
+            56,57 ->Weather.RAINY
+            71,73,75 ->Weather.RAINY
+            80,81,82 -> Weather.RAINY
+            95 -> Weather.RAINY
+            96,99 ->Weather.RAINY
+            else -> Weather.CLOUDY
+        }
     }
 }
 

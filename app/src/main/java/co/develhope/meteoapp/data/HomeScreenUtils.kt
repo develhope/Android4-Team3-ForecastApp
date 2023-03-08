@@ -19,8 +19,6 @@ sealed class HomePageItems() {
 data class Title(
     val city: String,
     val region: String,
-    val latitude: Double,
-    val longitude: Double
 )
 
 data class HomeCardWeather(
