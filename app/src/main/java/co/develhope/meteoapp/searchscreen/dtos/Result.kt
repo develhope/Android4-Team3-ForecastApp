@@ -1,4 +1,8 @@
-package co.develhope.meteoapp.searchscreen
+package co.develhope.meteoapp.searchscreen.dtos
+
+import co.develhope.meteoapp.Weather
+import co.develhope.meteoapp.searchscreen.HourlyForecast
+import co.develhope.meteoapp.searchscreen.Place
 
 data class Result(
     val admin1: String,
@@ -19,4 +23,14 @@ data class Result(
     val population: Int,
     val postcodes: List<String>,
     val timezone: String
-)
+){
+    fun toDomain() : HourlyForecast {
+        return HourlyForecast(
+                degrees = 0,
+                weather = Weather.SUNNY,
+                city = Place(name = name, latitude = latitude, longitude = longitude)
+            )
+        }
+
+
+    }

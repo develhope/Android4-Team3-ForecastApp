@@ -1,21 +1,12 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.searchscreen
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.searchscreen.*
+import co.develhope.meteoapp.R
 
-
-class SearchBarViewHolder(view: View) : RecyclerView.ViewHolder(view){
-    val searchBar : SearchView
-    init {
-        searchBar = view.findViewById(R.id.search_view)
-    }
-
-}
 
 class HourlyForecastViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -41,29 +32,22 @@ class RecentSearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 }
 
 class SearchAdapter(
-    val search: List<GetHourlyForecastList>,
-    val listener: Navigable,
-    val filterable: Filterable,
+    private val search: List<GetHourlyForecastList>,
     private val onClick: (Place) -> Unit
 
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        when (viewType) {
+        return when (viewType) {
             ViewType.HOURLYFORECAST.num -> {
                 val listItem =
                     LayoutInflater.from(parent.context).inflate(R.layout.cities_list, parent, false)
-                return HourlyForecastViewHolder(listItem)
+                HourlyForecastViewHolder(listItem)
             }
             ViewType.RESENTSEARCH.num -> {
                 val listItem2 = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recent_search, parent, false)
-                return RecentSearchViewHolder(listItem2)
-            }
-            ViewType.SEARCHBAR.num -> {
-                val listItem3 =
-                    LayoutInflater.from(parent.context).inflate(R.layout.search_bar, parent, false)
-                return SearchBarViewHolder(listItem3)
+                RecentSearchViewHolder(listItem2)
             }
             else -> TODO()
         }
@@ -72,8 +56,7 @@ class SearchAdapter(
 
     enum class ViewType(val num: Int) {
         HOURLYFORECAST(1),
-        SEARCHBAR(2),
-        RESENTSEARCH(3),
+        RESENTSEARCH(2)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -81,8 +64,8 @@ class SearchAdapter(
 
             is HourlyForecast -> ViewType.HOURLYFORECAST.num
             is RecentSearches -> ViewType.RESENTSEARCH.num
-            //is SearchBar -> ViewType.SEARCHBAR.num
         }
+
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -93,14 +76,9 @@ class SearchAdapter(
                     (search[position] as HourlyForecast).weather.toString().lowercase()
                 holder.itemView.setOnClickListener {
                     onClick((search[position] as HourlyForecast).city)
-//                    val destination = SearchScreenDirections.searchScreenToHomeScreen()
-//                    destination.cityName =
-//                    destination.regionName = "Italia"
-//                    listener.navigate(destination)
 
                 }
-                holder.degrees.text =
-                    "${(search[position] as HourlyForecast).degrees}°"
+                holder.degrees.text = "${(search[position] as HourlyForecast).degrees}°"
                 holder.cities.text =
                     (search[position] as HourlyForecast).city.name
 

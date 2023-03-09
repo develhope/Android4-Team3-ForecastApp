@@ -1,19 +1,13 @@
 package co.develhope.meteoapp.searchscreen
 
-import android.view.View
-import co.develhope.meteoapp.NavGraphDirections
+import co.develhope.meteoapp.searchscreen.dtos.Result
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface SearchCityService {
-    @GET("v1/search")  // CONTROLLARE ENDPOINT
-    suspend fun getDetails() : SearchCities
-}
-
-interface Filterable : View.OnFocusChangeListener {
-    override fun onFocusChange(p0: View?, p1: Boolean) {
-    }
-}
-
-interface Navigable{
-    fun navigate(card : NavGraphDirections.SearchScreenToHomeScreen)
+    @GET("v1/search")
+    suspend fun getDetails(
+        @Query("name") name: String
+    )
+    : Result
 }
