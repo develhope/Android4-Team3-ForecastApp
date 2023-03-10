@@ -93,50 +93,48 @@ class Adapter(private val list: List<Forecast>):RecyclerView.Adapter<RecyclerVie
 
             is TitleForecast ->{
                 (holder as TitleViewHolder).cityAndRegionTextView.text =
-                    "${(list[position] as TitleForecast).city}, " +
-                            (list[position] as TitleForecast).region
+                    (list[position] as TitleForecast).place.name
 
                 if(OffsetDateTime.now().dayOfMonth ==
-                    (list[position] as TitleForecast).date.dayOfMonth){
+                    (list[position] as TitleForecast).domainHourlyForecast.date.dayOfMonth){
                     (holder as TitleViewHolder).currentDayTextView.text = "Today"
                 }
                 else{
                     (holder as TitleViewHolder).currentDayTextView.text = "NotToday"
                 }
                 (holder as TitleViewHolder).dateTextView.text =
-                    ("${(list[position] as TitleForecast).date.dayOfWeek}" + " " +
-                            "${(list[position] as TitleForecast).date.dayOfMonth}" + " " +
-                            "${(list[position] as TitleForecast).date.month}").lowercase()
+                    ("${(list[position] as TitleForecast).domainHourlyForecast.date.dayOfWeek}" + " " +
+                            "${(list[position] as TitleForecast).domainHourlyForecast.date.dayOfMonth}" + " " +
+                            "${(list[position] as TitleForecast).domainHourlyForecast.date.month}").lowercase()
             }
 
             is HourlyForecastListItem ->{
                 (holder as HourlyViewHolder).hourTextView.text =
-                    "${(list[position] as HourlyForecastListItem).date.hour.toString()}:00"
-                when((list[position] as HourlyForecastListItem).weather){
+                    "${(list[position] as HourlyForecastListItem).domainHourlyForecast.date.hour.toString()}:00"
+                when((list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.weather){
                     Weather.SUNNY -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sunny_icon)
                     Weather.CLOUDY -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sun_cloud_icon)
                     Weather.RAINY -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.sun_behind_rain_cloud_icon)
                     Weather.NIGHT -> (holder as HourlyViewHolder).iconView.setImageResource(R.drawable.moon_icon)
                 }
                 (holder as HourlyViewHolder).celsiusTextView.text =
-                    "${(list[position] as HourlyForecastListItem).celsius}°"
+                    "${(list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.celsius}°"
                 (holder as HourlyViewHolder).wetnessTextView.text =
-                    "${(list[position] as HourlyForecastListItem).wetness}%"
+                    "${(list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.wetness}%"
 
                 //Card Values From here
                 (holder as HourlyViewHolder).cardPerceivedTemperatureView.text =
-                    "${(list[position] as HourlyForecastListItem)
-                        .cardValues.perceivedTemperature.toString()}°"
+                    "${(list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.perceivedTemperature.toString()}°"
                 (holder as HourlyViewHolder).cardCoverageTextView.text =
-                    "${(list[position] as HourlyForecastListItem).cardValues.coverage.toString()}%"
+                    "${(list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.coverage.toString()}%"
                 (holder as HourlyViewHolder).cardRainTextView.text =
-                    "${(list[position] as HourlyForecastListItem).cardValues.rain.toString()}cm"
+                    "${(list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.rain.toString()}cm"
                 (holder as HourlyViewHolder).cardWetnessTextView.text =
-                    "${(list[position] as HourlyForecastListItem).wetness.toString()}%"
+                    "${(list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.wetness.toString()}%"
                 (holder as HourlyViewHolder).cardUvIndexTextView.text =
-                    "${(list[position] as HourlyForecastListItem).cardValues.uvIndex.toString()}/10"
+                    "${(list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.uvIndex.toString()}/10"
                 (holder as HourlyViewHolder).cardWindTextView.text =
-                    "SSE${(list[position] as HourlyForecastListItem).cardValues.wind.toString()}km/h"
+                    "SSE${(list[position] as HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.wind.toString()}km/h"
 
                 //this implementation enable the expandable card view for each list item
                 val wholeView = (holder as HourlyViewHolder).itemView
