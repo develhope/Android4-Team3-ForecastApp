@@ -1,5 +1,6 @@
 package co.develhope.meteoapp.searchscreen
 
+import co.develhope.meteoapp.searchscreen.dtos.Result
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,5 +20,10 @@ class RetrofitInstance {
         .baseUrl("https://geocoding-api.open-meteo.com/")  // CONTROLLARE URL
         .addConverterFactory(GsonConverterFactory.create()).client(client).build()
     val apiService: SearchCityService = retrofit.create(SearchCityService::class.java)
+
+
+    suspend fun getDomain() : MutableList<GetHourlyForecastList> {
+        return apiService.getDetails(name = "Palermo").toDomain()
+    }
 
 }

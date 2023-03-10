@@ -87,8 +87,7 @@ class SearchAdapter(
                 (holder as RecentSearchViewHolder).recentSearches.text =
                     (search[position] as RecentSearches).recentSearches
             }
-
-            }
+        }
         }
 
     override fun getItemCount(): Int {
