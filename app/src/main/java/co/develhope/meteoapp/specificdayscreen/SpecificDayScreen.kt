@@ -1,4 +1,4 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.specificdayscreen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.databinding.FragmentSpecificDayScreenBinding
 import co.develhope.meteoapp.todayscreen.Adapter
-import co.develhope.meteoapp.todayscreen.DataSourceTodayScreen
+import co.develhope.meteoapp.data.DataSource
 
 
 class SpecificDayScreen : Fragment() {
@@ -24,7 +24,7 @@ class SpecificDayScreen : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSpecificDayScreenBinding.inflate(inflater, container, false)
-        binding.specificDayRecycleView.adapter = Adapter(DataSourceTodayScreen.getTodayDetailedForecast())
+        binding.specificDayRecycleView.adapter = Adapter(DataSource.getTodayDetailedForecast())
         binding.specificDayRecycleView.layoutManager = LinearLayoutManager(requireContext())
         return binding.root
     }
