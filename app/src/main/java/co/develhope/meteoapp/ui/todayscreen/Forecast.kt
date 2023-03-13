@@ -1,7 +1,7 @@
 package co.develhope.meteoapp.ui.todayscreen
 
-import co.develhope.meteoapp.data.Place
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
+import co.develhope.meteoapp.data.domainmodel.Place
 
 sealed class Forecast {
     data class HourlyForecastListItem(

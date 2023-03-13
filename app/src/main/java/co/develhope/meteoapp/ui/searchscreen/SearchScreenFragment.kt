@@ -44,7 +44,7 @@ class SearchScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        retryCall()
+        retryCall("Palermo")
 
         //  searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         //      override fun onQueryTextSubmit(query: String?): Boolean {
@@ -77,12 +77,10 @@ class SearchScreenFragment : Fragment() {
     }
 
 
-    fun retryCall() {
-
-
+    private fun retryCall(userSearch : String) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                RetrofitInstance().getHourlyForecast()
+                RetrofitInstance().getPlaces(userSearch)
 
             } catch (e: Exception) {
 

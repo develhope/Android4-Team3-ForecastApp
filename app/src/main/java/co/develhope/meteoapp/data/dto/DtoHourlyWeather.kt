@@ -3,7 +3,6 @@ package co.develhope.meteoapp.data.dto
 import co.develhope.meteoapp.data.domainmodel.DetailedCardForecast
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Weather
-import co.develhope.meteoapp.todayscreen.domain.ToTodayScreenMapper
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
@@ -27,9 +26,7 @@ data class DtoHourlyWeather(
         hourly.time.mapIndexed { idx, it ->
             list.add(
                 DomainHourlyForecast(
-                    date = OffsetDateTime.of(
-                        LocalDateTime.parse(it, DateTimeFormatter.ofPattern("[yyyy-MM-dd'T'HH:mm]")), ZoneId.of("Europe/Berlin").rules.getOffset(
-                        Instant.now())),// LocalDate.parse(it, dateTimeFormatter),
+                    date = it,
                     DetailedCardForecast(
                         weather = getWeather(hourly.weathercode[idx]),
                         celsius = hourly.temperature_2m[idx].toInt(),

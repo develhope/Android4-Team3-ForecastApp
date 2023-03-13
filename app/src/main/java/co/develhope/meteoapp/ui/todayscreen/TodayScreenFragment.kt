@@ -8,20 +8,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.data.DataSource.getTodayDetailedForecast
+import co.develhope.meteoapp.data.RetrofitInstance
+import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
+import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
-import co.develhope.meteoapp.data.HourlyForecastListItem
-import co.develhope.meteoapp.data.RetrofitInstanceeee
-import co.develhope.meteoapp.data.HourlyWeatherService
 import kotlinx.coroutines.launch
 
 
 class TodayScreenFragment : Fragment() {
     private lateinit var binding: FragmentTodayScreenBinding
-
-    private val api: HourlyWeatherService by lazy {
-        RetrofitInstanceeee().getClient().create(HourlyWeatherService::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,23 +29,32 @@ class TodayScreenFragment : Fragment() {
         binding.todayRecycleView.adapter = TodayAdapter(getTodayDetailedForecast()) //TODO change this
         binding.todayRecycleView.layoutManager = LinearLayoutManager(requireContext())
 
+        val place = DataSource.getSelectedCity()
+        if(place != null){
+            getDetailedForecast(place)
+        }else{
+            //navigate to search
+        }
+
+        return binding.root
+    }
+
+    private fun getDetailedForecast(place: Place) {
         lifecycleScope.launch {
             try {
-                binding.todayRecycleView.adapter = TodayAdapter(
-                    getTodayDetailedForecast().plus(
-                        //TODO replace this when u know how to use a view model
-                        api.getDtoHourlyWeather(40.8532f, 14.3055f)
-                            .toDomainHourlyForecast().map {
-                                HourlyForecastListItem(it)
-                            }
-                    )
-                )
+                val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place)
+
+
+                val screenItems : List<Forecast> = getScreenItems(detailedForecast)
+                binding.todayRecycleView.adapter = TodayAdapter(screenItems)
             } catch (e: Exception) {
                 Log.e("TodayScreen", "error: $e")
             }
         }
+    }
 
-        return binding.root
+    private fun getScreenItems(detailedForecast: List<DomainHourlyForecast>): List<Forecast> {
+        return emptyList()
     }
 
 }

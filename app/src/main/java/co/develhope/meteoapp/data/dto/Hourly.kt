@@ -1,5 +1,7 @@
 package co.develhope.meteoapp.data.dto
 
+import org.threeten.bp.OffsetDateTime
+
 data class Hourly(
     val rain: List<Double>,
     val showers: List<Double>,
@@ -9,7 +11,7 @@ data class Hourly(
     val apparent_temperature: List<Double>,
     val diffuse_radiation: List<Double>,
     val cloudcover: List<Long>,
-    val time: List<String>,
+    val time: List<OffsetDateTime>,
     val weathercode: List<Int>,
     val windspeed_10m: List<Double>
 )

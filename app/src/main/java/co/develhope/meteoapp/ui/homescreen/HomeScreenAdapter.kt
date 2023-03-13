@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.data.HomePageItems
 import co.develhope.meteoapp.data.domainmodel.Weather
 import co.develhope.meteoapp.databinding.HomeScreenCardviewBinding
 import co.develhope.meteoapp.databinding.HomeScreenSubtitleBinding
 import co.develhope.meteoapp.databinding.HomeScreenTitleBinding
-import co.develhope.meteoapp.homescreen.HomeScreenArgs
+import co.develhope.meteoapp.ui.homescreen.HomePageItems
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.TextStyle
@@ -65,9 +64,9 @@ ViewHolder(binding.root) {
 class HomeTitleViewHolder(private val binding : HomeScreenTitleBinding) : RecyclerView.
 ViewHolder(binding.root) {
 
-    fun bindHomeTitle(title : HomePageItems.HomeTitle, args: HomeScreenArgs){
-        binding.homeTitleCity.text = args.cityName
-        binding.homeTitleRegion.text = args.regionName
+    fun bindHomeTitle(title : HomePageItems.HomeTitle){
+        binding.homeTitleCity.text = title.title.city
+        binding.homeTitleRegion.text = title.title.region
     }
 }
 
@@ -82,7 +81,7 @@ ViewHolder(binding.root) {
 class HomeScreenAdapter(
     private val list: List<HomePageItems>,
     private val listener: OnCardClick,
-    private val args: HomeScreenArgs) :
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     enum class ViewType(val value: Int) {
@@ -117,7 +116,7 @@ class HomeScreenAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is HomeTitleViewHolder -> holder.bindHomeTitle(list[position] as HomePageItems.HomeTitle, args)
+            is HomeTitleViewHolder -> holder.bindHomeTitle(list[position] as HomePageItems.HomeTitle)
 
             is HomeCardViewHolder -> holder.bindHomeCardView(list[position] as HomePageItems.SpecificDayWeather, listener )
 
