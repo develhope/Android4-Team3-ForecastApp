@@ -8,12 +8,14 @@
     android:layout_marginStart="@dimen/bottom_bar_text_size"
     android:layout_marginEnd="@dimen/bottom_bar_text_size"
     app:cardCornerRadius="@dimen/search_corner_radius_card"
+    android:id="@+id/search_screen_recycler_view"
     >
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_card">
+    android:background="@drawable/background_card"
+    >
 
 
 

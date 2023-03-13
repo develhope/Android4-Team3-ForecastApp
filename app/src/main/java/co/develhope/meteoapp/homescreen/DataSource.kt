@@ -1,10 +1,18 @@
 package co.develhope.meteoapp.homescreen
 
 import co.develhope.meteoapp.*
+import co.develhope.meteoapp.searchscreen.Place
 import org.threeten.bp.OffsetDateTime
 
 
 object DataSource {
+    private var selectedCity : Place? = null
+    fun setSelectedCity(place: Place){
+        selectedCity = place
+    }
+    fun getSelectedCity(): Place?{
+        return selectedCity
+    }
 
     private val homeItems: List<HomePageItems> = listOf(
         HomePageItems.HomeTitle("Palermo", "Sicilia"),

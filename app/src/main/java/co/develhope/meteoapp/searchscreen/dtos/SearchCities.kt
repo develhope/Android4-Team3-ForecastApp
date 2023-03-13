@@ -1,0 +1,29 @@
+package co.develhope.meteoapp.searchscreen.dtos
+
+import co.develhope.meteoapp.Weather
+import co.develhope.meteoapp.searchscreen.GetHourlyForecastList
+import co.develhope.meteoapp.searchscreen.HourlyForecast
+import co.develhope.meteoapp.searchscreen.Place
+
+data class SearchCities(
+    val generationtime_ms: Double,
+    val results: List<Result>
+) {
+    fun toDomain(): MutableList<GetHourlyForecastList> {
+        val toDomainList = mutableListOf<GetHourlyForecastList>()
+        this.results.getOrNull(index = 0).let { result ->
+            val degrees = 0
+            val weather = Weather.SUNNY
+            val city = "${result?.name}, ${result?.country}"
+            val hourlyForecast = HourlyForecast(
+                degrees,
+                weather,
+                city = Place(city, latitude = result!!.latitude, longitude = result.longitude)
+            )
+            toDomainList.add(hourlyForecast)
+
+        }
+        return toDomainList
+
+    }
+}
