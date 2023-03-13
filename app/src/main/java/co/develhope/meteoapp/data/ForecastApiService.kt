@@ -24,7 +24,7 @@ interface ForecastApiService {
         @Query("timezone") timezone: String = "Europe/Berlin"
     ): DayForecast
 
-    @GET("forecast")
+    @GET("v1/forecast")
     suspend fun getHourlyWeather(
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double,

@@ -12,12 +12,16 @@ import org.threeten.bp.OffsetDateTime
 
 object DataSource{
 
-    private var selectedCity : Place? = null
+    private var selectedCity : Place? = Place(
+        name = "Pippo",
+        latitude = 40.8531,
+        longitude = 14.3055
+    )
     fun setSelectedCity(place: Place){
         selectedCity = place
     }
     fun getSelectedCity(): Place?{
-        return selectedCity
+        return  selectedCity
     }
 
     val cardView = HomeCardWeather(

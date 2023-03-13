@@ -43,8 +43,6 @@ class TodayScreenFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place)
-
-
                 val screenItems : List<Forecast> = getScreenItems(detailedForecast)
                 binding.todayRecycleView.adapter = TodayAdapter(screenItems)
             } catch (e: Exception) {
