@@ -4,6 +4,14 @@ import org.threeten.bp.OffsetDateTime
 
 object DataSource{
 
+    private var selectedCity : Place? = null
+    fun setSelectedCity(place: Place){
+        selectedCity = place
+    }
+    fun getSelectedCity(): Place?{
+        return selectedCity
+    }
+
     private val homeItems: List<HomePageItems> = listOf(
         HomePageItems.HomeTitle(Title("Palermo", "Sicilia")),
 
@@ -127,11 +135,10 @@ object DataSource{
     fun getTodayDetailedForecast() = ForecastList
 
     private val searchList : List<GetHourlyForecastList> = listOf(
-        SearchBar(""),
         RecentSearches("Ricerche Recenti"),
-        HourlyForecast(12, Weather.SUNNY, "Palermo"),
-        HourlyForecast(12, Weather.CLOUDY, "Catanzaro"),
-        HourlyForecast(12, Weather.RAINY, "Roma")
+        HourlyForecast(12, Weather.SUNNY, Place("Palermo", 38.13205, 13.33561)),
+        HourlyForecast(12, Weather.CLOUDY, Place("Catanzaro", 38.8824700, 16.60008600)),
+        HourlyForecast(12, Weather.RAINY, Place("Roma", 41.8919300, 12.5113300))
     )
     fun getSearchCitiesList() : List<GetHourlyForecastList>{
         return searchList

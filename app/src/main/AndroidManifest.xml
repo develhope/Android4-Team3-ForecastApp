@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="co.develhope.meteoapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-permission android:name="android.permission.INTERNET">
+    </uses-permission>
 
     <application
         android:allowBackup="true"
