@@ -1,5 +1,6 @@
 package co.develhope.meteoapp.data
 
+import co.develhope.meteoapp.data.domainmodel.Weather
 import org.threeten.bp.OffsetDateTime
 
 sealed class HomePageItems() {

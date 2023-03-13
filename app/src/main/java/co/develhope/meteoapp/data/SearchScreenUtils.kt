@@ -1,5 +1,7 @@
 package co.develhope.meteoapp.data
 
+import co.develhope.meteoapp.data.domainmodel.Weather
+
 data class HourlyForecast(
     val degrees : Int,
     val weather : Weather,

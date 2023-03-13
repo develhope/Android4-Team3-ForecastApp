@@ -7,6 +7,6 @@
     android:layout_height="match_parent"
     tools:listitem="@layout/hourly_forecast_list_item"
     android:backgroundTint="#C4C4C4"
-    tools:context=".specificdayscreen.SpecificDayScreen">
+    tools:context=".ui.specificdayscreen.SpecificDayScreen">
 
 </androidx.recyclerview.widget.RecyclerView>

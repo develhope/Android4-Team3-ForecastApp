@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/search_screen_background"
-    tools:context=".searchscreen.SearchScreen">
+    tools:context=".ui.searchscreen.SearchScreenFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"

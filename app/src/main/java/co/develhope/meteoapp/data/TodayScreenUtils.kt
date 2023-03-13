@@ -1,6 +1,6 @@
 package co.develhope.meteoapp.data
 
-import co.develhope.meteoapp.todayscreen.domain.DomainHourlyForecast
+import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 
 sealed class Forecast
 

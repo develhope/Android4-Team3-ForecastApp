@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".searchscreen.SearchScreen">
+    tools:context=".ui.searchscreen.SearchScreenFragment">
 
     <!--
     ADJUST SEARCH ICON AND SEARCH TEXT !!!
