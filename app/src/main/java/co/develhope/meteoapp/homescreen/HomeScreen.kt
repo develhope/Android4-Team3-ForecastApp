@@ -49,9 +49,8 @@ class HomeScreen : Fragment() {
       //  binding.homeScreenRecyclerView.adapter = adapter
         binding.homeScreenRecyclerView.layoutManager = LinearLayoutManager(requireContext())
          viewLifecycleOwner.lifecycleScope.launch {
-             try {
                  val response = RetrofitInstance().retrieveDailyDetails()?.daily?.toDomain()
-                 val listScreen = listOf<HomePageItems>(
+                 val listScreen = listOf(
                      HomePageItems.HomeTitle(Title("Palermo", "Sicilia")),
                      HomePageItems.SpecificDayWeather(response?.getOrNull(0) ?: DataSource.cardView),
                      HomePageItems.NextDays(R.string.next_5_days.toString()),
@@ -71,10 +70,6 @@ class HomeScreen : Fragment() {
                      }
                  }, args)
                  binding.homeScreenRecyclerView.adapter = adapter
-             } catch (e: Exception){
-                 Log.d("HomeFragment", "ERROR ${e.message}, ${e.cause}")
-             }
-
          }
 
     }
