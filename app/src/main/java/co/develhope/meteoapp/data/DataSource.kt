@@ -15,64 +15,80 @@ object DataSource{
     }
 
     private val homeItems: List<HomePageItems> = listOf(
-        HomePageItems.HomeTitle("Palermo", "Sicilia"),
+        HomePageItems.HomeTitle(Title("Palermo", "Sicilia")),
 
-        HomePageItems.SpecificDayWeather(
+        HomePageItems.SpecificDayWeather(HomeCardWeather(
             date = OffsetDateTime.now(),
             22,
             31,
             12,
             0,
             Weather.SUNNY
+        )
         ),
 
         HomePageItems.NextDays("PROSSIMI 5 GIORNI"),
 
-        HomePageItems.SpecificDayWeather(
+        HomePageItems.SpecificDayWeather(HomeCardWeather(
             date = OffsetDateTime.now().plusDays(1),
             23,
             29,
             6,
             4,
             Weather.CLOUDY
+        )
+
         ),
 
-        HomePageItems.SpecificDayWeather(
+        HomePageItems.SpecificDayWeather( HomeCardWeather(
             date = OffsetDateTime.now().plusDays(2),
             22,
             31,
             12,
             0,
             Weather.SUNNY
+        )
+
         ),
 
-        HomePageItems.SpecificDayWeather(
+        HomePageItems.SpecificDayWeather( HomeCardWeather(
             date = OffsetDateTime.now().plusDays(3),
             20,
             25,
             32,
             90,
             Weather.RAINY
+        )
         ),
 
-        HomePageItems.SpecificDayWeather(
+        HomePageItems.SpecificDayWeather( HomeCardWeather(
             date = OffsetDateTime.now().plusDays(4),
             20,
             29,
             15,
             9,
             Weather.CLOUDY
+        )
         ),
 
-        HomePageItems.SpecificDayWeather(
+        HomePageItems.SpecificDayWeather( HomeCardWeather(
             date = OffsetDateTime.now().plusDays(5),
             24,
             33,
             10,
             0,
             Weather.SUNNY
+        )
         ),
     )
+
+    val cardView = HomeCardWeather(
+        date = OffsetDateTime.now(),
+        22,
+        31,
+        12,
+        0,
+        Weather.SUNNY)
     fun getHomeItems()= homeItems
 
 
@@ -111,6 +127,21 @@ object DataSource{
     )
     fun getSearchCitiesList() : List<GetHourlyForecastList>{
         return searchList
+    }
+
+    fun Int.toWeather() : Weather{
+        return when(this){
+            0 -> Weather.SUNNY
+            1,2,3 -> Weather.CLOUDY
+            45,48 -> Weather.CLOUDY
+            51,53,55 -> Weather.RAINY
+            56,57 ->Weather.RAINY
+            71,73,75 ->Weather.RAINY
+            80,81,82 -> Weather.RAINY
+            95 -> Weather.RAINY
+            96,99 ->Weather.RAINY
+            else -> Weather.CLOUDY
+        }
     }
 }
 

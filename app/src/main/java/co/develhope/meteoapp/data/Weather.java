@@ -6,3 +6,5 @@ public enum Weather {
     RAINY,
     NIGHT
 }
+
+
