@@ -9,13 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.data.HomePageItems
 import co.develhope.meteoapp.HomeScreenAdapter
 import co.develhope.meteoapp.OnCardClick
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.RetrofitInstancee
 import co.develhope.meteoapp.data.DataSource
-import co.develhope.meteoapp.data.Title
 import co.develhope.meteoapp.databinding.FragmentHomeScreenBinding
 import co.develhope.meteoapp.homescreen.HomeScreenArgs
 import kotlinx.coroutines.launch
