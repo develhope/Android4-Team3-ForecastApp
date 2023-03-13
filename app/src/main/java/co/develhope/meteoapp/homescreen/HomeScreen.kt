@@ -37,16 +37,16 @@ class HomeScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = HomeScreenAdapter(DataSource.getHomeItems(), object: OnCardClick{
-            override fun onCardClick(card: HomePageItems.SpecificDayWeather) {
-                when(card.homeCardWeather.date.dayOfWeek){
-                    OffsetDateTime.now().dayOfWeek ->  findNavController().
-                    navigate(R.id.homeScreen_to_todayScreen)
-                    else ->  findNavController().navigate(R.id.homeScreen_to_specificDayScreen)
-                }
-            }
-        }, args)
-        binding.homeScreenRecyclerView.adapter = adapter
+      // val adapter = HomeScreenAdapter(DataSource.getHomeItems(), object: OnCardClick{
+      //     override fun onCardClick(card: HomePageItems.SpecificDayWeather) {
+      //         when(card.homeCardWeather.date.dayOfWeek){
+      //             OffsetDateTime.now().dayOfWeek ->  findNavController().
+      //             navigate(R.id.homeScreen_to_todayScreen)
+      //             else ->  findNavController().navigate(R.id.homeScreen_to_specificDayScreen)
+      //         }
+      //     }
+      // }, args)
+      //  binding.homeScreenRecyclerView.adapter = adapter
         binding.homeScreenRecyclerView.layoutManager = LinearLayoutManager(requireContext())
          viewLifecycleOwner.lifecycleScope.launch {
              try {
@@ -61,7 +61,7 @@ class HomeScreen : Fragment() {
                      HomePageItems.SpecificDayWeather(response?.getOrNull(4) ?: DataSource.cardView),
                      HomePageItems.SpecificDayWeather(response?.getOrNull(5) ?: DataSource.cardView)
                  )
-                 binding.homeScreenRecyclerView.adapter = HomeScreenAdapter(listScreen, object: OnCardClick{
+                 val adapter = HomeScreenAdapter(listScreen, object: OnCardClick{
                      override fun onCardClick(card: HomePageItems.SpecificDayWeather) {
                          when(card.homeCardWeather.date.dayOfWeek){
                              OffsetDateTime.now().dayOfWeek ->  findNavController().
@@ -70,6 +70,7 @@ class HomeScreen : Fragment() {
                          }
                      }
                  }, args)
+                 binding.homeScreenRecyclerView.adapter = adapter
              } catch (e: Exception){
                  Log.d("HomeFragment", "ERROR ${e.message}, ${e.cause}")
              }
