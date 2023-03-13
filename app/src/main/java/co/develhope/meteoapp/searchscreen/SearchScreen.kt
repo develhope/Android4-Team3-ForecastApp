@@ -83,7 +83,7 @@ class SearchScreen : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                RetrofitInstance().getDomain()
+                RetrofitInstance().getHourlyForecast()
 
             } catch (e: Exception) {
 
