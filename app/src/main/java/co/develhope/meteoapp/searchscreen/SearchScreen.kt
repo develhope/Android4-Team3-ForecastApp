@@ -1,24 +1,24 @@
 package co.develhope.meteoapp.searchscreen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import co.develhope.meteoapp.data.DataSource.getSearchCitiesList
+import android.util.Log
+import android.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
+import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
-import co.develhope.meteoapp.homescreen.DataSource
-import co.develhope.meteoapp.searchscreen.SearchSource.getSearchCitiesList
 import kotlinx.coroutines.launch
-
 class SearchScreen : Fragment() {
 
     private lateinit var binding: FragmentSearchScreenBinding
+
     val adapter = SearchAdapter(
         getSearchCitiesList()
 
@@ -29,12 +29,10 @@ class SearchScreen : Fragment() {
     }
     private lateinit var searchView: SearchView
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
 
         binding = FragmentSearchScreenBinding.inflate(inflater, container, false)

@@ -1,9 +1,9 @@
 package co.develhope.meteoapp.searchscreen.dtos
 
-import co.develhope.meteoapp.Weather
-import co.develhope.meteoapp.searchscreen.GetHourlyForecastList
-import co.develhope.meteoapp.searchscreen.HourlyForecast
-import co.develhope.meteoapp.searchscreen.Place
+import co.develhope.meteoapp.data.GetHourlyForecastList
+import co.develhope.meteoapp.data.HourlyForecast
+import co.develhope.meteoapp.data.Place
+import co.develhope.meteoapp.data.Weather
 
 data class SearchCities(
     val generationtime_ms: Double,

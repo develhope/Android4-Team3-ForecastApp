@@ -1,5 +1,6 @@
 package co.develhope.meteoapp.searchscreen
 
+import co.develhope.meteoapp.data.GetHourlyForecastList
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

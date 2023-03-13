@@ -7,6 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.R
 
+import co.develhope.meteoapp.data.GetHourlyForecastList
+import co.develhope.meteoapp.data.HourlyForecast
+import co.develhope.meteoapp.data.Place
+import co.develhope.meteoapp.data.RecentSearches
+
+
 
 class HourlyForecastViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
