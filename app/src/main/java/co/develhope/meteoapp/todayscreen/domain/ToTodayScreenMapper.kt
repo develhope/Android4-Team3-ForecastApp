@@ -1,6 +1,6 @@
 package co.develhope.meteoapp.todayscreen.domain
 
-import co.develhope.meteoapp.Weather
+import co.develhope.meteoapp.data.Weather
 import co.develhope.meteoapp.todayscreen.dto.DtoHourlyWeather
 import org.threeten.bp.*
 import org.threeten.bp.format.DateTimeFormatter

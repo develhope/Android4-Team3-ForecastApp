@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
 import co.develhope.meteoapp.data.DataSource.getTodayDetailedForecast
-import co.develhope.meteoapp.todayscreen.DataSourceTodayScreen.getTodayDetailedForecast
+import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
+import co.develhope.meteoapp.data.HourlyForecastListItem
 import co.develhope.meteoapp.todayscreen.api.RetrofitInstance
 import co.develhope.meteoapp.todayscreen.api.HourlyWeatherService
 import co.develhope.meteoapp.todayscreen.domain.ToTodayScreenMapper.toDomainHourlyForecast

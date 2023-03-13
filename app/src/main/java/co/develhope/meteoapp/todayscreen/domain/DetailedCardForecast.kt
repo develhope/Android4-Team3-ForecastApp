@@ -1,6 +1,7 @@
 package co.develhope.meteoapp.todayscreen.domain
 
-import co.develhope.meteoapp.Weather
+import co.develhope.meteoapp.data.Weather
+
 
 data class DetailedCardForecast(
     val perceivedTemperature: Int,
