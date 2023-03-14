@@ -10,6 +10,7 @@ data class SearchCities(
         return results.map {
             Place(
                 name = it.name,
+                region = it.admin1,
                 latitude = it.latitude,
                 longitude = it.longitude
             )

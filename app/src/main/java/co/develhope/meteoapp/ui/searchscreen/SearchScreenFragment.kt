@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import co.develhope.meteoapp.data.DataSource.getSearchCitiesList
 import android.util.Log
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -84,13 +85,13 @@ class SearchScreenFragment : Fragment() {
 
             } catch (e: Exception) {
 
-                Log.d("SearchScreen", "${e.message}, ${e.cause}")
+               // Log.d("SearchScreen", "${e.message}, ${e.cause}")
 
-             //  Toast.makeText(
-             //      requireContext(),
-             //      "Error",
-             //      Toast.LENGTH_LONG
-             //  ).show()
+               Toast.makeText(
+                   requireContext(),
+                   "Error",
+                   Toast.LENGTH_LONG
+               ).show()
 
             }
         }
