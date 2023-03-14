@@ -9,20 +9,15 @@
         android:id="@+id/homeScreen"
         android:name="co.develhope.meteoapp.ui.homescreen.HomeScreenFragment"
         tools:layout="@layout/fragment_home_screen" >
-        <argument
-            android:name="city_name"
-            app:argType="string"
-            android:defaultValue="Palermo" />
-        <argument
-            android:name="region_name"
-            app:argType="string"
-            android:defaultValue="Sicily" />
         <action
             android:id="@+id/homeScreen_to_todayScreen"
             app:destination="@id/todayScreen" />
         <action
             android:id="@+id/homeScreen_to_specificDayScreen"
             app:destination="@id/specificDayScreen" />
+        <action
+            android:id="@+id/homeScreen_to_searchScreen"
+            app:destination="@id/searchScreen" />
     </fragment>
     <fragment
         android:id="@+id/todayScreen"

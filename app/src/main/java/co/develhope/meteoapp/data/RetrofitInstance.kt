@@ -69,7 +69,7 @@ class RetrofitInstance {
         gson: Gson
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.open-meteo.com/")
+            .baseUrl("https://geocoding-api.open-meteo.com/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
@@ -80,7 +80,7 @@ class RetrofitInstance {
         return this.geocodingService.getDetails(userSearch).toDomain()
     }
 
-    suspend fun retrieveDailyDetails(latitude: Double, longitude: Double,): DayForecast? {
+    suspend fun retrieveDailyDetails(latitude: Double, longitude: Double,): DayForecast {
         return forecastService.getDailyForecast(
             latitude = latitude,
             longitude = longitude,

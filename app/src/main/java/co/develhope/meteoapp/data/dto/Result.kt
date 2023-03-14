@@ -7,7 +7,7 @@ data class Result(
     val admin2_id: Int,
     val admin3: String,
     val admin3_id: Int,
-    val country: List<String>,
+    val country: String,
     val country_code: String,
     val country_id: Int,
     val elevation: Double,

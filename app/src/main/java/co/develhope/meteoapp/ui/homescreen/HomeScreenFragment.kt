@@ -39,7 +39,7 @@ class HomeScreenFragment : Fragment() {
         if(place != null){
             getDailyForecast(place)
         }else{
-           //navigate to search
+           findNavController().navigate(R.id.homeScreen_to_searchScreen)
         }
 
       // val adapter = HomeScreenAdapter(DataSource.getHomeItems(), object: OnCardClick{
@@ -59,16 +59,16 @@ class HomeScreenFragment : Fragment() {
     private fun getDailyForecast(place: Place) {
         viewLifecycleOwner.lifecycleScope.launch {
 
-            val response = RetrofitInstance().retrieveDailyDetails(place.latitude, place.longitude)?.daily?.toDomain()
+            val response = RetrofitInstance().retrieveDailyDetails(place.latitude, place.longitude).daily.toDomain()
             val listScreen = listOf(
-                HomePageItems.HomeTitle(Title(place.name, "Sicilia")),
-                HomePageItems.SpecificDayWeather(response?.getOrNull(0) ?: DataSource.cardView),
+                HomePageItems.HomeTitle(Title(place.name, place.region)),
+                HomePageItems.SpecificDayWeather(response[0]),
                 HomePageItems.NextDays(R.string.next_5_days.toString()),
-                HomePageItems.SpecificDayWeather(response?.getOrNull(1) ?: DataSource.cardView),
-                HomePageItems.SpecificDayWeather(response?.getOrNull(2) ?: DataSource.cardView),
-                HomePageItems.SpecificDayWeather(response?.getOrNull(3) ?: DataSource.cardView),
-                HomePageItems.SpecificDayWeather(response?.getOrNull(4) ?: DataSource.cardView),
-                HomePageItems.SpecificDayWeather(response?.getOrNull(5) ?: DataSource.cardView)
+                HomePageItems.SpecificDayWeather(response[1]),
+                HomePageItems.SpecificDayWeather(response[2]),
+                HomePageItems.SpecificDayWeather(response[3]),
+                HomePageItems.SpecificDayWeather(response[4]),
+                HomePageItems.SpecificDayWeather(response[5])
             )
             val adapter = HomeScreenAdapter(listScreen, object : OnCardClick {
                 override fun onCardClick(card: HomePageItems.SpecificDayWeather) {

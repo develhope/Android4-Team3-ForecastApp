@@ -5,7 +5,6 @@ import co.develhope.meteoapp.data.domainmodel.DetailedCardForecast
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.ui.homescreen.HomeCardWeather
-import co.develhope.meteoapp.ui.homescreen.HomePageItems
 import co.develhope.meteoapp.ui.searchscreen.GetHourlyForecastList
 import co.develhope.meteoapp.ui.todayscreen.Forecast
 import org.threeten.bp.OffsetDateTime
@@ -13,7 +12,8 @@ import org.threeten.bp.OffsetDateTime
 object DataSource{
 
     private var selectedCity : Place? = Place(
-        name = "Pippo",
+        name = "Napoli",
+        region = "Campania",
         latitude = 40.8531,
         longitude = 14.3055
     )
@@ -51,6 +51,7 @@ object DataSource{
             ),
             Place(
                 name = "Naples",
+                region = "Campania",
                 latitude = 23.2323,
                 longitude = 23.2323
             )
@@ -63,9 +64,9 @@ object DataSource{
 
     private val searchList : List<GetHourlyForecastList> = listOf(
         GetHourlyForecastList.RecentSearches("Ricerche Recenti"),
-        GetHourlyForecastList.HourlyForecast(12, Weather.SUNNY, Place("Palermo", 38.13205, 13.33561)),
-        GetHourlyForecastList.HourlyForecast(12, Weather.CLOUDY, Place("Catanzaro", 38.8824700, 16.60008600)),
-        GetHourlyForecastList.HourlyForecast(12, Weather.RAINY, Place("Roma", 41.8919300, 12.5113300))
+        GetHourlyForecastList.HourlyForecast(12, Weather.SUNNY, Place("Palermo", "Sicilia", 38.13205, 13.33561)),
+        GetHourlyForecastList.HourlyForecast(12, Weather.CLOUDY, Place("Catanzaro", "Calabria",38.8824700, 16.60008600)),
+        GetHourlyForecastList.HourlyForecast(12, Weather.RAINY, Place("Roma", "Lazio",41.8919300, 12.5113300))
     )
     fun getSearchCitiesList() : List<GetHourlyForecastList>{
         return searchList
