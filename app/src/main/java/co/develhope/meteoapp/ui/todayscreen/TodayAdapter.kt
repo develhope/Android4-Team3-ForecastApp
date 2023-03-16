@@ -93,7 +93,8 @@ class TodayAdapter(private val list: List<Forecast>):RecyclerView.Adapter<Recycl
 
             is Forecast.TitleForecast ->{
                 (holder as TitleViewHolder).cityAndRegionTextView.text =
-                    (list[position] as Forecast.TitleForecast).place.name
+                    "${(list[position] as Forecast.TitleForecast).place.name}, " +
+                            "${(list[position] as Forecast.TitleForecast).place.region}"
 
                 if(OffsetDateTime.now().dayOfMonth ==
                     (list[position] as Forecast.TitleForecast).domainHourlyForecast.date.dayOfMonth){

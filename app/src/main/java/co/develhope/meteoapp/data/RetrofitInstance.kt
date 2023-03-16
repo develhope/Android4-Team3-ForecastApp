@@ -7,10 +7,10 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.threeten.bp.LocalDate
 import org.threeten.bp.OffsetDateTime
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 class RetrofitInstance {
@@ -88,10 +88,12 @@ class RetrofitInstance {
     }
 
 
-        suspend fun getHourlyWeather(place: Place): List<DomainHourlyForecast> {
+        suspend fun getHourlyWeather(place: Place, date: LocalDate): List<DomainHourlyForecast> {
             return forecastService.getHourlyWeather(
                 latitude = place.latitude,
                 longitude = place.longitude,
+                start_date = date.toString(),
+                end_date = date.toString(),
             ).toDomainHourlyForecast()
 
     }

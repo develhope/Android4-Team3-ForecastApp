@@ -24,14 +24,6 @@ object DataSource{
         return  selectedCity
     }
 
-    val cardView = HomeCardWeather(
-        date = OffsetDateTime.now(),
-        22,
-        31,
-        12,
-        0,
-        Weather.SUNNY)
-
 
 
     private val forecast: MutableList<Forecast> = mutableListOf(
