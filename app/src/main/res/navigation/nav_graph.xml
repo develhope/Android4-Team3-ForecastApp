@@ -14,7 +14,7 @@
             app:destination="@id/todayScreen" />
         <action
             android:id="@+id/homeScreen_to_specificDayScreen"
-            app:destination="@id/specificDayScreen" />
+            app:destination="@id/tomorrowScreen" />
         <action
             android:id="@+id/homeScreen_to_searchScreen"
             app:destination="@id/searchScreen" />
@@ -22,11 +22,19 @@
     <fragment
         android:id="@+id/todayScreen"
         android:name="co.develhope.meteoapp.ui.todayscreen.TodayScreenFragment"
-        tools:layout="@layout/fragment_today_screen" />
+        tools:layout="@layout/fragment_today_screen" >
+        <action
+            android:id="@+id/todayScreen_to_searchScreen"
+            app:destination="@id/searchScreen"/>
+    </fragment>
     <fragment
-        android:id="@+id/specificDayScreen"
-        android:name="co.develhope.meteoapp.ui.specificdayscreen.SpecificDayScreen"
-        tools:layout="@layout/fragment_specific_day_screen" />
+        android:id="@+id/tomorrowScreen"
+        android:name="co.develhope.meteoapp.ui.specificdayscreen.TomorrowScreenFragment"
+        tools:layout="@layout/fragment_specific_day_screen" >
+        <action
+            android:id="@+id/tomorrowScreen_to_searchScreen"
+            app:destination="@id/searchScreen"/>
+    </fragment>
     <fragment
         android:id="@+id/searchScreen"
         android:name="co.develhope.meteoapp.ui.searchscreen.SearchScreenFragment"

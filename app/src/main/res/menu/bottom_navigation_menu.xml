@@ -10,7 +10,7 @@
         android:icon="@drawable/today_icon"
         android:title="today"/>
     <item
-        android:id="@+id/specificDayScreen"
+        android:id="@+id/tomorrowScreen"
         android:icon="@drawable/today_icon_1"
         android:title="tomorrow" />
     <item

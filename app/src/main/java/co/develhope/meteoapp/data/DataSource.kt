@@ -24,44 +24,6 @@ object DataSource{
         return  selectedCity
     }
 
-    val cardView = HomeCardWeather(
-        date = OffsetDateTime.now(),
-        22,
-        31,
-        12,
-        0,
-        Weather.SUNNY)
-
-
-
-    private val forecast: MutableList<Forecast> = mutableListOf(
-        Forecast.TitleForecast(
-            DomainHourlyForecast(
-                OffsetDateTime.now(),
-                DetailedCardForecast(
-                    perceivedTemperature = 1,
-                    coverage = 1,
-                    rain = 1,
-                    uvIndex = 1,
-                    wind = 1,
-                    wetness = 1,
-                    weather = Weather.SUNNY,
-                    celsius = 1
-                )
-            ),
-            Place(
-                name = "Naples",
-                region = "Campania",
-                latitude = 23.2323,
-                longitude = 23.2323
-            )
-        )
-    )
-
-    fun getTodayDetailedForecast(): List<Forecast>{
-        return forecast
-    }
-
     private val searchList : List<GetHourlyForecastList> = listOf(
         GetHourlyForecastList.RecentSearches("Ricerche Recenti"),
         GetHourlyForecastList.HourlyForecast(12, Weather.SUNNY, Place("Palermo", "Sicilia", 38.13205, 13.33561)),

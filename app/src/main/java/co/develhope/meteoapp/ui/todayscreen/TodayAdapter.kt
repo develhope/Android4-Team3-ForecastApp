@@ -93,14 +93,19 @@ class TodayAdapter(private val list: List<Forecast>):RecyclerView.Adapter<Recycl
 
             is Forecast.TitleForecast ->{
                 (holder as TitleViewHolder).cityAndRegionTextView.text =
-                    (list[position] as Forecast.TitleForecast).place.name
+                    "${(list[position] as Forecast.TitleForecast).place.name}, " +
+                            "${(list[position] as Forecast.TitleForecast).place.region}"
 
                 if(OffsetDateTime.now().dayOfMonth ==
                     (list[position] as Forecast.TitleForecast).domainHourlyForecast.date.dayOfMonth){
                     (holder as TitleViewHolder).currentDayTextView.text = "Today"
-                }
-                else{
-                    (holder as TitleViewHolder).currentDayTextView.text = "NotToday"
+                } else if (OffsetDateTime.now().plusDays(1).dayOfMonth ==
+                    (list[position] as Forecast.TitleForecast).domainHourlyForecast.date.dayOfMonth) {
+                    (holder as TitleViewHolder).currentDayTextView.text = "Tomorrow"
+                } else {
+                    (holder as TitleViewHolder).currentDayTextView.text =
+                        (list[position] as Forecast.TitleForecast).domainHourlyForecast.date.dayOfWeek.name
+                            .lowercase().replaceFirstChar { it.titlecase() }
                 }
                 (holder as TitleViewHolder).dateTextView.text =
                     ("${(list[position] as Forecast.TitleForecast).domainHourlyForecast.date.dayOfWeek}" + " " +
