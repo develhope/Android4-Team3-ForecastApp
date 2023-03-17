@@ -15,12 +15,13 @@
         android:layout_marginLeft="@dimen/bottom_bar_text_size"
         android:layout_marginTop="@dimen/bottom_bar_text_size"
         android:layout_marginRight="@dimen/bottom_bar_text_size"
-        android:autofillHints="name"
         android:background="@drawable/search_view_background"
-        android:inputType="textAutoComplete"
         app:iconifiedByDefault="false"
+        app:searchIcon="@drawable/search_icon_black"
+        android:autofillHints="name"
+        android:inputType="textAutoComplete"
         app:queryHint="@string/search_city"
-        app:searchIcon="@drawable/search_icon_black" />
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search"

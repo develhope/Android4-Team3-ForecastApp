@@ -3,15 +3,15 @@ package co.develhope.meteoapp.ui.searchscreen
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.data.domainmodel.Weather
 
-sealed class GetHourlyForecastList {
-    data class HourlyForecast(
+sealed class GetCitiesList {
+    data class Cities(
         val degrees: Int,
         val weather: Weather,
         val city: Place
-    ) : GetHourlyForecastList()
+    ) : GetCitiesList()
 
     data class RecentSearches(
         val recentSearches: String
-    ) : GetHourlyForecastList()
+    ) : GetCitiesList()
 
 }
