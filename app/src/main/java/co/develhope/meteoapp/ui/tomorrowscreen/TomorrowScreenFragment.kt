@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.ui.specificdayscreen
+package co.develhope.meteoapp.ui.tomorrowscreen
 
 import android.os.Bundle
 import android.util.Log
@@ -11,23 +11,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.DataSource
-import co.develhope.meteoapp.databinding.FragmentSpecificDayScreenBinding
-import co.develhope.meteoapp.ui.todayscreen.TodayAdapter
 import co.develhope.meteoapp.data.RetrofitInstance
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
-import co.develhope.meteoapp.ui.todayscreen.Forecast
+import co.develhope.meteoapp.databinding.FragmentTomorrowScreenBinding
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
 class TomorrowScreenFragment : Fragment() {
-    private lateinit var binding: FragmentSpecificDayScreenBinding
+    private lateinit var binding: FragmentTomorrowScreenBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSpecificDayScreenBinding.inflate(inflater, container, false)
+        binding = FragmentTomorrowScreenBinding.inflate(inflater, container, false)
         val place = DataSource.getSelectedCity()
         binding.specificDayRecycleView.layoutManager = LinearLayoutManager(requireContext())
         if(place != null){
@@ -43,7 +41,7 @@ class TomorrowScreenFragment : Fragment() {
             try {
                 val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place, OffsetDateTime.now().plusDays(1).toLocalDate())
                 val screenItems : List<Forecast> = getSpecificDayScreenItems(detailedForecast, place)
-                binding.specificDayRecycleView.adapter = TodayAdapter(screenItems)
+                binding.specificDayRecycleView.adapter = TomorrowAdapter(screenItems)
             } catch (e: Exception) {
                 Log.e("TodayScreen", "error: $e")
             }
