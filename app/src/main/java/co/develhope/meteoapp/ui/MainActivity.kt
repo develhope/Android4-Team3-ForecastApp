@@ -9,10 +9,12 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         //https://issuetracker.google.com/issues/142847973?pli=1
 
         navController = navHostFragment.navController
-        val bottomNavigationView = binding.bottomNavigationToolbar
+        bottomNavigationView = binding.bottomNavigationToolbar
         setupWithNavController(bottomNavigationView, navController)
         bottomNavigationView.setupWithNavController(navController)
         bottomNavigationView.setOnItemSelectedListener  {
@@ -41,6 +43,17 @@ class MainActivity : AppCompatActivity() {
                 else -> {it.onNavDestinationSelected(navController)
                 }
             }
+        }
+    }
+
+    public fun uncheckAllBottomNavigationItems() {
+        bottomNavigationView.apply {
+            menu.setGroupCheckable(0, true, false)
+            for (i in 0 until menu.size()) {
+                menu.getItem(i).isChecked = false
+            }
+            menu.setGroupCheckable(0, true, true)
+
         }
     }
 }

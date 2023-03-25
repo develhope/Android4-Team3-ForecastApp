@@ -7,6 +7,7 @@ import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.ui.homescreen.HomeCardWeather
 import co.develhope.meteoapp.ui.searchscreen.GetHourlyForecastList
 import co.develhope.meteoapp.ui.todayscreen.Forecast
+import org.threeten.bp.DayOfWeek
 import org.threeten.bp.OffsetDateTime
 
 object DataSource{
@@ -23,6 +24,14 @@ object DataSource{
     fun getSelectedCity(): Place?{
         return  selectedCity
     }
+
+    private var selectedDay : DayOfWeek? = null
+
+    fun setSelectedDay(dayOfWeek: DayOfWeek){
+        selectedDay = dayOfWeek
+    }
+
+    fun getSelectedDay(): DayOfWeek? = selectedDay
 
     private val searchList : List<GetHourlyForecastList> = listOf(
         GetHourlyForecastList.RecentSearches("Ricerche Recenti"),

@@ -1,13 +1,13 @@
 package co.develhope.meteoapp.ui.homescreen
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.HomeScreenAdapter
 import co.develhope.meteoapp.OnCardClick
@@ -16,6 +16,7 @@ import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.data.RetrofitInstance
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentHomeScreenBinding
+import co.develhope.meteoapp.ui.MainActivity
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
@@ -74,7 +75,13 @@ class HomeScreenFragment : Fragment() {
                 override fun onCardClick(card: HomePageItems.SpecificDayWeather) {
                     when (card.homeCardWeather.date.dayOfWeek) {
                         OffsetDateTime.now().dayOfWeek -> findNavController().navigate(R.id.homeScreen_to_todayScreen)
-                        else -> findNavController().navigate(R.id.homeScreen_to_specificDayScreen)
+                        OffsetDateTime.now().plusDays(1).dayOfWeek -> findNavController().navigate(R.id.homeScreen_to_tomorrowScreen)
+                        in OffsetDateTime.now().plusDays(2).dayOfWeek..OffsetDateTime.now().plusDays(7).dayOfWeek -> {
+                            (requireActivity() as MainActivity).uncheckAllBottomNavigationItems()
+                            DataSource.setSelectedDay(card.homeCardWeather.date.dayOfWeek)
+                            findNavController().navigate(R.id.homeScreen_to_specificDayScreen)
+                        }
+                        else -> Log.e("HomeScreenFragment", "error navigating from home cards to today, tomorrow and specific day fragment")
                     }
                 }
             })

@@ -13,11 +13,14 @@
             android:id="@+id/homeScreen_to_todayScreen"
             app:destination="@id/todayScreen" />
         <action
-            android:id="@+id/homeScreen_to_specificDayScreen"
+            android:id="@+id/homeScreen_to_tomorrowScreen"
             app:destination="@id/tomorrowScreen" />
         <action
             android:id="@+id/homeScreen_to_searchScreen"
             app:destination="@id/searchScreen" />
+        <action
+            android:id="@+id/homeScreen_to_specificDayScreen"
+            app:destination="@id/specificDayScreen" />
     </fragment>
     <fragment
         android:id="@+id/todayScreen"
@@ -38,8 +41,17 @@
     <fragment
         android:id="@+id/searchScreen"
         android:name="co.develhope.meteoapp.ui.searchscreen.SearchScreenFragment"
-        tools:layout="@layout/fragment_search_screen" />
+        tools:layout="@layout/fragment_search_screen" >
     <action
         android:id="@+id/searchScreenToHomeScreen"
         app:destination="@+id/homeScreen"/>
+    </fragment>
+    <fragment
+        android:id="@+id/specificDayScreen"
+        android:name="co.develhope.meteoapp.ui.specificdayscreen.SpecificDayFragment"
+        tools:layout="@layout/fragment_specific_day">
+        <action
+            android:id="@+id/specificDayScreenToHomeScreen"
+            app:destination="@+id/homeScreen"/>
+    </fragment>
 </navigation>
