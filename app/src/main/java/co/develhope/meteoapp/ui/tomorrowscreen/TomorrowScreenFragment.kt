@@ -27,19 +27,20 @@ class TomorrowScreenFragment : Fragment() {
     ): View {
         binding = FragmentTomorrowScreenBinding.inflate(inflater, container, false)
         val place = DataSource.getSelectedCity()
+        val specificDay = DataSource.getSelectedDay()
         binding.specificDayRecycleView.layoutManager = LinearLayoutManager(requireContext())
-        if(place != null){
-            getSpecificDayDetailedForecast(place)
+        if(place != null && specificDay != null){
+            getSpecificDayDetailedForecast(place, specificDay)
         }else{
             findNavController().navigate(R.id.tomorrowScreen_to_searchScreen)
         }
         return binding.root
     }
 
-    private fun getSpecificDayDetailedForecast(place: Place) {
+    private fun getSpecificDayDetailedForecast(place: Place, specificDay: OffsetDateTime) {
         lifecycleScope.launch {
             try {
-                val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place, OffsetDateTime.now().plusDays(1).toLocalDate())
+                val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place, specificDay)
                 val screenItems : List<Forecast> = getSpecificDayScreenItems(detailedForecast, place)
                 binding.specificDayRecycleView.adapter = TomorrowAdapter(screenItems)
             } catch (e: Exception) {

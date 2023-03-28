@@ -8,8 +8,10 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import co.develhope.meteoapp.R
+import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.threeten.bp.OffsetDateTime
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -35,10 +37,19 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener  {
             when (it.itemId) {
                 R.id.homeScreen -> {
+                    navController.popBackStack()  //used to let the specificDayFragment navigation function properly
                     if (navController.popBackStack(R.id.homeScreen,false)){
                         it.onNavDestinationSelected(navController)
-                    };
+                    }
                     true
+                }
+                R.id.todayScreen -> {
+                    DataSource.setSelectedDay(OffsetDateTime.now())
+                    it.onNavDestinationSelected(navController)
+                }
+                R.id.tomorrowScreen -> {
+                    DataSource.setSelectedDay(OffsetDateTime.now().plusDays(1))
+                    it.onNavDestinationSelected(navController)
                 }
                 else -> {it.onNavDestinationSelected(navController)
                 }
@@ -46,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    public fun uncheckAllBottomNavigationItems() {
+    fun uncheckAllBottomNavigationItems() {
         bottomNavigationView.apply {
             menu.setGroupCheckable(0, true, false)
             for (i in 0 until menu.size()) {

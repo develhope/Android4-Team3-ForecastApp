@@ -2,10 +2,10 @@ package co.develhope.meteoapp.ui.specificdayscreen
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +15,8 @@ import co.develhope.meteoapp.data.RetrofitInstance
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentSpecificDayBinding
+import co.develhope.meteoapp.ui.MainActivity
 import kotlinx.coroutines.launch
-import org.threeten.bp.DayOfWeek
 import org.threeten.bp.OffsetDateTime
 
 
@@ -26,6 +26,7 @@ class SpecificDayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity() as MainActivity).uncheckAllBottomNavigationItems()
         binding = FragmentSpecificDayBinding.inflate(inflater, container, false)
         val place = DataSource.getSelectedCity()
         val specificDay = DataSource.getSelectedDay()
@@ -40,10 +41,14 @@ class SpecificDayFragment : Fragment() {
         return binding.root
     }
 
-    private fun getSpecificDayDetailedForecast(place: Place, specificDay: DayOfWeek) {
+    private fun getSpecificDayDetailedForecast(place: Place, specificDay: OffsetDateTime) {
         lifecycleScope.launch {
             try {
-                val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place, OffsetDateTime.now().with(specificDay).toLocalDate())
+                val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place,
+                    specificDay //TODO this line has to be changed cause
+                                                                         // u must insert here only a variable
+                                                                         // and no a logic to use on the variable
+                )
                 val screenItems : List<Forecast> = getSpecificDayScreenItems(detailedForecast, place)
                 binding.todayRecycleView.adapter = SpecificDayAdapter(screenItems)
             } catch (e: Exception) {

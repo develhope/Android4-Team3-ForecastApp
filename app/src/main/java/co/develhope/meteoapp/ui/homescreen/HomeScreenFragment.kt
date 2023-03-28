@@ -1,7 +1,6 @@
 package co.develhope.meteoapp.ui.homescreen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.data.RetrofitInstance
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentHomeScreenBinding
-import co.develhope.meteoapp.ui.MainActivity
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
@@ -73,15 +71,11 @@ class HomeScreenFragment : Fragment() {
             )
             val adapter = HomeScreenAdapter(listScreen, object : OnCardClick {
                 override fun onCardClick(card: HomePageItems.SpecificDayWeather) {
+                    DataSource.setSelectedDay(card.homeCardWeather.date)
                     when (card.homeCardWeather.date.dayOfWeek) {
                         OffsetDateTime.now().dayOfWeek -> findNavController().navigate(R.id.homeScreen_to_todayScreen)
                         OffsetDateTime.now().plusDays(1).dayOfWeek -> findNavController().navigate(R.id.homeScreen_to_tomorrowScreen)
-                        in OffsetDateTime.now().plusDays(2).dayOfWeek..OffsetDateTime.now().plusDays(7).dayOfWeek -> {
-                            (requireActivity() as MainActivity).uncheckAllBottomNavigationItems()
-                            DataSource.setSelectedDay(card.homeCardWeather.date.dayOfWeek)
-                            findNavController().navigate(R.id.homeScreen_to_specificDayScreen)
-                        }
-                        else -> Log.e("HomeScreenFragment", "error navigating from home cards to today, tomorrow and specific day fragment")
+                        else -> { findNavController().navigate(R.id.homeScreen_to_specificDayScreen) }
                     }
                 }
             })

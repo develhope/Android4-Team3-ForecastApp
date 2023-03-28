@@ -1,13 +1,8 @@
 package co.develhope.meteoapp.data
 
-import co.develhope.meteoapp.data.domainmodel.Weather
-import co.develhope.meteoapp.data.domainmodel.DetailedCardForecast
-import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
-import co.develhope.meteoapp.ui.homescreen.HomeCardWeather
+import co.develhope.meteoapp.data.domainmodel.Weather
 import co.develhope.meteoapp.ui.searchscreen.GetHourlyForecastList
-import co.develhope.meteoapp.ui.todayscreen.Forecast
-import org.threeten.bp.DayOfWeek
 import org.threeten.bp.OffsetDateTime
 
 object DataSource{
@@ -25,13 +20,13 @@ object DataSource{
         return  selectedCity
     }
 
-    private var selectedDay : DayOfWeek? = null
+    private var selectedDay : OffsetDateTime? = null
 
-    fun setSelectedDay(dayOfWeek: DayOfWeek){
-        selectedDay = dayOfWeek
+    fun setSelectedDay(offsetDateTime: OffsetDateTime){
+        selectedDay = offsetDateTime
     }
 
-    fun getSelectedDay(): DayOfWeek? = selectedDay
+    fun getSelectedDay(): OffsetDateTime? = selectedDay
 
     private val searchList : List<GetHourlyForecastList> = listOf(
         GetHourlyForecastList.RecentSearches("Ricerche Recenti"),
