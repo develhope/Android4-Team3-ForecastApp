@@ -15,3 +15,12 @@ sealed class GetCitiesList {
     ) : GetCitiesList()
 
 }
+
+//sealed class GetSearch{
+//    data class SetSearch(val tag: String) : GetSearch()
+//}
+
+sealed class SearchResults{
+    data class Results(val results: List<Place>) : SearchResults()
+    data class Errors(val errors: String) : SearchResults()
+}

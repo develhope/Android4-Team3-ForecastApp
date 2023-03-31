@@ -27,7 +27,8 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/search_view">
+        android:layout_below="@id/search_view"
+        android:layout_marginTop="10sp">
 
 
     </androidx.recyclerview.widget.RecyclerView>

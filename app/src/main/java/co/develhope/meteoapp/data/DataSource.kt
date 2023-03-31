@@ -20,13 +20,19 @@ object DataSource{
     }
 
     private val searchList : List<GetCitiesList> = listOf(
-        GetCitiesList.RecentSearches("Ricerche Recenti"),
         GetCitiesList.Cities(12, Weather.SUNNY, Place("Palermo", "Sicilia", 38.13205, 13.33561)),
         GetCitiesList.Cities(12, Weather.CLOUDY, Place("Catanzaro", "Calabria",38.8824700, 16.60008600)),
         GetCitiesList.Cities(12, Weather.RAINY, Place("Roma", "Lazio",41.8919300, 12.5113300))
     )
+
+    private val recentSearches : GetCitiesList = GetCitiesList.RecentSearches("Ricerche Recenti")
+
     fun getSearchCitiesList() : List<GetCitiesList>{
         return searchList
+    }
+
+    fun getRecentSearches() : GetCitiesList{
+        return recentSearches
     }
 
 
