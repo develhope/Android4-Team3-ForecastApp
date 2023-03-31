@@ -1,14 +1,14 @@
-package co.develhope.meteoapp
+package co.develhope.meteoapp.ui.homescreen
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.domainmodel.Weather
 import co.develhope.meteoapp.databinding.HomeScreenCardviewBinding
 import co.develhope.meteoapp.databinding.HomeScreenSubtitleBinding
 import co.develhope.meteoapp.databinding.HomeScreenTitleBinding
-import co.develhope.meteoapp.ui.homescreen.HomePageItems
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.TextStyle
