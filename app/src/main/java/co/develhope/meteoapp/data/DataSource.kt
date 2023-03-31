@@ -3,15 +3,15 @@ package co.develhope.meteoapp.data
 import co.develhope.meteoapp.data.domainmodel.Weather
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.ui.searchscreen.GetCitiesList
+import co.develhope.meteoapp.data.dto.HomeCardWeather
+import co.develhope.meteoapp.ui.searchscreen.GetHourlyForecastList
+import co.develhope.meteoapp.ui.todayscreen.Forecast
+import org.threeten.bp.OffsetDateTime
+
 
 object DataSource{
 
-    private var selectedCity : Place? = Place(
-        name = "Napoli",
-        region = "Campania",
-        latitude = 40.8531,
-        longitude = 14.3055
-    )
+    private var selectedCity : Place? = null
     fun setSelectedCity(place: Place){
         selectedCity = place
     }
