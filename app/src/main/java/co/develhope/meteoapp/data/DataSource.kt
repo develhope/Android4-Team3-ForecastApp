@@ -11,12 +11,7 @@ import org.threeten.bp.OffsetDateTime
 
 object DataSource{
 
-    private var selectedCity : Place? = Place(
-        name = "Napoli",
-        region = "Campania",
-        latitude = 40.8531,
-        longitude = 14.3055
-    )
+    private var selectedCity : Place? = null
     fun setSelectedCity(place: Place){
         selectedCity = place
     }
