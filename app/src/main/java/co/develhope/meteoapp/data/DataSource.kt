@@ -4,7 +4,7 @@ import co.develhope.meteoapp.data.domainmodel.Weather
 import co.develhope.meteoapp.data.domainmodel.DetailedCardForecast
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
-import co.develhope.meteoapp.ui.homescreen.HomeCardWeather
+import co.develhope.meteoapp.data.dto.HomeCardWeather
 import co.develhope.meteoapp.ui.searchscreen.GetHourlyForecastList
 import co.develhope.meteoapp.ui.todayscreen.Forecast
 import org.threeten.bp.OffsetDateTime
