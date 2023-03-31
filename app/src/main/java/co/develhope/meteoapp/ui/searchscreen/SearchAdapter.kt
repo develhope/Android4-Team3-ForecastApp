@@ -33,7 +33,7 @@ class RecentSearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 }
 
 class SearchAdapter(
-    private val search: List<GetHourlyForecastList>,
+    private val search: List<GetCitiesList>,
     private val onClick: (Place) -> Unit
 
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
@@ -63,8 +63,8 @@ class SearchAdapter(
     override fun getItemViewType(position: Int): Int {
         return when (search[position]) {
 
-            is GetHourlyForecastList.HourlyForecast -> ViewType.HOURLYFORECAST.num
-            is GetHourlyForecastList.RecentSearches -> ViewType.RESENTSEARCH.num
+            is GetCitiesList.Cities -> ViewType.HOURLYFORECAST.num
+            is GetCitiesList.RecentSearches -> ViewType.RESENTSEARCH.num
         }
 
     }
@@ -72,21 +72,21 @@ class SearchAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         when (search[position]) {
-            is GetHourlyForecastList.HourlyForecast -> {
+            is GetCitiesList.Cities -> {
                 (holder as HourlyForecastViewHolder).weather.text =
-                    (search[position] as GetHourlyForecastList.HourlyForecast).weather.toString().lowercase()
+                    (search[position] as GetCitiesList.Cities).weather.toString().lowercase()
                 holder.itemView.setOnClickListener {
-                    onClick((search[position] as GetHourlyForecastList.HourlyForecast).city)
+                    onClick((search[position] as GetCitiesList.Cities).city)
 
                 }
-                holder.degrees.text = "${(search[position] as GetHourlyForecastList.HourlyForecast).degrees}°"
+                holder.degrees.text = "${(search[position] as GetCitiesList.Cities).degrees}°"
                 holder.cities.text =
-                    (search[position] as GetHourlyForecastList.HourlyForecast).city.name
+                    (search[position] as GetCitiesList.Cities).city.name
 
             }
-            is GetHourlyForecastList.RecentSearches -> {
+            is GetCitiesList.RecentSearches -> {
                 (holder as RecentSearchViewHolder).recentSearches.text =
-                    (search[position] as GetHourlyForecastList.RecentSearches).recentSearches
+                    (search[position] as GetCitiesList.RecentSearches).recentSearches
             }
         }
         }
