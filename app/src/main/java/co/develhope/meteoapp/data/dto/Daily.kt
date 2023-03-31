@@ -1,7 +1,6 @@
 package co.develhope.meteoapp.data.dto
 
 import co.develhope.meteoapp.data.domainmodel.Weather
-import co.develhope.meteoapp.ui.homescreen.HomeCardWeather
 import org.threeten.bp.OffsetDateTime
 
 data class Daily(
