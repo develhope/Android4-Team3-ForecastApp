@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.develhope.meteoapp.HomeScreenAdapter
-import co.develhope.meteoapp.OnCardClick
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.data.domainmodel.Place
+import co.develhope.meteoapp.data.dto.HomeCardWeather
+import co.develhope.meteoapp.data.dto.Title
 import co.develhope.meteoapp.databinding.FragmentHomeScreenBinding
 import org.threeten.bp.OffsetDateTime
 
