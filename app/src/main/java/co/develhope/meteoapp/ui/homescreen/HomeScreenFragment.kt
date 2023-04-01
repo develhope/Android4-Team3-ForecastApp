@@ -61,9 +61,11 @@ class HomeScreenFragment : Fragment() {
 
         val adapter = HomeScreenAdapter(list, object : OnCardClick {
             override fun onCardClick(card: HomePageItems.SpecificDayWeather) {
+                DataSource.setSelectedDay(card.homeCardWeather.date)
                 when (card.homeCardWeather.date.dayOfWeek) {
                     OffsetDateTime.now().dayOfWeek -> findNavController().navigate(R.id.homeScreen_to_todayScreen)
-                    else -> findNavController().navigate(R.id.homeScreen_to_specificDayScreen)
+                    OffsetDateTime.now().plusDays(1).dayOfWeek -> findNavController().navigate(R.id.homeScreen_to_tomorrowScreen)
+                    else -> { findNavController().navigate(R.id.homeScreen_to_specificDayScreen) }
                 }
             }
         })

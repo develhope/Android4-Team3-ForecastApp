@@ -7,7 +7,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.threeten.bp.LocalDate
 import org.threeten.bp.OffsetDateTime
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -80,7 +79,7 @@ class RetrofitInstance {
         return this.geocodingService.getDetails(userSearch).toDomain()
     }
 
-    suspend fun retrieveDailyDetails(latitude: Double, longitude: Double,): DayForecast {
+    suspend fun retrieveDailyDetails(latitude: Double, longitude: Double): DayForecast {
         return forecastService.getDailyForecast(
             latitude = latitude,
             longitude = longitude,
@@ -88,12 +87,12 @@ class RetrofitInstance {
     }
 
 
-        suspend fun getHourlyWeather(place: Place, date: LocalDate): List<DomainHourlyForecast> {
+        suspend fun getHourlyWeather(place: Place, date: OffsetDateTime): List<DomainHourlyForecast> {
             return forecastService.getHourlyWeather(
                 latitude = place.latitude,
                 longitude = place.longitude,
-                start_date = date.toString(),
-                end_date = date.toString(),
+                start_date = date.toLocalDate().toString(),
+                end_date = date.toLocalDate().toString(),
             ).toDomainHourlyForecast()
 
     }

@@ -6,20 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.DataSource
-import co.develhope.meteoapp.data.RetrofitInstance
-import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
-import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
-import kotlinx.coroutines.launch
-import org.threeten.bp.OffsetDateTime
 
 class TodayScreenFragment : Fragment() {
     private lateinit var binding: FragmentTodayScreenBinding
+    private lateinit var viewModel: TodayScreenViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[TodayScreenViewModel::class.java]
+
+        val place = DataSource.getSelectedCity()
+        val specificDay = DataSource.getSelectedDay()
+        if(place != null && specificDay != null){
+            viewModel.getDetailedForecast(place, specificDay)
+        }else{
+            findNavController().navigate(R.id.todayScreen_to_searchScreen)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,34 +36,16 @@ class TodayScreenFragment : Fragment() {
     ): View {
         binding = FragmentTodayScreenBinding.inflate(inflater, container, false)
         binding.todayRecycleView.layoutManager = LinearLayoutManager(requireContext())
-
-        val place = DataSource.getSelectedCity()
-        if(place != null){
-            getTodayDetailedForecast(place)
-        }else{
-            findNavController().navigate(R.id.todayScreen_to_searchScreen)
-        }
+        observeDetailedForecastList()
         return binding.root
     }
 
-    private fun getTodayDetailedForecast(place: Place) {
-        lifecycleScope.launch {
-            try {
-                val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place, OffsetDateTime.now().toLocalDate())
-                val screenItems : List<Forecast> = getTodayScreenItems(detailedForecast, place)
-                binding.todayRecycleView.adapter = TodayAdapter(screenItems)
-            } catch (e: Exception) {
-                Log.e("TodayScreen", "error: $e")
-            }
+    private fun observeDetailedForecastList(){
+        viewModel.forecastList.observe(viewLifecycleOwner) {
+            binding.todayRecycleView.adapter = TodayAdapter(it)
         }
-    }
-
-    private fun getTodayScreenItems(detailedForecast: List<DomainHourlyForecast>, place: Place): List<Forecast> {
-        val list: MutableList<Forecast> = mutableListOf()   //list to return
-        list.add(Forecast.TitleForecast(detailedForecast.first(), place))   //adding the title to the list
-        detailedForecast.map {  //adding all the hourly view for the entire day (0 to 23)
-            list.add(Forecast.HourlyForecastListItem(it))
+        viewModel.error.observe(viewLifecycleOwner) {
+            Log.e("TodayScreenFragment", it) //TODO replace this with error fragment navigation
         }
-        return list
     }
 }
