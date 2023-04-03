@@ -13,18 +13,17 @@ class SearchViewModel : ViewModel() {
     val searchData2: LiveData<SearchResults>
         get() = searchData
 
-
-    fun searchApi(userSearch : String) {
+    fun searchApi() {
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                searchData.value = SearchResults.Results(RetrofitInstance().getPlaces(userSearch))
+                searchData.value = SearchResults.Results(RetrofitInstance().getPlaces("Palermo"))
             } catch (e: Exception) {
 
                 //Log.d("Search","ERROR : ${e.message},${e.cause}")
 
-                searchData.value = e.localizedMessage?.let { SearchResults.Errors(it) }
+                searchData.value =  SearchResults.Errors(e.localizedMessage!!)
+                //searchData.value = e.localizedMessage?.let { SearchResults.Errors(it) }
             }
         }
     }
-
 }

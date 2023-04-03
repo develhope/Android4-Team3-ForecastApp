@@ -36,7 +36,8 @@ class SearchScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
         setupFilter()
-        searchViewModel.searchApi("")
+        retryCall()
+        searchViewModel.searchApi()
     }
 
     private fun setupFilter() {
@@ -69,7 +70,7 @@ class SearchScreenFragment : Fragment() {
         val filteredListAdapter = mutableListOf(getRecentSearches())
         filteredListAdapter.addAll(
             1,
-            listAdapter.filter { (it as GetCitiesList.Cities).city.name.startsWith(p0.replaceFirstChar { it.uppercase() }) })
+            listAdapter.filter { it -> (it as GetCitiesList.Cities).city.name.startsWith(p0.replaceFirstChar { it.uppercase() }) })
         val adapter = SearchAdapter(filteredListAdapter) {
             DataSource.setSelectedCity(it)
             findNavController().navigate(R.id.searchScreenToHomeScreen)

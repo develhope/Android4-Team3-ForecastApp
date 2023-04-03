@@ -1,9 +1,8 @@
 package co.develhope.meteoapp.data
 
-import co.develhope.meteoapp.data.domainmodel.Weather
 import co.develhope.meteoapp.data.domainmodel.Place
-import org.threeten.bp.OffsetDateTime
 import co.develhope.meteoapp.ui.searchscreen.GetCitiesList
+import org.threeten.bp.OffsetDateTime
 
 object DataSource{
 
@@ -24,9 +23,9 @@ object DataSource{
     fun getSelectedDay(): OffsetDateTime? = selectedDay
 
     private val searchList : List<GetCitiesList> = listOf(
-        GetCitiesList.Cities(12, Weather.SUNNY, Place("Palermo", "Sicilia", 38.13205, 13.33561)),
-        GetCitiesList.Cities(12, Weather.CLOUDY, Place("Catanzaro", "Calabria",38.8824700, 16.60008600)),
-        GetCitiesList.Cities(12, Weather.RAINY, Place("Roma", "Lazio",41.8919300, 12.5113300))
+        GetCitiesList.Cities(Place("Palermo,", "Sicilia", 38.13205, 13.33561)),
+        GetCitiesList.Cities(Place("Catanzaro,", "Calabria",38.8824700, 16.60008600)),
+        GetCitiesList.Cities(Place("Roma,", "Lazio",41.8919300, 12.5113300))
     )
 
     private val recentSearches : GetCitiesList = GetCitiesList.RecentSearches("Ricerche Recenti")
