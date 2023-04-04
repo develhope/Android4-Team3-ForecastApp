@@ -15,6 +15,7 @@ import co.develhope.meteoapp.data.RetrofitInstance
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentTomorrowScreenBinding
+import co.develhope.meteoapp.ui.tomorrowscreen.tomorrowadapter.TomorrowAdapter
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
