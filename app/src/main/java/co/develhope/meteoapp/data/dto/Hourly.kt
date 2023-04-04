@@ -9,7 +9,7 @@ data class Hourly(
     val temperature_2m: List<Double>,
     val relativehumidity_2m: List<Long>,
     val apparent_temperature: List<Double>,
-    val diffuse_radiation: List<Double>,
+    val uv_index: List<Double>,
     val cloudcover: List<Long>,
     val time: List<OffsetDateTime>,
     val weathercode: List<Int>,

@@ -32,7 +32,7 @@ interface ForecastApiService {
             "temperature_2m",
             "relativehumidity_2m",
             "apparent_temperature",
-            "diffuse_radiation",
+            "uv_index",
             "cloudcover",
             "rain",
             "weathercode",
