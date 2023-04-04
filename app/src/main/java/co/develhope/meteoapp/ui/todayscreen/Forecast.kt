@@ -9,8 +9,6 @@ sealed class Forecast {
     ) : Forecast()
     
     data class TitleForecast(
-        //TODO Remove all value and get them from data class "Place"
-        // from eufemia's code
         val domainHourlyForecast: DomainHourlyForecast,
         val place: Place
     ) : Forecast()

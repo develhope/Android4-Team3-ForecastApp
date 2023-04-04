@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
+import co.develhope.meteoapp.ui.todayscreen.todayadapter.TodayAdapter
 
 class TodayScreenFragment : Fragment() {
     private lateinit var binding: FragmentTodayScreenBinding

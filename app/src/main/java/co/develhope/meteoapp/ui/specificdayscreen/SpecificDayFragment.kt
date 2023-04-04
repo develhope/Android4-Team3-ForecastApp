@@ -16,6 +16,7 @@ import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentSpecificDayBinding
 import co.develhope.meteoapp.ui.MainActivity
+import co.develhope.meteoapp.ui.specificdayscreen.specificdayadapter.SpecificDayAdapter
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
