@@ -33,7 +33,7 @@ data class DtoHourlyWeather(
                         wetness = hourly.relativehumidity_2m[idx].toInt(),
 
                         perceivedTemperature = hourly.apparent_temperature[idx].toInt(),
-                        uvIndex = hourly.diffuse_radiation[idx].toInt(),
+                        uvIndex = hourly.uv_index[idx].toInt(),
 
                         coverage = hourly.cloudcover[idx].toInt(),
                         rain = hourly.rain[idx].toInt(),
