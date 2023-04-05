@@ -7,7 +7,8 @@ import retrofit2.http.Query
 interface SearchCityService {
     @GET("v1/search")
     suspend fun getDetails(
-        @Query("name") name: String
+        @Query("name") name: String,
+        @Query("language") language: String = "it",
     )
     : SearchCities
 }

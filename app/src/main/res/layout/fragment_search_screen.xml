@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/search_screen_background"
-    tools:context=".ui.searchscreen.SearchScreenFragment">
+    tools:context=".ui.searchscreen.SearchScreenFragment"
+    >
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
@@ -18,9 +19,9 @@
         android:background="@drawable/search_view_background"
         app:iconifiedByDefault="false"
         app:searchIcon="@drawable/search_icon_black"
-        android:autofillHints="name"
         android:inputType="textAutoComplete"
         app:queryHint="@string/search_city"
+        app:queryBackground="@color/white"
         />
 
     <androidx.recyclerview.widget.RecyclerView
