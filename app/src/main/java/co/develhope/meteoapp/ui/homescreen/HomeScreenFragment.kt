@@ -83,7 +83,7 @@ class HomeScreenFragment : Fragment() {
       list.add(
           HomePageItems.NextDays(R.string.next_5_days.toString())
       )
-      val restOfList = weeklyCards.drop(1)
+      val restOfList = weeklyCards.drop(1).take(5)
       restOfList.map {
           list.add(HomePageItems.SpecificDayWeather(it))
       }

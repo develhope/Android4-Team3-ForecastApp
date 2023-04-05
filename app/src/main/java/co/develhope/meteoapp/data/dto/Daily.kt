@@ -18,11 +18,11 @@ data class Daily(
         return time.indices.map{index ->
             HomeCardWeather(
                 date = time[index],
-                minDegree = temperature_2m_min.getOrNull(index)?.toInt() ?: 0,
-                maxDegree = temperature_2m_max.getOrNull(index)?.toInt() ?: 0,
-                weather =  (weathercode.getOrNull(index)?.toWeather() ?: 0) as Weather,
-                windKmh = windspeed_10m_max.getOrNull(index)?.toInt() ?: 0,
-                rainPerc = precipitation_sum.getOrNull(index)?.toInt() ?: 0
+                minDegree = temperature_2m_min.get(index).toInt() ?: 0,
+                maxDegree = temperature_2m_max.get(index).toInt() ?: 0,
+                weather =  (weathercode.get(index).toWeather() ?: 0) as Weather,
+                windKmh = windspeed_10m_max.get(index).toInt() ?: 0,
+                rainPerc = precipitation_sum.get(index).toInt() ?: 0
             )
         }
     }
