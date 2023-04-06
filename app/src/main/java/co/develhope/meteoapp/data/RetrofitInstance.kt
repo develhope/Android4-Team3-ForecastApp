@@ -75,8 +75,8 @@ class RetrofitInstance {
     }
 
 
-    suspend fun getPlaces(userSearch: String): List<Place> {
-        return this.geocodingService.getDetails(userSearch).toDomain()
+    suspend fun getPlaces(userSearch: String?): List<Place>? {
+        return userSearch?.let { this.geocodingService.getDetails(it).toDomain() }
     }
 
     suspend fun retrieveDailyDetails(latitude: Double, longitude: Double): DayForecast {
