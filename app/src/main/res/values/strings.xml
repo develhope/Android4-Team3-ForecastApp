@@ -12,5 +12,7 @@
     <string name="uv_index">Indice UV</string>
     <string name="wind">Vento</string>
     <string name="rain">Piogga</string>
+    <string name="error_message">C\è stato un problema con il caricamento dei tuoi dati. Verifica la tua rete e riprova</string>
+    <string name="retry">Riprova</string>
 
 </resources>

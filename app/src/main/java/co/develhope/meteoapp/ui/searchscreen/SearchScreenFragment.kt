@@ -1,7 +1,6 @@
 package co.develhope.meteoapp.ui.searchscreen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.data.DataSource.getRecentSearches
-import co.develhope.meteoapp.data.DataSource.getSearchCitiesList
+import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
 
 class SearchScreenFragment : Fragment() {
@@ -34,43 +33,37 @@ class SearchScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapter()
+        setAdapter(listOf())
         setupFilter()
-        searchViewModel.searchApi("")
+        retryCall()
     }
 
     private fun setupFilter() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
+                searchViewModel.searchApi(p0)
+                retryCall()
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                p0?.let {
-                    setAdapter(p0)
-                } ?: kotlin.run {
-                    Log.d("SearchView", "p0 is null")
-                }
-
-                //   if(p0 != null){
-                //       retryCall(p0)
-                //   } else {
-                //       Log.d("SearchView", "p0 is null")
-                //   }
+                searchViewModel.searchApi(p0)
+                retryCall()
                 return true
             }
-
         })
     }
 
-    private fun setAdapter(p0: String = ""): SearchAdapter {
-        val listAdapter = getSearchCitiesList()
-        val filteredListAdapter = mutableListOf(getRecentSearches())
-        filteredListAdapter.addAll(
+    private fun setAdapter(list: List<Place>): SearchAdapter {
+        val listAdapter = mutableListOf(getRecentSearches())
+        listAdapter.addAll(
             1,
-            listAdapter.filter { (it as GetCitiesList.Cities).city.name.startsWith(p0.replaceFirstChar { it.uppercase() }) })
-        val adapter = SearchAdapter(filteredListAdapter) {
+            list.map {
+                GetCitiesList.Cities(it)
+            }
+        )
+        val adapter = SearchAdapter(listAdapter) {
             DataSource.setSelectedCity(it)
             findNavController().navigate(R.id.searchScreenToHomeScreen)
         }
@@ -82,8 +75,9 @@ class SearchScreenFragment : Fragment() {
     private fun retryCall() {
         searchViewModel.searchData2.observe(viewLifecycleOwner) {
             when (it) {
-                is SearchResults.Results -> setAdapter()
+                is SearchResults.Results -> setAdapter(it.results)
                 is SearchResults.Errors -> {
+
                     Toast.makeText(
                         requireContext(),
                         "Error $it",
