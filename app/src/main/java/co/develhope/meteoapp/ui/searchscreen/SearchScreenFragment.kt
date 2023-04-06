@@ -50,7 +50,7 @@ class SearchScreenFragment : Fragment() {
             override fun onQueryTextChange(p0: String?): Boolean {
                 // Gestire la cancellazione del testo per eliminare la chiamata di rete
                 // Gestire i suggerimenti
-                searchViewModel.searchApi(p0)
+                searchViewModel.searchApi(p0?.trimEnd())
                 retryCall()
                 return true
             }
