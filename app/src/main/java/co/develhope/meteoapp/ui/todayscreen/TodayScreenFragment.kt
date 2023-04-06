@@ -27,7 +27,7 @@ class TodayScreenFragment : Fragment() {
         if(place != null && specificDay != null){
             viewModel.getDetailedForecast(place, specificDay)
         }else{
-            findNavController().navigate(R.id.todayScreen_to_searchScreen)
+            findNavController().navigate(R.id.todayScreen_to_errorFragment)
         }
     }
     override fun onCreateView(

@@ -51,7 +51,7 @@ class HomeScreenFragment : Fragment() {
         viewModel.dailyForecast.observe(viewLifecycleOwner) {
             when(it){
                 is HomeViewModel.NetworkCall.Success -> setHomeUi(it.dailyInfo, place)
-                is HomeViewModel.NetworkCall.Error -> Log.d("Error", "Error")
+                is HomeViewModel.NetworkCall.Error -> findNavController().navigate(R.id.homeScreen_to_errorFragment)
             }
         }
     }

@@ -11,4 +11,7 @@
     <string name="wind">Vento</string>
     <string name="rain">Piogga</string>
     <string name="recent_searches">Ricerche recenti</string>
+    <string name="error_dialog">C\'è stato un problema con il caricamento dei tuoi dati. Verifica la tua rete e riprova.</string>
+    <string name="retry_button">Riprova</string>
+
 </resources>

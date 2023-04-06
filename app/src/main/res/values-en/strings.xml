@@ -12,4 +12,7 @@
     <string name="wind">Wind</string>
     <string name="rain">Rain</string>
     <string name="recent_searches">Recent searches</string>
+    <string name="error_dialog">There was an issue while loading your data. Verify your connection and try again.</string>
+    <string name="retry_button">Retry</string>
+
 </resources>

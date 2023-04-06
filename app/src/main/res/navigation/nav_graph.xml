@@ -21,6 +21,9 @@
         <action
             android:id="@+id/homeScreen_to_specificDayScreen"
             app:destination="@id/specificDayScreen" />
+        <action
+            android:id="@+id/homeScreen_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/todayScreen"
@@ -29,6 +32,9 @@
         <action
             android:id="@+id/todayScreen_to_searchScreen"
             app:destination="@id/searchScreen"/>
+        <action
+            android:id="@+id/todayScreen_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/tomorrowScreen"
@@ -37,6 +43,9 @@
         <action
             android:id="@+id/tomorrowScreen_to_searchScreen"
             app:destination="@id/searchScreen"/>
+        <action
+            android:id="@+id/tomorrowScreen_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchScreen"
@@ -45,6 +54,9 @@
     <action
         android:id="@+id/searchScreenToHomeScreen"
         app:destination="@+id/homeScreen"/>
+        <action
+            android:id="@+id/searchScreen_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
     <fragment
         android:id="@+id/specificDayScreen"
@@ -53,5 +65,20 @@
         <action
             android:id="@+id/specificDayScreenToHomeScreen"
             app:destination="@+id/homeScreen"/>
+        <action
+            android:id="@+id/specificDayScreen_to_errorFragment"
+            app:destination="@id/errorFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/errorFragment"
+        android:name="co.develhope.meteoapp.ui.errorscreen.ErrorFragment"
+        android:label="fragment_error"
+        tools:layout="@layout/fragment_error" >
+        <action
+        android:id="@+id/errorFragment_to_homeScreen"
+        app:destination="@id/homeScreen" />
+        <action
+            android:id="@+id/errorFragment_to_searchScreen"
+            app:destination="@id/searchScreen" />
+    </dialog>
 </navigation>
