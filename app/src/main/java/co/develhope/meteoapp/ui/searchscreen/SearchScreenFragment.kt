@@ -50,12 +50,6 @@ class SearchScreenFragment : Fragment() {
             override fun onQueryTextChange(p0: String?): Boolean {
                 searchViewModel.searchApi(p0)
                 retryCall()
-
-                //   if(p0 != null){
-                //       retryCall(p0)
-                //   } else {
-                //       Log.d("SearchView", "p0 is null")
-                //   }
                 return true
             }
         })
@@ -69,14 +63,6 @@ class SearchScreenFragment : Fragment() {
                 GetCitiesList.Cities(it)
             }
         )
-
-        //  val filteredListAdapter = mutableListOf(getRecentSearches())
-        //  filteredListAdapter.addAll(
-        //      1,
-        //      listAdapter.filter { it ->
-        //          (it as GetCitiesList.Cities).city.name.startsWith(p0.replaceFirstChar { it.uppercase() }
-        //              .trimEnd())
-        //      })
         val adapter = SearchAdapter(listAdapter) {
             DataSource.setSelectedCity(it)
             findNavController().navigate(R.id.searchScreenToHomeScreen)
@@ -91,6 +77,7 @@ class SearchScreenFragment : Fragment() {
             when (it) {
                 is SearchResults.Results -> setAdapter(it.results)
                 is SearchResults.Errors -> {
+
                     Toast.makeText(
                         requireContext(),
                         "Error $it",
