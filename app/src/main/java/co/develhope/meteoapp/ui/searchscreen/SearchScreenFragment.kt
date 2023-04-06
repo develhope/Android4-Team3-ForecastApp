@@ -1,6 +1,7 @@
 package co.develhope.meteoapp.ui.searchscreen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,6 @@ class SearchScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setAdapter(listOf())
         setupFilter()
-        retryCall()
     }
 
     private fun setupFilter() {
@@ -48,6 +48,8 @@ class SearchScreenFragment : Fragment() {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
+                // Gestire la cancellazione del testo per eliminare la chiamata di rete
+                // Gestire i suggerimenti
                 searchViewModel.searchApi(p0)
                 retryCall()
                 return true
@@ -77,12 +79,7 @@ class SearchScreenFragment : Fragment() {
             when (it) {
                 is SearchResults.Results -> setAdapter(it.results)
                 is SearchResults.Errors -> {
-
-                    Toast.makeText(
-                        requireContext(),
-                        "Error $it",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    findNavController().navigate(R.id.searchScreen_to_errorFragment)
                 }
             }
         }

@@ -27,7 +27,7 @@ class TodayScreenFragment : Fragment() {
         if(place != null && specificDay != null){
             viewModel.getDetailedForecast(place, specificDay)
         }else{
-            findNavController().navigate(R.id.todayScreen_to_errorFragment)
+            findNavController().navigate(R.id.todayScreen_to_searchScreen)
         }
     }
     override fun onCreateView(
@@ -46,7 +46,8 @@ class TodayScreenFragment : Fragment() {
             binding.todayRecycleView.adapter = TodayAdapter(it)
         }
         viewModel.error.observe(viewLifecycleOwner) {
-            Log.e("TodayScreenFragment", it) //TODO replace this with error fragment navigation
+            Log.e("TodayScreenFragment", it)
+            findNavController().navigate(R.id.todayScreen_to_errorFragment)
         }
     }
 }

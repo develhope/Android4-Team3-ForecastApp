@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeScreen"
         android:name="co.develhope.meteoapp.ui.homescreen.HomeScreenFragment"
-        tools:layout="@layout/fragment_home_screen" >
+        tools:layout="@layout/fragment_home_screen">
         <action
             android:id="@+id/homeScreen_to_todayScreen"
             app:destination="@id/todayScreen" />
@@ -28,10 +28,10 @@
     <fragment
         android:id="@+id/todayScreen"
         android:name="co.develhope.meteoapp.ui.todayscreen.TodayScreenFragment"
-        tools:layout="@layout/fragment_today_screen" >
+        tools:layout="@layout/fragment_today_screen">
         <action
             android:id="@+id/todayScreen_to_searchScreen"
-            app:destination="@id/searchScreen"/>
+            app:destination="@id/searchScreen" />
         <action
             android:id="@+id/todayScreen_to_errorFragment"
             app:destination="@id/errorFragment" />
@@ -39,10 +39,10 @@
     <fragment
         android:id="@+id/tomorrowScreen"
         android:name="co.develhope.meteoapp.ui.tomorrowscreen.TomorrowScreenFragment"
-        tools:layout="@layout/fragment_tomorrow_screen" >
+        tools:layout="@layout/fragment_tomorrow_screen">
         <action
             android:id="@+id/tomorrowScreen_to_searchScreen"
-            app:destination="@id/searchScreen"/>
+            app:destination="@id/searchScreen" />
         <action
             android:id="@+id/tomorrowScreen_to_errorFragment"
             app:destination="@id/errorFragment" />
@@ -50,10 +50,10 @@
     <fragment
         android:id="@+id/searchScreen"
         android:name="co.develhope.meteoapp.ui.searchscreen.SearchScreenFragment"
-        tools:layout="@layout/fragment_search_screen" >
-    <action
-        android:id="@+id/searchScreenToHomeScreen"
-        app:destination="@+id/homeScreen"/>
+        tools:layout="@layout/fragment_search_screen">
+        <action
+            android:id="@+id/searchScreenToHomeScreen"
+            app:destination="@+id/homeScreen" />
         <action
             android:id="@+id/searchScreen_to_errorFragment"
             app:destination="@id/errorFragment" />
@@ -64,7 +64,7 @@
         tools:layout="@layout/fragment_specific_day">
         <action
             android:id="@+id/specificDayScreenToHomeScreen"
-            app:destination="@+id/homeScreen"/>
+            app:destination="@+id/homeScreen" />
         <action
             android:id="@+id/specificDayScreen_to_errorFragment"
             app:destination="@id/errorFragment" />
@@ -73,10 +73,10 @@
         android:id="@+id/errorFragment"
         android:name="co.develhope.meteoapp.ui.errorscreen.ErrorFragment"
         android:label="fragment_error"
-        tools:layout="@layout/fragment_error" >
+        tools:layout="@layout/fragment_error">
         <action
-        android:id="@+id/errorFragment_to_homeScreen"
-        app:destination="@id/homeScreen" />
+            android:id="@+id/errorFragment_to_homeScreen"
+            app:destination="@id/homeScreen" />
         <action
             android:id="@+id/errorFragment_to_searchScreen"
             app:destination="@id/searchScreen" />
