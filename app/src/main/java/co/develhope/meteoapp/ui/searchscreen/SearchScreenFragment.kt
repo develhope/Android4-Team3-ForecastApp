@@ -1,12 +1,10 @@
 package co.develhope.meteoapp.ui.searchscreen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -42,7 +40,7 @@ class SearchScreenFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                searchViewModel.searchApi(p0)
+                searchViewModel.searchApi(p0?.trimEnd())
                 retryCall()
                 return true
             }

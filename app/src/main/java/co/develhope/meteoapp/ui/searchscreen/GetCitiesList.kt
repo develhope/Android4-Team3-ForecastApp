@@ -12,6 +12,7 @@ sealed class GetCitiesList {
         val recentSearches: String
     ) : GetCitiesList()
 
+    // come gestire questa stringa?
 }
 
 
