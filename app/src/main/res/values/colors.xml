@@ -15,4 +15,5 @@
     <color name="start_color_search_screen_background">#1F2D98</color>
     <color name="end_color_search_screen_background">#6779FF</color>
     <color name="search_screen_background">#F0EFFF</color>
+    <color name="error_text_color">#434C59</color>
 </resources>

@@ -51,7 +51,7 @@ class HomeScreenFragment : Fragment() {
         viewModel.dailyForecast.observe(viewLifecycleOwner) {
             when(it){
                 is HomeViewModel.NetworkCall.Success -> setHomeUi(it.dailyInfo, place)
-                is HomeViewModel.NetworkCall.Error -> Log.d("Error", "Error")
+                is HomeViewModel.NetworkCall.Error -> findNavController().navigate(R.id.homeScreen_to_errorFragment)
             }
         }
     }
@@ -83,7 +83,7 @@ class HomeScreenFragment : Fragment() {
       list.add(
           HomePageItems.NextDays(R.string.next_5_days.toString())
       )
-      val restOfList = weeklyCards.drop(1)
+      val restOfList = weeklyCards.drop(1).take(5)
       restOfList.map {
           list.add(HomePageItems.SpecificDayWeather(it))
       }

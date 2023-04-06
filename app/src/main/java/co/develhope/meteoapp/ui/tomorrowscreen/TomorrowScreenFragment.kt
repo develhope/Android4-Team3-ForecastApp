@@ -46,6 +46,7 @@ class TomorrowScreenFragment : Fragment() {
                 binding.specificDayRecycleView.adapter = TomorrowAdapter(screenItems)
             } catch (e: Exception) {
                 Log.e("TodayScreen", "error: $e")
+                findNavController().navigate(R.id.tomorrowScreen_to_errorFragment)
             }
         }
     }

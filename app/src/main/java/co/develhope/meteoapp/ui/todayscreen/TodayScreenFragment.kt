@@ -46,7 +46,8 @@ class TodayScreenFragment : Fragment() {
             binding.todayRecycleView.adapter = TodayAdapter(it)
         }
         viewModel.error.observe(viewLifecycleOwner) {
-            Log.e("TodayScreenFragment", it) //TODO replace this with error fragment navigation
+            Log.e("TodayScreenFragment", it)
+            findNavController().navigate(R.id.todayScreen_to_errorFragment)
         }
     }
 }
