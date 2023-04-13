@@ -14,15 +14,23 @@ class SearchViewModel : ViewModel() {
         get() = searchData
 
     fun searchApi(city : String?) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                searchData.value = RetrofitInstance().getPlaces(city)
-                    ?.let { SearchResults.Results(it) }
-            } catch (e: Exception) {
+        if(city != null && city.isNotEmpty()){
+            CoroutineScope(Dispatchers.Main).launch {
+                try {
+                    searchData.value = RetrofitInstance().getPlaces(city)
+                        ?.let { SearchResults.Results(it) }
+                } catch (e: Exception) {
 
-                searchData.value =  SearchResults.Errors(e.localizedMessage!!)
+                    searchData.value =  SearchResults.Errors(e.localizedMessage!!)
 
+                }
             }
+        } else {
+            //prendere lista shared pref
+            searchData.value = SearchResults.Results(emptyList())
         }
+
     }
 }
+
+

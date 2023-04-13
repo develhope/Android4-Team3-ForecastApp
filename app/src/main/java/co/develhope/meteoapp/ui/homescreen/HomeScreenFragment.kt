@@ -1,7 +1,6 @@
 package co.develhope.meteoapp.ui.homescreen
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.data.dto.HomeCardWeather
 import co.develhope.meteoapp.data.dto.Title
 import co.develhope.meteoapp.databinding.FragmentHomeScreenBinding
+import co.develhope.meteoapp.ui.preferences
 import org.threeten.bp.OffsetDateTime
 
 class HomeScreenFragment : Fragment() {
@@ -34,7 +34,7 @@ class HomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val place = DataSource.getSelectedCity()
+        val place = preferences.getCity()
 
         if(place != null){
             observeViewModel(place)
