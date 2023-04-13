@@ -1,6 +1,7 @@
 package co.develhope.meteoapp.ui
 
 import android.app.Application
+import co.develhope.meteoapp.data.Preferences
 
 val preferences: Preferences by lazy {
     App.preferences!!

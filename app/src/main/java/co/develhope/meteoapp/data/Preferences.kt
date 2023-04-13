@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.ui
+package co.develhope.meteoapp.data
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,23 +7,26 @@ import com.google.gson.Gson
 
 class Preferences(applicationContext: Context) {
     private val preferences: SharedPreferences = applicationContext.getSharedPreferences(
-        KEY_SEARCHED_CITY, Context.MODE_PRIVATE
+        KEY_FORECAST_APP, Context.MODE_PRIVATE
     )
 
+    val gson = Gson()
     fun setCity(place: Place) {
         val editor = preferences.edit()
-        val gson = Gson()
         val json = gson.toJson(place)
-        editor.putString(KEY_SEARCHED_CITY, json)
+        editor.putString(KEY_CHOSEN_PLACE, json)
         editor.apply()
     }
 
     fun getCity(): Place? {
-        val gson = Gson()
-        val json = preferences.getString(KEY_SEARCHED_CITY, null)
+        val json = preferences.getString(KEY_CHOSEN_PLACE, null)
         return gson.fromJson(json, Place::class.java)
     }
 
 }
 
-const val KEY_SEARCHED_CITY = "recent searches"
+const val KEY_RECENT_SEARCHES = "recentSearches"
+const val KEY_FORECAST_APP = "forecastApp"
+const val KEY_CHOSEN_PLACE = "chosenPlace"
+
+

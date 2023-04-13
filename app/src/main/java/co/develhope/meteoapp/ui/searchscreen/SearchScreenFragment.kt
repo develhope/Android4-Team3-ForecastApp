@@ -41,15 +41,14 @@ class SearchScreenFragment : Fragment() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 searchViewModel.searchApi(p0?.trimEnd())
-                retryCall()
+                setObserve()
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                // Gestire la cancellazione del testo per eliminare la chiamata di rete
-                // Gestire i suggerimenti
+
                 searchViewModel.searchApi(p0?.trimEnd())
-                retryCall()
+                setObserve()
                 return true
             }
         })
@@ -72,7 +71,7 @@ class SearchScreenFragment : Fragment() {
         return adapter
     }
 
-    private fun retryCall() {
+    private fun setObserve() {
         searchViewModel.searchData2.observe(viewLifecycleOwner) {
             when (it) {
                 is SearchResults.Results -> setAdapter(it.results)
