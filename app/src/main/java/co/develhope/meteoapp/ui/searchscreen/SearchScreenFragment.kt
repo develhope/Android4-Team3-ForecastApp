@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
-import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.data.DataSource.getRecentSearches
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
+import co.develhope.meteoapp.ui.preferences
 
 class SearchScreenFragment : Fragment() {
 
@@ -64,7 +64,7 @@ class SearchScreenFragment : Fragment() {
             }
         )
         val adapter = SearchAdapter(listAdapter) {
-            DataSource.setSelectedCity(it)
+            preferences.setCity(it)
             findNavController().navigate(R.id.searchScreenToHomeScreen)
         }
         binding.search.adapter = adapter

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
+import co.develhope.meteoapp.ui.preferences
 import co.develhope.meteoapp.ui.todayscreen.todayadapter.TodayAdapter
 
 class TodayScreenFragment : Fragment() {
@@ -22,7 +23,7 @@ class TodayScreenFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[TodayScreenViewModel::class.java]
 
-        val place = DataSource.getSelectedCity()
+        val place = preferences.getCity()
         val specificDay = DataSource.getSelectedDay()
         if(place != null && specificDay != null){
             viewModel.getDetailedForecast(place, specificDay)

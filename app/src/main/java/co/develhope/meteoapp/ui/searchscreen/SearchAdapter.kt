@@ -39,7 +39,7 @@ class SearchAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return when (viewType) {
-            ViewType.HOURLYFORECAST.num -> {
+            ViewType.CITIESLIST.num -> {
                 val listItem =
                     LayoutInflater.from(parent.context).inflate(R.layout.cities_list, parent, false)
                 CitiesViewHolder(listItem)
@@ -54,14 +54,14 @@ class SearchAdapter(
     }
 
     enum class ViewType(val num: Int) {
-        HOURLYFORECAST(1),
+        CITIESLIST(1),
         RESENTSEARCH(2)
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (search[position]) {
 
-            is GetCitiesList.Cities -> ViewType.HOURLYFORECAST.num
+            is GetCitiesList.Cities -> ViewType.CITIESLIST.num
             is GetCitiesList.RecentSearches -> ViewType.RESENTSEARCH.num
         }
 

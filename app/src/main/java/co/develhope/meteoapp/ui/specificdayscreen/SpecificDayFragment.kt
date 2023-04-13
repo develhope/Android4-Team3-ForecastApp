@@ -16,6 +16,7 @@ import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentSpecificDayBinding
 import co.develhope.meteoapp.ui.MainActivity
+import co.develhope.meteoapp.ui.preferences
 import co.develhope.meteoapp.ui.specificdayscreen.specificdayadapter.SpecificDayAdapter
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
@@ -29,7 +30,7 @@ class SpecificDayFragment : Fragment() {
     ): View {
         (requireActivity() as MainActivity).uncheckAllBottomNavigationItems()
         binding = FragmentSpecificDayBinding.inflate(inflater, container, false)
-        val place = DataSource.getSelectedCity()
+        val place = preferences.getCity()
         val specificDay = DataSource.getSelectedDay()
         binding.todayRecycleView.layoutManager = LinearLayoutManager(requireContext())
 
