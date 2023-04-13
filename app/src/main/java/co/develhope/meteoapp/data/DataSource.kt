@@ -4,8 +4,6 @@ import co.develhope.meteoapp.ui.searchscreen.GetCitiesList
 import org.threeten.bp.OffsetDateTime
 
 object DataSource{
-
-
     private var selectedDay : OffsetDateTime? = null
 
     fun setSelectedDay(offsetDateTime: OffsetDateTime){
@@ -13,11 +11,6 @@ object DataSource{
     }
 
     fun getSelectedDay(): OffsetDateTime? = selectedDay
-
-    private val recentSearches : GetCitiesList = GetCitiesList.RecentSearches("Ricerche Recenti")
-    fun getRecentSearches() : GetCitiesList{
-        return recentSearches
-    }
 
 }
 

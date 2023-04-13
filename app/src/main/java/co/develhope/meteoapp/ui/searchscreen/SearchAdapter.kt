@@ -81,8 +81,7 @@ class SearchAdapter(
                 }
             }
             is GetCitiesList.RecentSearches -> {
-                (holder as RecentSearchViewHolder).recentSearches.text =
-                    (search[position] as GetCitiesList.RecentSearches).recentSearches
+                (holder as RecentSearchViewHolder).recentSearches.text = holder.itemView.context.getString(R.string.recent_searches)
             }
         }
     }

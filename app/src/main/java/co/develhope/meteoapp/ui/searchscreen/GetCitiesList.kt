@@ -8,11 +8,7 @@ sealed class GetCitiesList {
         val city: Place,
     ) : GetCitiesList()
 
-    data class RecentSearches(
-        val recentSearches: String
-    ) : GetCitiesList()
-
-    // come gestire questa stringa?
+    object RecentSearches: GetCitiesList()
 }
 
 
