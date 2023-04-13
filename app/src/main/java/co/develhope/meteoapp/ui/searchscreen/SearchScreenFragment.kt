@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
-import co.develhope.meteoapp.data.DataSource.getRecentSearches
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
 import co.develhope.meteoapp.ui.preferences
@@ -55,7 +54,7 @@ class SearchScreenFragment : Fragment() {
     }
 
     private fun setAdapter(list: List<Place>): SearchAdapter {
-        val listAdapter = mutableListOf(getRecentSearches())
+        val listAdapter = mutableListOf<GetCitiesList>(GetCitiesList.RecentSearches)
         listAdapter.addAll(
             1,
             list.map {
