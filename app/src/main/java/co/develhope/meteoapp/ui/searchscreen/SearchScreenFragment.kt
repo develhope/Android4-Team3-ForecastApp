@@ -31,7 +31,7 @@ class SearchScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapter(listOf())
+        setAdapter(preferences.getCitiesFromResentSearches().asReversed())//todo move this logic to the viewModel
         setupFilter()
     }
 
