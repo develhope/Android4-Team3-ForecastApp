@@ -22,6 +22,7 @@ import org.threeten.bp.OffsetDateTime
 
 class TomorrowScreenFragment : Fragment() {
     private lateinit var binding: FragmentTomorrowScreenBinding
+    private val tomorrowAdapter: TomorrowAdapter by lazy { TomorrowAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +44,8 @@ class TomorrowScreenFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place, specificDay)
-                val screenItems : List<Forecast> = getSpecificDayScreenItems(detailedForecast, place)
-                binding.specificDayRecycleView.adapter = TomorrowAdapter(screenItems)
+                tomorrowAdapter.submitList(getSpecificDayScreenItems(detailedForecast, place))
+                binding.specificDayRecycleView.adapter = tomorrowAdapter
             } catch (e: Exception) {
                 Log.e("TodayScreen", "error: $e")
                 findNavController().navigate(R.id.tomorrowScreen_to_errorFragment)
