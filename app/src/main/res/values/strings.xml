@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">meteoapp</string>
+    <string name="home">Home</string>
     <string name="today">Oggi</string>
     <string name="tomorrow">Domani</string>
+    <string name="search">Cerca</string>
     <string name="next_5_days">PROSSIMI 5 GIORNI</string>
     <string name="search_city">Cerca città</string>
     <string name="perceived">Percepita</string>
