@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">meteoapp</string>
+    <string name="home">Home</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
+    <string name="search">Search</string>
     <string name="next_5_days">NEXT 5 DAYS</string>
     <string name="search_city">Search city</string>
     <string name="perceived">Perceived</string>

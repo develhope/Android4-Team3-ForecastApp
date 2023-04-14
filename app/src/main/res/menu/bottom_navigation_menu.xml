@@ -4,19 +4,19 @@
     <item
         android:id="@+id/homeScreen"
         android:icon="@drawable/home_icon_1"
-        android:title="home"/>
+        android:title="@string/home"/>
     <item
         android:id="@+id/todayScreen"
         android:icon="@drawable/today_icon"
-        android:title="today"/>
+        android:title="@string/today"/>
     <item
         android:id="@+id/tomorrowScreen"
         android:icon="@drawable/today_icon_1"
-        android:title="tomorrow" />
+        android:title="@string/tomorrow" />
     <item
         android:id="@+id/searchScreen"
         android:icon="@drawable/search_icon_1"
-        android:title="search" />
+        android:title="@string/search" />
 
     <!-- TODO add text style for title's strings-->
 </menu>
