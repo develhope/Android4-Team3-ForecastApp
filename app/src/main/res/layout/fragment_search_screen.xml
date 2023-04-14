@@ -9,6 +9,8 @@
     tools:context=".ui.searchscreen.SearchScreenFragment"
     >
 
+    <!-- CHECK FOR BACKGROUND COLOUR -->
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"
@@ -17,11 +19,12 @@
         android:layout_marginTop="@dimen/bottom_bar_text_size"
         android:layout_marginRight="@dimen/bottom_bar_text_size"
         android:background="@drawable/search_view_background"
+        android:backgroundTint="@color/material_on_primary_disabled"
         app:iconifiedByDefault="false"
         app:searchIcon="@drawable/search_icon_black"
         android:inputType="textAutoComplete"
         app:queryHint="@string/search_city"
-        app:queryBackground="@color/white"
+        app:queryBackground="@android:color/transparent"
         />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -1,21 +1,18 @@
 package co.develhope.meteoapp.ui.searchscreen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
-import co.develhope.meteoapp.data.DataSource
-import co.develhope.meteoapp.data.DataSource.getRecentSearches
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
+import co.develhope.meteoapp.ui.preferences
 
 class SearchScreenFragment : Fragment() {
 
@@ -34,7 +31,7 @@ class SearchScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapter(listOf())
+        setAdapter(preferences.getCitiesFromResentSearches().asReversed())//todo move this logic to the viewModel
         setupFilter()
     }
 
@@ -42,23 +39,22 @@ class SearchScreenFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                searchViewModel.searchApi(p0)
-                retryCall()
+                searchViewModel.searchApi(p0?.trimEnd())
+                setObserve()
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                // Gestire la cancellazione del testo per eliminare la chiamata di rete
-                // Gestire i suggerimenti
+
                 searchViewModel.searchApi(p0?.trimEnd())
-                retryCall()
+                setObserve()
                 return true
             }
         })
     }
 
     private fun setAdapter(list: List<Place>): SearchAdapter {
-        val listAdapter = mutableListOf(getRecentSearches())
+        val listAdapter = mutableListOf<GetCitiesList>(GetCitiesList.RecentSearches)
         listAdapter.addAll(
             1,
             list.map {
@@ -66,7 +62,7 @@ class SearchScreenFragment : Fragment() {
             }
         )
         val adapter = SearchAdapter(listAdapter) {
-            DataSource.setSelectedCity(it)
+            preferences.setCity(it)
             findNavController().navigate(R.id.searchScreenToHomeScreen)
         }
         binding.search.adapter = adapter
@@ -74,7 +70,7 @@ class SearchScreenFragment : Fragment() {
         return adapter
     }
 
-    private fun retryCall() {
+    private fun setObserve() {
         searchViewModel.searchData2.observe(viewLifecycleOwner) {
             when (it) {
                 is SearchResults.Results -> setAdapter(it.results)

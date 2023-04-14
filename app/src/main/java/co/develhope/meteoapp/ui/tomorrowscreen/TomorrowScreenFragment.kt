@@ -15,6 +15,7 @@ import co.develhope.meteoapp.data.RetrofitInstance
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentTomorrowScreenBinding
+import co.develhope.meteoapp.ui.preferences
 import co.develhope.meteoapp.ui.tomorrowscreen.tomorrowadapter.TomorrowAdapter
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
@@ -28,7 +29,7 @@ class TomorrowScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTomorrowScreenBinding.inflate(inflater, container, false)
-        val place = DataSource.getSelectedCity()
+        val place = preferences.getCity()
         val specificDay = DataSource.getSelectedDay()
         binding.specificDayRecycleView.layoutManager = LinearLayoutManager(requireContext())
         if(place != null && specificDay != null){
