@@ -43,7 +43,7 @@ class TomorrowScreenFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place, specificDay)
-                tomorrowAdapter.differ.submitList(getSpecificDayScreenItems(detailedForecast, place))
+                tomorrowAdapter.submitList(getSpecificDayScreenItems(detailedForecast, place))
                 binding.specificDayRecycleView.adapter = tomorrowAdapter
             } catch (e: Exception) {
                 Log.e("TodayScreen", "error: $e")

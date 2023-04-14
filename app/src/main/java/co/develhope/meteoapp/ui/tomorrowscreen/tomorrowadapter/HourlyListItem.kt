@@ -32,6 +32,7 @@ class HourlyListItem(private val listBinding: HourlyForecastListItemBinding) :
             }
 
             expandableButtonImageView.setOnClickListener {
+                setIsRecyclable(false)
                 if (hiddenHourlyForecastListItemView.visibility == View.VISIBLE) {
                     TransitionManager.beginDelayedTransition(
                         hourlyForecastListItemView,
