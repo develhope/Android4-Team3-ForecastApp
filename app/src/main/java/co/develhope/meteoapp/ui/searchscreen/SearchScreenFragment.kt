@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -54,6 +55,7 @@ class SearchScreenFragment : Fragment() {
     }
 
     private fun setAdapter(list: List<Place>): SearchAdapter {
+        val check = binding.searchView.query
         val listAdapter = mutableListOf<GetCitiesList>(GetCitiesList.RecentSearches)
         listAdapter.addAll(
             1,
@@ -61,7 +63,13 @@ class SearchScreenFragment : Fragment() {
                 GetCitiesList.Cities(it)
             }
         )
-        val adapter = SearchAdapter(listAdapter) {
+        val adapter = SearchAdapter(if(check.length > 1){
+            listAdapter.filter { it != GetCitiesList.RecentSearches }
+        }else if(check.isEmpty()){
+            listAdapter
+        }else{
+            emptyList()
+        }) {
             preferences.setCity(it)
             findNavController().navigate(R.id.searchScreenToHomeScreen)
         }
