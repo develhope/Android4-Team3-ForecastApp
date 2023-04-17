@@ -16,7 +16,7 @@ class SearchViewModel : ViewModel() {
         get() = searchData
 
     fun searchApi(city : String?) {
-        if(city != null && city.isNotEmpty()){
+        if(city != null && city.length > 1){
             CoroutineScope(Dispatchers.Main).launch {
                 try {
                     searchData.value = RetrofitInstance().getPlaces(city)
