@@ -32,7 +32,7 @@ class SearchScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapter(preferences.getCitiesFromResentSearches().asReversed())//todo move this logic to the viewModel
+        setAdapter(preferences.getCitiesFromResentSearches().asReversed(), "")//todo move this logic to the viewModel
         setupFilter()
     }
 
@@ -41,21 +41,20 @@ class SearchScreenFragment : Fragment() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 searchViewModel.searchApi(p0?.trimEnd())
-                setObserve()
+                setObserve(p0)
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
 
                 searchViewModel.searchApi(p0?.trimEnd())
-                setObserve()
+                setObserve(p0)
                 return true
             }
         })
     }
 
-    private fun setAdapter(list: List<Place>): SearchAdapter {
-        val check = binding.searchView.query
+    private fun setAdapter(list: List<Place>, check: String?): SearchAdapter {
         val listAdapter = mutableListOf<GetCitiesList>(GetCitiesList.RecentSearches)
         listAdapter.addAll(
             1,
@@ -63,7 +62,7 @@ class SearchScreenFragment : Fragment() {
                 GetCitiesList.Cities(it)
             }
         )
-        val adapter = SearchAdapter(if(check.length > 1){
+        val adapter = SearchAdapter(if(check?.length!! > 1){
             listAdapter.filter { it != GetCitiesList.RecentSearches }
         }else if(check.isEmpty()){
             listAdapter
@@ -78,10 +77,10 @@ class SearchScreenFragment : Fragment() {
         return adapter
     }
 
-    private fun setObserve() {
+    private fun setObserve(check: String?) {
         searchViewModel.searchData2.observe(viewLifecycleOwner) {
             when (it) {
-                is SearchResults.Results -> setAdapter(it.results)
+                is SearchResults.Results -> setAdapter(it.results, check)
                 is SearchResults.Errors -> {
                     findNavController().navigate(R.id.searchScreen_to_errorFragment)
                 }
