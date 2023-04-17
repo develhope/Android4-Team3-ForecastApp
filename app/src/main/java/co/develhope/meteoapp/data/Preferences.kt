@@ -4,25 +4,28 @@ import android.content.Context
 import android.content.SharedPreferences
 import co.develhope.meteoapp.data.domainmodel.Place
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import org.threeten.bp.OffsetDateTime
 
 class Preferences(applicationContext: Context) {
     private val preferences: SharedPreferences = applicationContext.getSharedPreferences(
         KEY_FORECAST_APP, Context.MODE_PRIVATE
     )
-
-    val gson = Gson()
+    private fun provideGson(): Gson = GsonBuilder()
+        .registerTypeAdapter(OffsetDateTime::class.java, OffsetDateTimeTypeAdapter())
+        .create()
     fun setCity(place: Place) {
         getCity()?.let { addCityToResentSearches(it) }
         val editor = preferences.edit()
-        val json = gson.toJson(place)
+        val json = provideGson().toJson(place)
         editor.putString(KEY_CHOSEN_PLACE, json)
         editor.apply()
     }
 
     fun getCity(): Place? {
         val json = preferences.getString(KEY_CHOSEN_PLACE, null)
-        return gson.fromJson(json, Place::class.java)
+        return provideGson().fromJson(json, Place::class.java)
     }
 
     private fun addCityToResentSearches(place: Place) {
@@ -35,7 +38,7 @@ class Preferences(applicationContext: Context) {
         } else {
             savedJson.add(place)
             val editor = preferences.edit()
-            val json = gson.toJson(savedJson)
+            val json = provideGson().toJson(savedJson)
             editor.putString(KEY_RECENT_SEARCHES, json)
             editor.apply()
         }
@@ -45,7 +48,7 @@ class Preferences(applicationContext: Context) {
         val json = preferences.getString(KEY_RECENT_SEARCHES, null)
         return if (json != null) {
             val type = object : TypeToken<MutableList<Place?>?>() {}.type
-            gson.fromJson(json, type)
+            provideGson().fromJson(json, type)
         } else {
             mutableListOf()
         }
