@@ -22,13 +22,13 @@ class SearchScreenFragment : Fragment() {
     ): View {
         binding = FragmentSearchScreenBinding.inflate(inflater, container, false)
         searchViewModel = ViewModelProvider(this)[SearchViewModel::class.java]
-        searchViewModel.send(SearchEvent.RetrieveListFromPreferences)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObserver()
+        searchViewModel.send(SearchEvent.RetrieveListFromPreferences)
         setupFilter()
     }
 
