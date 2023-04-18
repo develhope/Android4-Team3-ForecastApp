@@ -15,6 +15,7 @@ import co.develhope.meteoapp.data.RetrofitInstance
 import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
 import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentTomorrowScreenBinding
+import co.develhope.meteoapp.ui.errorscreen.ErrorFragment
 import co.develhope.meteoapp.ui.preferences
 import co.develhope.meteoapp.ui.tomorrowscreen.tomorrowadapter.TomorrowAdapter
 import kotlinx.coroutines.launch
@@ -48,7 +49,7 @@ class TomorrowScreenFragment : Fragment() {
                 binding.specificDayRecycleView.adapter = tomorrowAdapter
             } catch (e: Exception) {
                 Log.e("TodayScreen", "error: $e")
-                findNavController().navigate(R.id.tomorrowScreen_to_errorFragment)
+                ErrorFragment.show(childFragmentManager){getSpecificDayDetailedForecast(place, specificDay)}
             }
         }
     }
