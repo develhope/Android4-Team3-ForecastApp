@@ -17,7 +17,7 @@ class ErrorFragment : DialogFragment() {
     private var performAction: (() -> Unit)? = null
 
     companion object {
-        private const val FRAGMENT_TAG = "gift_dialog"
+        private const val FRAGMENT_TAG = "error_dialog"
         fun show(fragmentManager: FragmentManager, performAction: () -> Unit): ErrorFragment {
             val dialog = ErrorFragment()
             dialog.performAction = performAction
@@ -50,8 +50,16 @@ class ErrorFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.errorButton.setOnClickListener { performAction?.invoke()
-            findNavController().navigate(R.id.errorFragment_to_searchScreen)
         dismiss()
         }
+    }
+
+    private fun getStyle(): Int {
+        return R.style.DialogFragmentTheme
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, getStyle())
     }
 }
