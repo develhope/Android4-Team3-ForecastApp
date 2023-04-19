@@ -27,7 +27,7 @@ class SearchScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setObserver()
+        setObserver("")
         searchViewModel.send(SearchEvent.RetrieveListFromPreferences)
         setupFilter()
     }
@@ -37,20 +37,22 @@ class SearchScreenFragment : Fragment() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 searchViewModel.send(SearchEvent.WritingOnSearchBar(p0?.trimEnd()))
+                setObserver(p0)
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 searchViewModel.send(SearchEvent.WritingOnSearchBar(p0?.trimEnd()))
+                setObserver(p0)
                 return true
             }
         })
     }
 
-    private fun setObserver() {
+    private fun setObserver(check: String?) {
         searchViewModel.searchData2.observe(viewLifecycleOwner) {
             when (it) {
-                is SearchResults.Results -> setAdapter(it.results)
+                is SearchResults.Results -> setAdapter(it.results, check)
                 is SearchResults.Errors -> {
                     findNavController().navigate(R.id.searchScreen_to_errorFragment)
                 }
@@ -58,11 +60,19 @@ class SearchScreenFragment : Fragment() {
         }
     }
 
-    private fun setAdapter(list: List<GetCitiesList>) {
+    private fun setAdapter(list: List<GetCitiesList>, check : String?) {
         binding.search.layoutManager = LinearLayoutManager(requireContext())
-        binding.search.adapter = SearchAdapter(list) {
-            searchViewModel.send(SearchEvent.AddCityToPreferences(it))
-            findNavController().navigate(R.id.searchScreenToHomeScreen)
+        if (check != null) {
+            binding.search.adapter = SearchAdapter(if(check.length >1){
+                list.filter { it != GetCitiesList.RecentSearches }
+            }else if(check.isEmpty()){
+                list
+            }else{
+                emptyList()
+            }) {
+                searchViewModel.send(SearchEvent.AddCityToPreferences(it))
+                findNavController().navigate(R.id.searchScreenToHomeScreen)
+            }
         }
     }
 }
