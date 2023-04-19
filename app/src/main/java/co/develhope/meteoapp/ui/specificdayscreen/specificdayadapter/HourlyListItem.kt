@@ -42,7 +42,8 @@ class HourlyListItem(private val listBinding: HourlyForecastListItemBinding) :
                     )
                     lineImageView.visibility = View.VISIBLE
                     hiddenHourlyForecastListItemView.visibility = View.GONE
-                    expandableButtonImageView.setImageResource(R.drawable.baseline_keyboard_arrow_down_24)
+                    expandableButtonImageView.setImageResource(R.drawable.upper_arrow)
+                    listBinding.expandableButtonImageView.rotation = 0F
                 } else {
                     TransitionManager.beginDelayedTransition(
                         hourlyForecastListItemView,
@@ -50,7 +51,8 @@ class HourlyListItem(private val listBinding: HourlyForecastListItemBinding) :
                     )
                     lineImageView.visibility = View.GONE
                     hiddenHourlyForecastListItemView.visibility = View.VISIBLE
-                    expandableButtonImageView.setImageResource(R.drawable.baseline_keyboard_arrow_up_24)
+                    expandableButtonImageView.setImageResource(R.drawable.upper_arrow)
+                    listBinding.expandableButtonImageView.rotation = 180F
                 }
             }
 
