@@ -2,6 +2,7 @@ package co.develhope.meteoapp.ui
 
 import android.app.Application
 import co.develhope.meteoapp.data.Preferences
+import com.google.gson.Gson
 
 val preferences: Preferences by lazy {
     App.preferences!!
@@ -10,6 +11,7 @@ val preferences: Preferences by lazy {
 class App : Application() {
     companion object {
         var preferences: Preferences? = null
+        var gson : Gson? = null
         lateinit var instance: App
             private set
     }
@@ -19,5 +21,6 @@ class App : Application() {
 
         instance = this
         preferences = Preferences(applicationContext)
+        gson = Gson()
     }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:listitem="@layout/hourly_forecast_list_item"
-    android:backgroundTint="#C4C4C4"
+    android:background="@color/search_screen_background"
     tools:context=".ui.tomorrowscreen.TomorrowScreenFragment">
 
 </androidx.recyclerview.widget.RecyclerView>

@@ -28,7 +28,7 @@ class SearchViewModel : ViewModel() {
     }
 
     private fun returnPreferences() {
-        listToUi(preferences.getCitiesFromResentSearches().asReversed())
+        preferences.getCitiesFromResentSearches()?.let { listToUi(it.asReversed()) }
     }
 
     private fun searchCity(city : String?) {

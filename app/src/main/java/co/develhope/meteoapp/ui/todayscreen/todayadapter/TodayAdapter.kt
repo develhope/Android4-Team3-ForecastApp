@@ -111,12 +111,14 @@ class TodayAdapter(private val list: List<Forecast>):RecyclerView.Adapter<Recycl
                             TransitionManager.beginDelayedTransition(wholeView, AutoTransition())
                             lineView.visibility = View.VISIBLE
                             hiddenCard.visibility = View.GONE
-                            arrowButton.setImageResource(R.drawable.baseline_keyboard_arrow_down_24)
+                            arrowButton.setImageResource(R.drawable.upper_arrow)
+
                         } else {
                             TransitionManager.beginDelayedTransition(wholeView, AutoTransition())
                             lineView.visibility = View.GONE
                             hiddenCard.visibility = View.VISIBLE
-                            arrowButton.setImageResource(R.drawable.baseline_keyboard_arrow_up_24)
+                            arrowButton.setImageResource(R.drawable.upper_arrow)
+
                         }
                     }
                     //TODO remove baseline_keyboard_arrow_down_24 baseline_keyboard_arrow_up_24

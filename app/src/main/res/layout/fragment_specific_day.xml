@@ -4,7 +4,7 @@
     android:id="@+id/today_recycle_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#C4C4C4"
+    android:background="@color/search_screen_background"
     tools:context=".ui.specificdayscreen.SpecificDayFragment"
     tools:listitem="@layout/hourly_forecast_list_item">
 </androidx.recyclerview.widget.RecyclerView>

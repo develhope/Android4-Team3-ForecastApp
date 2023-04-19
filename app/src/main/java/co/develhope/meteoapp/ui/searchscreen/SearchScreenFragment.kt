@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
 import co.develhope.meteoapp.ui.errorscreen.ErrorFragment
-import co.develhope.meteoapp.ui.preferences
 
 
 class SearchScreenFragment : Fragment() {
