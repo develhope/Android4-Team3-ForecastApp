@@ -11,6 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.FragmentSearchScreenBinding
+import co.develhope.meteoapp.ui.errorscreen.ErrorFragment
+import co.develhope.meteoapp.ui.preferences
+
 
 class SearchScreenFragment : Fragment() {
     private lateinit var searchViewModel: SearchViewModel
@@ -52,7 +55,7 @@ class SearchScreenFragment : Fragment() {
             when (it) {
                 is SearchResults.Results -> setAdapter(it.results)
                 is SearchResults.Errors -> {
-                    findNavController().navigate(R.id.searchScreen_to_errorFragment)
+                    ErrorFragment.show(childFragmentManager){searchViewModel.searchApi(check)}
                 }
             }
         }

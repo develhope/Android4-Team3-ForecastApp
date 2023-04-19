@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
+import co.develhope.meteoapp.ui.errorscreen.ErrorFragment
 import co.develhope.meteoapp.ui.preferences
 import co.develhope.meteoapp.ui.todayscreen.todayadapter.TodayAdapter
 
@@ -43,12 +44,18 @@ class TodayScreenFragment : Fragment() {
     }
 
     private fun observeDetailedForecastList(){
+        val place = preferences.getCity()
+        val specificDay = DataSource.getSelectedDay()
         viewModel.forecastList.observe(viewLifecycleOwner) {
             binding.todayRecycleView.adapter = TodayAdapter(it)
         }
         viewModel.error.observe(viewLifecycleOwner) {
             Log.e("TodayScreenFragment", it)
-            findNavController().navigate(R.id.todayScreen_to_errorFragment)
+            ErrorFragment.show(childFragmentManager){if(place != null && specificDay != null){
+                viewModel.getDetailedForecast(place, specificDay)
+            }else{
+                findNavController().navigate(R.id.todayScreen_to_searchScreen)
+            }}
         }
     }
 }
