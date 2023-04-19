@@ -57,7 +57,7 @@ class SearchScreenFragment : Fragment() {
             when (it) {
                 is SearchResults.Results -> setAdapter(it.results, check)
                 is SearchResults.Errors -> {
-                    ErrorFragment.show(childFragmentManager){searchViewModel.searchApi(check)}
+                    ErrorFragment.show(childFragmentManager){searchViewModel.send(SearchEvent.WritingOnSearchBar(check))}
                 }
             }
         }
