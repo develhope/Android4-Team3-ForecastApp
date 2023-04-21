@@ -34,7 +34,7 @@ class HourlyViewHolder(
                     rainTextView.text = "${rain}cm"
                 }
             }
-            expandableButtonImageView.setOnClickListener {
+            itemView.setOnClickListener {
                 if (hiddenHourlyForecastListItemView.visibility == View.VISIBLE) {
                     setOpenedCard(null)
                     closeCard()
