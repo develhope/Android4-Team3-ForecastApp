@@ -1,35 +1,80 @@
 package co.develhope.meteoapp.ui.todayscreen.todayadapter
 
+import android.annotation.SuppressLint
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.R
+import co.develhope.meteoapp.data.domainmodel.Weather
+import co.develhope.meteoapp.databinding.HourlyForecastListItemBinding
+import co.develhope.meteoapp.ui.todayscreen.Forecast
 
-class HourlyViewHolder(view: View): RecyclerView.ViewHolder(view){
-    val hourTextView: TextView
-    val iconView: ImageView
-    val celsiusTextView: TextView
-    val wetnessTextView: TextView
+class HourlyViewHolder(
+    private val listBinding: HourlyForecastListItemBinding,
+    private val setOpenedCard: (Forecast.HourlyForecastListItem?) -> Unit
+) : RecyclerView.ViewHolder(listBinding.root) {
+    @SuppressLint("SetTextI18n")
+    fun bindListItem(item: Forecast.HourlyForecastListItem) {
+        listBinding.apply {
+            item.domainHourlyForecast.apply {
+                hourListItemView.text = "${date.hour}:00"
+                detailedCardForecast.apply {
+                    iconListItemView.setImageResource(
+                        getWeatherImage(weather)
+                    )
+                    celsiusListItemView.text = "$celsius°"
+                    wetnessListItemView.text = "$wetness%"
 
-    val cardPerceivedTemperatureView: TextView
-    val cardWetnessTextView: TextView
-    val cardCoverageTextView: TextView
-    val cardUvIndexTextView: TextView
-    val cardWindTextView: TextView
-    val cardRainTextView: TextView
+                    perceivedTemperatureTextView.text = "$perceivedTemperature°"
+                    wetnessTextView.text = "$wetness%"
+                    coverageTextView.text = "$coverage%"
+                    uvIndexTextView.text = "$uvIndex/10"
+                    windTextView.text = "${wind}km/h"
+                    rainTextView.text = "${rain}cm"
+                }
+            }
+            itemView.setOnClickListener {
+                if (hiddenHourlyForecastListItemView.visibility == View.VISIBLE) {
+                    setOpenedCard(null)
+                    closeCard()
+                } else {
+                    setOpenedCard(item)
+                    openCard()
+                }
+            }
+        }
+    }
 
-    init {
-        hourTextView = view.findViewById(R.id.hour_list_item_view)
-        iconView = view.findViewById(R.id.icon_list_item_view)
-        celsiusTextView = view.findViewById(R.id.celsius_list_item_view)
-        wetnessTextView = view.findViewById(R.id.wetness_list_item_view)
+    fun closeCard(){
+        listBinding.apply {
+            TransitionManager.beginDelayedTransition(
+                hourlyForecastListItemView,
+                AutoTransition()
+            )
+            lineImageView.visibility = View.VISIBLE
+            hiddenHourlyForecastListItemView.visibility = View.GONE
+            expandableButtonImageView.setImageResource(R.drawable.upper_arrow)
+            listBinding.expandableButtonImageView.rotation = 0F
 
-        cardPerceivedTemperatureView = view.findViewById(R.id.perceived_temperature_text_view)
-        cardWetnessTextView = view.findViewById(R.id.wetness_text_view)
-        cardCoverageTextView = view.findViewById(R.id.coverage_text_view)
-        cardUvIndexTextView = view.findViewById(R.id.uv_index_text_view)
-        cardWindTextView = view.findViewById(R.id.wind_text_view)
-        cardRainTextView = view.findViewById(R.id.rain_text_view)
+        }
+    }
+    fun openCard(){
+        listBinding.apply {
+            TransitionManager.beginDelayedTransition(
+                hourlyForecastListItemView,
+                AutoTransition()
+            )
+            lineImageView.visibility = View.GONE
+            hiddenHourlyForecastListItemView.visibility = View.VISIBLE
+            expandableButtonImageView.setImageResource(R.drawable.upper_arrow)
+            listBinding.expandableButtonImageView.rotation = 180F
+        }
+    }
+    private fun getWeatherImage(weather: Weather): Int = when (weather) {
+        Weather.SUNNY -> R.drawable.sunny_icon
+        Weather.CLOUDY -> R.drawable.sun_cloud_icon
+        Weather.RAINY -> R.drawable.sun_behind_rain_cloud_icon
+        Weather.NIGHT -> R.drawable.moon_icon
     }
 }

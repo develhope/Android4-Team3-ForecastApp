@@ -9,8 +9,10 @@ import co.develhope.meteoapp.data.domainmodel.Weather
 import co.develhope.meteoapp.databinding.HourlyForecastListItemBinding
 import co.develhope.meteoapp.ui.tomorrowscreen.Forecast
 
-class HourlyListItem(private val listBinding: HourlyForecastListItemBinding) :
-    RecyclerView.ViewHolder(listBinding.root) {
+class HourlyListItem(
+    private val listBinding: HourlyForecastListItemBinding,
+    private val setOpenedCard: (Forecast.HourlyForecastListItem?) -> Unit
+) : RecyclerView.ViewHolder(listBinding.root) {
     fun bindListItem(item: Forecast.HourlyForecastListItem) {
         listBinding.apply {
             item.domainHourlyForecast.apply {
@@ -30,31 +32,42 @@ class HourlyListItem(private val listBinding: HourlyForecastListItemBinding) :
                     "${rain}cm".also { rainTextView.text = it }
                 }
             }
-
-            expandableButtonImageView.setOnClickListener {
-                setIsRecyclable(false)
+            itemView.setOnClickListener {
                 if (hiddenHourlyForecastListItemView.visibility == View.VISIBLE) {
-                    TransitionManager.beginDelayedTransition(
-                        hourlyForecastListItemView,
-                        AutoTransition()
-                    )
-                    lineImageView.visibility = View.VISIBLE
-                    hiddenHourlyForecastListItemView.visibility = View.GONE
-                    expandableButtonImageView.setImageResource(R.drawable.upper_arrow)
-                    listBinding.expandableButtonImageView.rotation = 0F
+                    setOpenedCard(null)
+                    closeCard()
                 } else {
-                    TransitionManager.beginDelayedTransition(
-                        hourlyForecastListItemView,
-                        AutoTransition()
-                    )
-                    lineImageView.visibility = View.GONE
-                    hiddenHourlyForecastListItemView.visibility = View.VISIBLE
-                    expandableButtonImageView.setImageResource(R.drawable.upper_arrow)
-                    listBinding.expandableButtonImageView.rotation = 180F
+                    setOpenedCard(item)
+                    openCard()
                 }
             }
         }
     }
+    fun closeCard() {
+        listBinding.apply {
+            TransitionManager.beginDelayedTransition(
+                hourlyForecastListItemView,
+                AutoTransition()
+            )
+            lineImageView.visibility = View.VISIBLE
+            hiddenHourlyForecastListItemView.visibility = View.GONE
+            expandableButtonImageView.setImageResource(R.drawable.upper_arrow)
+            listBinding.expandableButtonImageView.rotation = 0F
+        }
+    }
+    fun openCard() {
+        listBinding.apply {
+            TransitionManager.beginDelayedTransition(
+                hourlyForecastListItemView,
+                AutoTransition()
+            )
+            lineImageView.visibility = View.GONE
+            hiddenHourlyForecastListItemView.visibility = View.VISIBLE
+            expandableButtonImageView.setImageResource(R.drawable.upper_arrow)
+            listBinding.expandableButtonImageView.rotation = 180F
+        }
+    }
+
     private fun getWeatherImage(weather: Weather): Int = when (weather) {
         Weather.SUNNY -> R.drawable.sunny_icon
         Weather.CLOUDY -> R.drawable.sun_cloud_icon
