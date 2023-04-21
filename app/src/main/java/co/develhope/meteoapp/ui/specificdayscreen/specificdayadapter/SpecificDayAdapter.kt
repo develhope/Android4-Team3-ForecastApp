@@ -57,23 +57,7 @@ class SpecificDayAdapter(private val list: List<Forecast>) :
         HOURLY_FORECAST_LIST_ITEM(2)
     }
 
-
-  // override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
-  //     super.onViewDetachedFromWindow(holder)
-  //     if (holder is HourlyListItem && holder.openedRow){
-  //         holder.openedRow = false
-  //     }
-  // }
-
     override fun getItemId(position: Int): Long = position.toLong()
-
-  // override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
-  //     if (holder is HourlyListItem && holder.openedRow != null){
-  //         Log.v("Adapter:onViewRecycled", "${holder}")
-  //         Log.v("Adapter:onViewRecycled", "${holder.openedRow}")
-  //     }
-  //     super.onViewRecycled(holder)
-  // }
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         if (holder is HourlyListItem && openedRow == list[holder.absoluteAdapterPosition]){

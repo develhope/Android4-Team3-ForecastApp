@@ -6,67 +6,47 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
-import co.develhope.meteoapp.data.DataSource
-import co.develhope.meteoapp.data.RetrofitInstance
-import co.develhope.meteoapp.data.domainmodel.DomainHourlyForecast
-import co.develhope.meteoapp.data.domainmodel.Place
 import co.develhope.meteoapp.databinding.FragmentSpecificDayBinding
 import co.develhope.meteoapp.ui.MainActivity
 import co.develhope.meteoapp.ui.errorscreen.ErrorFragment
-import co.develhope.meteoapp.ui.preferences
 import co.develhope.meteoapp.ui.specificdayscreen.specificdayadapter.SpecificDayAdapter
-import kotlinx.coroutines.launch
-import org.threeten.bp.OffsetDateTime
-
 
 class SpecificDayFragment : Fragment() {
     private lateinit var binding: FragmentSpecificDayBinding
+    private lateinit var viewModel: SpecificDayViewModel
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[SpecificDayViewModel::class.java]
+        viewModel.getPrefAndSelectedDayOrNavigate { findNavController().navigate(R.id.specificDayScreenToHomeScreen) }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         (requireActivity() as MainActivity).uncheckAllBottomNavigationItems()
         binding = FragmentSpecificDayBinding.inflate(inflater, container, false)
-        val place = preferences.getCity()
-        val specificDay = DataSource.getSelectedDay()
         binding.todayRecycleView.layoutManager = LinearLayoutManager(requireContext())
-
-        if(place != null && specificDay != null){
-            getSpecificDayDetailedForecast(place, specificDay)
-        } else {
-            findNavController().navigate(R.id.specificDayScreenToHomeScreen)
-            Log.e("SpecificDayFragment", "error retrieving place instance")
-        }
+        observeList()
         return binding.root
     }
 
-    private fun getSpecificDayDetailedForecast(place: Place, specificDay: OffsetDateTime) {
-        lifecycleScope.launch {
-            try {
-                val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place,
-                    specificDay //TODO this line has to be changed cause
-                                                                         // u must insert here only a variable
-                                                                         // and no a logic to use on the variable
-                )
-                val screenItems : List<Forecast> = getSpecificDayScreenItems(detailedForecast, place)
-                binding.todayRecycleView.adapter = SpecificDayAdapter(screenItems)
-            } catch (e: Exception) {
-                Log.e("TodayScreen", "error: $e")
-                ErrorFragment.show(childFragmentManager){getSpecificDayDetailedForecast(place, specificDay)}
+    private fun observeList() {
+        viewModel.forecastList.observe(viewLifecycleOwner){
+            when(it){
+                is SpecificDayVMResults.Result -> binding.todayRecycleView.adapter = SpecificDayAdapter(it.result)
+                is SpecificDayVMResults.Error -> {
+                    Log.e("TodayScreenFragment", it.error)
+                    ErrorFragment.show(childFragmentManager) {
+                        viewModel.getPrefAndSelectedDayOrNavigate {
+                            findNavController().navigate(R.id.specificDayScreenToHomeScreen)
+                        }
+                    }
+                }
             }
         }
-    }
-
-    private fun getSpecificDayScreenItems(detailedForecast: List<DomainHourlyForecast>, place: Place): List<Forecast> {
-        val list: MutableList<Forecast> = mutableListOf()   //list to return
-        list.add(Forecast.TitleForecast(detailedForecast.first(), place))   //adding the title to the list
-        detailedForecast.map {  //adding all the hourly view for the entire day (0 to 23)
-            list.add(Forecast.HourlyForecastListItem(it))
-        }
-        return list
     }
 }

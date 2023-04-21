@@ -1,18 +1,30 @@
 package co.develhope.meteoapp.ui.todayscreen.todayadapter
 
-import android.view.View
-import android.widget.TextView
+import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
-import co.develhope.meteoapp.R
+import co.develhope.meteoapp.databinding.HourlyForecastTitleItemBinding
+import co.develhope.meteoapp.ui.todayscreen.Forecast
+import org.threeten.bp.format.TextStyle
+import java.util.*
 
-class TitleViewHolder(view: View): RecyclerView.ViewHolder(view){
-    val cityAndRegionTextView: TextView
-    val currentDayTextView: TextView
-    val dateTextView: TextView
-
-    init {
-        cityAndRegionTextView = view.findViewById(R.id.city_and_region_text_view)
-        currentDayTextView = view.findViewById(R.id.current_day_text_view)
-        dateTextView = view.findViewById(R.id.date_text_view)
+class TitleViewHolder(private val titleBinding: HourlyForecastTitleItemBinding) :
+    RecyclerView.ViewHolder(titleBinding.root) {
+    @SuppressLint("SetTextI18n")
+    fun bindTitleItem(item: Forecast.TitleForecast) {
+        titleBinding.apply {
+            cityAndRegionTextView.text = "${item.place.name}, " + item.place.region
+            item.domainHourlyForecast.apply {
+                currentDayTextView.text =
+                    date.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()).
+                    replaceFirstChar { it.titlecase(Locale.getDefault()) }
+                dateTextView.text = (
+                        date.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()).
+                        replaceFirstChar { it.titlecase(Locale.getDefault()) }
+                                + " " + date.dayOfMonth.toString() + " " +
+                                date.month.getDisplayName(TextStyle.FULL, Locale.getDefault()).
+                                replaceFirstChar { it.titlecase(Locale.getDefault()) }
+                        )
+            }
+        }
     }
 }
