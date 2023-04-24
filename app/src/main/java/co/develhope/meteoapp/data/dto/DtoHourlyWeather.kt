@@ -28,7 +28,7 @@ data class DtoHourlyWeather(
                 DomainHourlyForecast(
                     date = it,
                     DetailedCardForecast(
-                        weather = getWeather(hourly.weathercode[idx]),
+                        weather = hourly.weathercode[idx].toWeather(),
                         celsius = hourly.temperature_2m[idx].toInt(),
                         wetness = hourly.relativehumidity_2m[idx].toInt(),
 
@@ -45,16 +45,6 @@ data class DtoHourlyWeather(
         }
         return list
     }
-
-    private fun getWeather(weatherCode: Int): Weather {
-        return when(weatherCode){
-            in 0..3 -> Weather.SUNNY
-            in 45..57 -> Weather.CLOUDY
-            in 61..99 -> Weather.RAINY
-            else -> Weather.NIGHT
-        }
-    }
-
 }
 
 

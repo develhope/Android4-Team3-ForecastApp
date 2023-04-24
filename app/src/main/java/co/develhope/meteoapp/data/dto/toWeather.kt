@@ -4,11 +4,10 @@ import co.develhope.meteoapp.data.domainmodel.Weather
 
 fun Int.toWeather() : Weather {
         return when(this){
-            0 -> Weather.SUNNY
-            1 -> Weather.MAINLY_CLEAR
+            0,1 -> Weather.SUNNY
             2 -> Weather.PARTLY_CLOUDY
             3 -> Weather.CLOUDY
-            45,48 -> Weather.FOG
+            45,48 -> Weather.MAINLY_CLEAR
             51,53,55 -> Weather.SUN_RAINY
             56,57 -> Weather.SUN_RAINY
             61,63,65 -> Weather.RAINY
@@ -19,6 +18,6 @@ fun Int.toWeather() : Weather {
             85,86 -> Weather.SNOWFALL
             95 -> Weather.THUNDERSTORM
             96,99 -> Weather.RAINY_THUNDERSTORM
-            else -> Weather.CLOUDY
+            else -> Weather.SUNNY
         }
     }
