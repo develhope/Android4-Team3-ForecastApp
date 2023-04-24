@@ -71,10 +71,17 @@ class TodayAdapter(private val list: List<Forecast>):RecyclerView.Adapter<Recycl
                     hourTextView.text =
                         "${(list[position] as Forecast.HourlyForecastListItem).domainHourlyForecast.date.hour}:00"
                     when((list[position] as Forecast.HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.weather){
-                        Weather.SUNNY -> iconView.setImageResource(R.drawable.sunny_icon)
-                        Weather.CLOUDY -> iconView.setImageResource(R.drawable.sun_cloud_icon)
-                        Weather.RAINY -> iconView.setImageResource(R.drawable.sun_behind_rain_cloud_icon)
-                        Weather.NIGHT -> iconView.setImageResource(R.drawable.moon_icon)
+                        Weather.SUNNY -> R.drawable.sunny_icon
+                        Weather.MAINLY_CLEAR -> R.drawable.sun_behind_cloud
+                        Weather.PARTLY_CLOUDY -> R.drawable.sun_large_cloud_icon
+                        Weather.CLOUDY -> R.drawable.cloud
+                        Weather.FOG -> R.drawable.fog
+                        Weather.SUN_RAINY -> R.drawable.sun_behind_rain_cloud_icon
+                        Weather.RAINY -> R.drawable.cloud_with_rain
+                        Weather.SNOWFALL -> R.drawable.cloud_with_snow
+                        Weather.THUNDERSTORM -> R.drawable.cloud_with_lightning
+                        Weather.RAINY_THUNDERSTORM -> R.drawable.cloud_with_lightning_and_rain
+                        Weather.NIGHT -> R.drawable.moon_icon
                     }
                     celsiusTextView.text =
                         "${(list[position] as Forecast.HourlyForecastListItem).domainHourlyForecast.detailedCardForecast.celsius}°"
