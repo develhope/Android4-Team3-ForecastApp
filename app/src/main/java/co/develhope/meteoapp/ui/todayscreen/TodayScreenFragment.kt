@@ -10,9 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.develhope.meteoapp.R
-import co.develhope.meteoapp.data.DataSource
 import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
-import co.develhope.meteoapp.ui.preferences
+import co.develhope.meteoapp.ui.errorscreen.ErrorFragment
 import co.develhope.meteoapp.ui.todayscreen.todayadapter.TodayAdapter
 
 class TodayScreenFragment : Fragment() {
@@ -22,14 +21,7 @@ class TodayScreenFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[TodayScreenViewModel::class.java]
-
-        val place = preferences.getCity()
-        val specificDay = DataSource.getSelectedDay()
-        if(place != null && specificDay != null){
-            viewModel.getDetailedForecast(place, specificDay)
-        }else{
-            findNavController().navigate(R.id.todayScreen_to_searchScreen)
-        }
+        viewModel.getPrefAndSelectedDayOrNavigate { findNavController().navigate(R.id.todayScreen_to_searchScreen) }
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,11 +36,17 @@ class TodayScreenFragment : Fragment() {
 
     private fun observeDetailedForecastList(){
         viewModel.forecastList.observe(viewLifecycleOwner) {
-            binding.todayRecycleView.adapter = TodayAdapter(it)
-        }
-        viewModel.error.observe(viewLifecycleOwner) {
-            Log.e("TodayScreenFragment", it)
-            findNavController().navigate(R.id.todayScreen_to_errorFragment)
+            when(it){
+                is TodayVMResults.Result -> binding.todayRecycleView.adapter = TodayAdapter(it.result)
+                is TodayVMResults.Error -> {
+                    Log.e("TodayScreenFragment", it.error)
+                    ErrorFragment.show(childFragmentManager) {
+                        viewModel.getPrefAndSelectedDayOrNavigate {
+                            findNavController().navigate(R.id.todayScreen_to_searchScreen)
+                        }
+                    }
+                }
+            }
         }
     }
 }

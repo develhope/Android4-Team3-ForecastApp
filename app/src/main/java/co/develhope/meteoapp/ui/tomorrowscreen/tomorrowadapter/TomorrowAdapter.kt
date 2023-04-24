@@ -11,6 +11,7 @@ import co.develhope.meteoapp.databinding.HourlyForecastTitleItemBinding
 import co.develhope.meteoapp.ui.tomorrowscreen.Forecast
 
 class TomorrowAdapter : ListAdapter<Forecast, RecyclerView.ViewHolder>(ItemDiffCallback()) {
+    private var openedRow: Forecast.HourlyForecastListItem? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
             ViewType.TITLE_FORECAST.value -> {
@@ -19,7 +20,7 @@ class TomorrowAdapter : ListAdapter<Forecast, RecyclerView.ViewHolder>(ItemDiffC
             }
             ViewType.HOURLY_FORECAST_LIST_ITEM.value -> {
                 val listBinding = HourlyForecastListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                HourlyListItem(listBinding)
+                HourlyListItem(listBinding) { openedRow = it }
             }
             else -> throw java.lang.IllegalArgumentException("error")
         }
@@ -33,7 +34,6 @@ class TomorrowAdapter : ListAdapter<Forecast, RecyclerView.ViewHolder>(ItemDiffC
             }
             else -> throw java.lang.IllegalArgumentException("error")
         }
-        holder.setIsRecyclable(true)
     }
     override fun getItemCount(): Int = currentList.size
     override fun getItemViewType(position: Int): Int = when (currentList[position]) {
@@ -47,5 +47,18 @@ class TomorrowAdapter : ListAdapter<Forecast, RecyclerView.ViewHolder>(ItemDiffC
     class ItemDiffCallback: DiffUtil.ItemCallback<Forecast>() {
         override fun areItemsTheSame(oldItem: Forecast, newItem: Forecast): Boolean = (oldItem.id == newItem.id)
         override fun areContentsTheSame(oldItem: Forecast, newItem: Forecast): Boolean = (oldItem == newItem)
+    }
+
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        if (holder is HourlyListItem){
+            if(openedRow != currentList[holder.absoluteAdapterPosition]){
+                holder.closeCard()
+            }
+            else if(openedRow == currentList[holder.absoluteAdapterPosition]){
+                holder.openCard()
+            }
+        } else {
+            super.onViewAttachedToWindow(holder)
+        }
     }
 }

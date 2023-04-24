@@ -11,6 +11,7 @@
         android:layout_marginStart="@dimen/min_margin_from_start_end"
         android:layout_marginEnd="@dimen/min_margin_from_start_end"
         android:layout_marginTop="@dimen/home_margin_cards_next_days"
+        android:layout_marginBottom="@dimen/home_margin_cards_next_days"
         app:cardBackgroundColor="@color/home_screen_card"
         app:cardCornerRadius="@dimen/corner_radius"
         app:cardElevation="8dp">
