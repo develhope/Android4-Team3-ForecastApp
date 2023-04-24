@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.errorscreen.ErrorFragment"
-    android:background="@color/search_screen_background">
+    android:background="@color/search_screen_background"
+    android:paddingBottom="24dp"
+    >
 
     <ImageView
         android:id="@+id/error_image"
@@ -40,7 +42,7 @@
         android:layout_height="@dimen/error_button_height"
         android:text="@string/retry_button"
         android:textSize="@dimen/error_text_size"
-        android:background="@drawable/boutton_error_background"
+        android:background="@drawable/button_error_background"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="24dp"
@@ -48,9 +50,6 @@
         app:layout_constraintTop_toBottomOf="@id/error_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="20dp"
-
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

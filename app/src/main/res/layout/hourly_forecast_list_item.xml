@@ -51,7 +51,6 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/detailed_forecast_max_text_size"
-
             tools:text="0%"
             app:drawableLeftCompat="@drawable/humidity_icon" />
 
@@ -60,7 +59,8 @@
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_keyboard_arrow_down_24"/>
+            android:src="@drawable/upper_arrow"
+            android:layout_marginTop="7dp"/>
     </LinearLayout>
 
     <ImageView
@@ -85,7 +85,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/design_default_color_on_primary">
 
             <TextView
                 android:id="@+id/perceived_temperature_text_view_title"

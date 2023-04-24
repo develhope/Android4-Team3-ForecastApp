@@ -1,4 +1,4 @@
-package co.develhope.meteoapp.ui.todayscreen
+package co.develhope.meteoapp.ui.tomorrowscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,14 +12,13 @@ import co.develhope.meteoapp.ui.preferences
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
-sealed class TodayVMResults{
-    data class Result(val result: List<Forecast>): TodayVMResults()
-    data class Error(val error: String): TodayVMResults()
+sealed class TomorrowVMResults{
+    data class Result(val result: List<Forecast>): TomorrowVMResults()
+    data class Error(val error: String): TomorrowVMResults()
 }
-
-class TodayScreenViewModel: ViewModel() {
-    private val _forecastList: MutableLiveData<TodayVMResults> = MutableLiveData()
-    val forecastList: LiveData<TodayVMResults>
+class TomorrowScreenViewModel: ViewModel() {
+    private var _forecastList: MutableLiveData<TomorrowVMResults> = MutableLiveData()
+    val forecastList: LiveData<TomorrowVMResults>
         get() = _forecastList
 
     fun getPrefAndSelectedDayOrNavigate(navigate: () -> Unit){
@@ -35,9 +34,9 @@ class TodayScreenViewModel: ViewModel() {
         viewModelScope.launch {
             try {
                 val detailedForecast : List<DomainHourlyForecast> = RetrofitInstance().getHourlyWeather(place, specificDay)
-                _forecastList.value = TodayVMResults.Result(getTodayScreenItems(detailedForecast, place))
+                _forecastList.value = TomorrowVMResults.Result(getTodayScreenItems(detailedForecast, place))
             } catch (e: Exception){
-                _forecastList.value = e.localizedMessage?.let { TodayVMResults.Error(it) }
+                _forecastList.value = e.localizedMessage?.let { TomorrowVMResults.Error(it) }
             }
         }
     }
