@@ -59,8 +59,9 @@
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
             android:src="@drawable/upper_arrow"
-            android:layout_marginTop="7dp"/>
+            />
     </LinearLayout>
 
     <ImageView
