@@ -2,6 +2,7 @@ package co.develhope.meteoapp.ui.todayscreen.todayadapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.RecyclerView
+import co.develhope.meteoapp.R
 import co.develhope.meteoapp.databinding.HourlyForecastTitleItemBinding
 import co.develhope.meteoapp.ui.todayscreen.Forecast
 import org.threeten.bp.format.TextStyle
@@ -14,9 +15,7 @@ class TitleViewHolder(private val titleBinding: HourlyForecastTitleItemBinding) 
         titleBinding.apply {
             cityAndRegionTextView.text = "${item.place.name}, " + item.place.region
             item.domainHourlyForecast.apply {
-                currentDayTextView.text =
-                    date.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()).
-                    replaceFirstChar { it.titlecase(Locale.getDefault()) }
+                currentDayTextView.text = itemView.context.getString(R.string.today)
                 dateTextView.text = (
                         date.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()).
                         replaceFirstChar { it.titlecase(Locale.getDefault()) }
