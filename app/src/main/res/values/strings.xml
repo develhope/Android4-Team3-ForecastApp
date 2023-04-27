@@ -15,6 +15,6 @@
     <string name="recent_searches">Ricerche recenti</string>
     <string name="error_dialog">C\'è stato un problema con il caricamento dei tuoi dati. Verifica la tua rete e riprova.</string>
     <string name="retry_button">Riprova</string>
-    <string name="splash_screen_acticity">splash_screen_acticity</string>
+    <string name="splash_screen_activity" translatable="false">splash_screen_activity</string>
 
 </resources>
