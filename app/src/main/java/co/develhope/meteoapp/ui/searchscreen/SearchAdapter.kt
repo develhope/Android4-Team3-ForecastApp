@@ -2,32 +2,27 @@ package co.develhope.meteoapp.ui.searchscreen
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.develhope.meteoapp.R
 import co.develhope.meteoapp.data.domainmodel.Place
+import co.develhope.meteoapp.databinding.CitiesListBinding
+import co.develhope.meteoapp.databinding.RecentSearchBinding
 
 
-class CitiesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
-    val region: TextView
-    val cities: TextView
-
-
-    init {
-        region = view.findViewById(R.id.region)
-        cities = view.findViewById(R.id.cities_name)
+class CitiesViewHolder(private val binding: CitiesListBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    @SuppressLint("SetTextI18n")
+    fun citiesCardView(cardView: GetCitiesList.Cities) {
+        binding.citiesName.text = "${cardView.city.name},"
+        binding.region.text = cardView.city.region
     }
-
 }
 
-class RecentSearchViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val recentSearches: TextView
-
-    init {
-        recentSearches = view.findViewById(R.id.recent_search)
+class RecentSearchViewHolder(private val binding: RecentSearchBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun recentSearchesView() {
+        binding.recentSearch.text = itemView.context.getString(R.string.recent_searches)
     }
 }
 
@@ -40,16 +35,26 @@ class SearchAdapter(
 
         return when (viewType) {
             ViewType.CITIESLIST.num -> {
-                val listItem =
-                    LayoutInflater.from(parent.context).inflate(R.layout.cities_list, parent, false)
-                CitiesViewHolder(listItem)
+                CitiesViewHolder(
+                    CitiesListBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
             }
             ViewType.RESENTSEARCH.num -> {
-                val listItem2 = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recent_search, parent, false)
-                RecentSearchViewHolder(listItem2)
+                RecentSearchViewHolder(
+                    RecentSearchBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
             }
-            else -> TODO()
+            else -> {
+                TODO()
+            }
         }
     }
 
@@ -70,18 +75,15 @@ class SearchAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        when (search[position]) {
-            is GetCitiesList.Cities -> {
-                (holder as CitiesViewHolder).cities.text =
-                    "${(search[position] as GetCitiesList.Cities).city.name},"
-                holder.region.text =
-                    (search[position] as GetCitiesList.Cities).city.region
+        when (holder) {
+            is CitiesViewHolder -> {
+                holder.citiesCardView(search[position] as GetCitiesList.Cities)
                 holder.itemView.setOnClickListener {
                     onClick((search[position] as GetCitiesList.Cities).city)
                 }
             }
-            is GetCitiesList.RecentSearches -> {
-                (holder as RecentSearchViewHolder).recentSearches.text = holder.itemView.context.getString(R.string.recent_searches)
+            is RecentSearchViewHolder -> {
+                holder.recentSearchesView()
             }
         }
     }
